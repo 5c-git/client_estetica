@@ -1,0 +1,19 @@
+.socials {
+  display: flex;
+  gap: 8px;
+
+  &__item {
+    width: 40px;
+    height: 40px;
+    display: block;
+    border: 1px solid $default;
+    transition: border-color $transition-duration;
+    flex-shrink: 0;
+
+    &:hover {
+      @media(min-width: $desktop-only) {
+        border-color: $primary;
+      }
+    }
+  }
+}

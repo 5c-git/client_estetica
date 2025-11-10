@@ -1,0 +1,12 @@
+mixin layout(props)
+  section.layout(class=props.mixin)
+    div.container 
+          
+      if props.title
+        div.layout__header
+          h2.layout__title!=props.title
+          if props.postTitle
+            p.layout__post-title!=props.postTitle
+
+      div.layout__wrapper
+        block

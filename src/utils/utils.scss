@@ -1,0 +1,200 @@
+$main-font: 'SuisseIntl', sans-serif;
+$icon-font: 'icon';
+
+$base: #ffffff;
+$elevated: #F5F5F5;
+$dark: #000000;
+$overlay-dark: rgba(0, 0, 0, 0.36);
+$overlay-light: rgba(255, 255, 255, 0.36);
+$elevated-2: #ECECEC;
+$default: #E2E2E2;
+$hover: #1C1C1C;
+$inverted: #ffffff;
+$mistake: #C80039;
+$primary: #1C1C1C;
+$secondary: #8F8F8F;
+
+$desktop: 1300px;
+$tablet: 991px;
+$desktop-only: $tablet + 1;
+$phone: 767px;
+
+$article-width: 800px;
+$transition-duration: 0.3s;
+
+@mixin scroll {
+  overflow: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+
+  /* Chrome and Safari */
+
+  &::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 4px;
+    border: 5px solid #ffffff;
+    border-radius: 8px;
+    background-color: #212121;
+  }
+}
+
+@mixin container {
+  width: 100%;
+  max-width: 1780px;
+  margin: 0 auto;
+  padding-right: 50px;
+  padding-left: 50px;
+
+  @media(max-width: $tablet) {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  @media(max-width: $phone) {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+@mixin Shadow-L {
+  box-shadow: 0 0 30px 0 rgba(60, 60, 60, 0.26);
+}
+
+@mixin Shadow-XS {
+  box-shadow: 0 0 25px rgba(60, 60, 60, 0.18);
+}
+
+@mixin Shadow-cards {
+  box-shadow: 0 0 12px rgba(60, 60, 60, 0.18);
+}
+
+// fonts settings
+@mixin Subtitle-32 {
+  font-family: $main-font;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 40px;
+}
+
+@mixin Subtitle-30 {
+  font-family: $main-font;
+  font-size: 30px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 36px;
+}
+
+
+@mixin Display-144 {
+  font-family: $main-font;
+  font-size: 144px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 144px;
+}
+
+@mixin Display-92 {
+  font-family: $main-font;
+  font-size: 92px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 106px;
+}
+
+@mixin Title-62 {
+  font-family: $main-font;
+  font-size: 62px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 72px;
+
+  @media(max-width: $phone) {
+    @include Subtitle-32;
+  }
+}
+
+@mixin Title-52 {
+  font-family: $main-font;
+  font-size: 52px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 62px;
+
+  @media(max-width: $phone) {
+    @include Subtitle-30;
+  }
+}
+
+@mixin Title-44 {
+  font-family: $main-font;
+  font-size: 44px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 52px;
+
+  @media(max-width: $phone) {
+    @include Subtitle-30;
+  }
+}
+
+@mixin Body-16 {
+  font-family: $main-font;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+}
+
+@mixin Body-20 {
+  font-family: $main-font;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 28px;
+
+  @media(max-width: $phone) {
+    @include Body-16;
+  }
+}
+
+@mixin Body-24 {
+  font-family: $main-font;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 32px;
+
+  @media(max-width: $phone) {
+    @include Body-16;
+  }
+}
+
+@mixin Button-16 {
+  font-family: $main-font;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+}
+
+@mixin Button-20 {
+  font-family: $main-font;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 24px;
+
+  @media(max-width: $phone) {
+    @include Body-16;
+  }
+}

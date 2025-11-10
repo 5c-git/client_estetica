@@ -1,0 +1,63 @@
+.layout {
+  position: relative;
+  margin-top: 160px;
+  margin-bottom: 160px;
+
+  @media(max-width: $phone) {
+    margin-top: 96px;
+    margin-bottom: 96px;
+  }
+
+  &:has(.promo),
+  &:has(.promo-gallery),
+  &:has(.promo-news) {
+    overflow: hidden;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__title {
+    @include Title-52;
+    margin: 0;
+  }
+
+  &__post-title {
+    @include Body-24;
+    margin: 0;
+    color: $secondary;
+  }
+
+  &--header-center {
+    .layout {
+
+      &__header {
+        width: 100%;
+        max-width: 830px;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+      }
+    }
+  }
+
+  &--grey {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 160px;
+    padding-bottom: 160px;
+    background-color: $elevated;
+  }
+
+  &--dark {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 160px;
+    padding-bottom: 160px;
+    color: $inverted;
+    background-color: $dark;
+  }
+}

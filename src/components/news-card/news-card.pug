@@ -1,0 +1,9 @@
+mixin news-card(props)
+  div.news-card
+    a(href="#").news-card__link
+      figure.news-card__banner
+        img(src=props.src alt="")
+      div.news-card__info
+        span 24 июня
+        span Новости
+      span.news-card__title=props.title

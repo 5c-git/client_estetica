@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "icon";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/icon/icon.woff2") format("woff2"),
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  // src: url("../assets/fonts/SuisseIntl/suisseintl-thin.ttf") format("truetype");
+  // src: url("../assets/fonts/Suisse Intl/SuisseIntl-Thin.otf") format("opentype");
+  src: url("../assets/fonts/SuisseIntl/SuisseIntl-Thin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  // src: url("../assets/fonts/SuisseIntl/suisseintl-light.ttf") format("truetype");
+  // src: url("../assets/fonts/Suisse Intl/SuisseIntl-Light.otf") format("opentype");
+  src: url("../assets/fonts/SuisseIntl/SuisseIntl-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  // src: url("../assets/fonts/SuisseIntl/suisseintl-regular.ttf") format("truetype");
+  // src: url("../assets/fonts/Suisse Intl/SuisseIntl-Regular.otf") format("opentype");
+  src: url("../assets/fonts/SuisseIntl/SuisseIntl-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  // src: url("../assets/fonts/SuisseIntl/suisseintl-bold.ttf") format("truetype");
+  // src: url("../assets/fonts/Suisse Intl/SuisseIntl-Bold.otf") format("opentype");
+  src: url("../assets/fonts/SuisseIntl/SuisseIntl-Bold.woff2") format("woff2");
+}

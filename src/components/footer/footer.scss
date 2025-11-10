@@ -1,0 +1,126 @@
+.footer {
+  background-color: $elevated;
+
+  @media print {
+    display: none;
+  }
+
+  &__top {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 144px;
+    padding-bottom: 60px;
+    gap: 120px;
+  }
+
+  &__logo {
+    width: 226px;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  &__contacts {
+    @include Title-44;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
+    a:not([class]) {
+      color: inherit;
+      text-decoration: underline;
+      transition: text-decoration-color $transition-duration;
+      text-decoration-color: transparent;
+      text-underline-position: under;
+
+      &:hover {
+        @media(min-width: $desktop-only) {
+          text-decoration-color: currentcolor;
+        }
+      }
+    }
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 60px;
+    padding-bottom: 60px;
+    border-top: 1px solid $default;
+    gap: 120px;
+  }
+
+  &__info {
+    @include Body-16;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    a {
+      color: $secondary;
+      text-decoration: underline;
+      transition: text-decoration-color $transition-duration;
+      text-decoration-color: transparent;
+      text-underline-position: under;
+
+      &:hover {
+        @media(min-width: $desktop-only) {
+          text-decoration-color: currentcolor;
+        }
+      }
+    }
+  }
+
+  &__copyright {
+    color: $secondary;
+  }
+
+  &__politics {
+    display: flex;
+    gap: 70px;
+  }
+
+  &__nav {
+    @include Body-20;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) auto;
+    gap: 24px;
+  }
+
+  &__nav-title {
+    display: block;
+    margin: 0;
+    margin-bottom: 16px;
+    color: $primary;
+  }
+
+  &__nav-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: 16px;
+  }
+
+  &__nav-item {
+
+    a {
+      color: $secondary;
+      text-decoration: underline;
+      transition: text-decoration-color $transition-duration;
+      text-decoration-color: transparent;
+      text-underline-position: under;
+
+      &:hover {
+        @media(min-width: $desktop-only) {
+          text-decoration-color: currentcolor;
+        }
+      }
+    }
+  }
+}

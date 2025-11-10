@@ -1,0 +1,37 @@
+include ../news-card/news-card
+
+div.slider
+  div.swiper.slider__swiper
+    ul.swiper-wrapper.slider__list
+      li.swiper-slide.slider__item
+        +news-card({
+          src: './assets/images/promo-gallery-1.png',
+          title: 'Как правильно ухаживать за мебелью: Ваш гид по составу ткани',
+        })
+      li.swiper-slide.slider__item
+        +news-card({
+          src: './assets/images/promo-gallery-2.png',
+          title: 'iSaloni 2024 в Краснодаре',
+        })
+      li.swiper-slide.slider__item
+        +news-card({
+          src: './assets/images/promo-gallery-3.png',
+          title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
+        })
+      li.swiper-slide.slider__item
+        +news-card({
+          src: './assets/images/promo-gallery-4.png',
+          title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
+        })
+      li.swiper-slide.slider__item
+        +news-card({
+          src: './assets/images/promo-gallery-5.png',
+          title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
+        })
+
+  div.slider__nav
+    div.slider__pagination
+
+    div.slider__buttons
+      button(type='button' aria-label='Предыдущий слайд.').slider__button.slider__button--prev
+      button(type='button' aria-label='Следующий слайд.').slider__button.slider__button--next

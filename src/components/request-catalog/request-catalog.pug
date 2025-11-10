@@ -1,0 +1,25 @@
+include ../field/field
+
+div.request-catalog
+  div.request-catalog__wrapper
+    figure.request-catalog__banner
+      img(src="./assets/images/request-catalog-1.png", alt="")
+
+    div.request-catalog__main
+      h2.request-catalog__title Посмотрите как мебель ESTETICA оживает #[br] в проектах дизайнеров
+      form(action="#" method='post').request-catalog__form
+        div.request-catalog__fields
+          div.request-catalog__field
+            +field({
+              type: 'tel',
+              name: 'Phone-number',
+              id: 'Phone-number',
+              placeholder: '+7 (999) 999-99-99',
+              secondClass: 'field__input--tel',
+            })
+        div.request-catalog__actions
+          button(type='submit').button
+            span.button__wrapper Скачать каталог
+
+      div.request-catalog__legal
+        p Отправляя форму, вы даёте согласие на обработку персональных #[br] данных в соответствии с #[a(href='#' target='_blank') Политикой конфиденциальности ].

@@ -1,0 +1,47 @@
+.promo-partner {
+
+  &__wrapper {
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 120px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 120px;
+  }
+
+  &__desc {
+    @include Body-24;
+    margin: 0;
+  }
+
+  &__title {
+    @include Title-52;
+    margin: 0;
+  }
+
+  &__media {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__main {
+    @include Subtitle-30;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 60px;
+
+    p {
+      margin: 0;
+    }
+  }
+}

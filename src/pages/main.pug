@@ -1,0 +1,38 @@
+extends ../templates/default
+
+block main
+  include ../components/intro/intro
+
+  +layout({
+    mixin: 'layout--header-center',
+    title: 'ESTETICA  — мебель,<br> которая говорит за вас',
+    postTitle: 'Для нас мебель — это не просто предмет интерьера, а язык, на котором вы выражаете характер, вкус и индивидуальность. Каждая коллекция ESTETICA создана, чтобы соединять искусство и жизнь, превращая дом в отражение вашей личности.',
+  })
+    include ../components/promo/promo
+
+  +layout({})
+    include ../components/request-catalog/request-catalog
+
+  +layout({
+    mixin: 'layout--grey',
+  })
+    include ../components/configurator/configurator
+
+  +layout({})
+    include ../components/catalog-menu/catalog-menu
+
+  +layout({
+    mixin: 'layout--dark',
+  })
+    include ../components/promo-gallery/promo-gallery
+
+  +layout({})
+    include ../components/request-catalog/request-catalog
+
+  +layout({
+    mixin: 'layout--dark',
+  })
+    include ../components/promo-partner/promo-partner
+
+  +layout({})
+    include ../components/promo-news/promo-news

@@ -1,0 +1,102 @@
+.catalog-menu {
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__title {
+    @include Body-24;
+    margin: 0;
+    color: $secondary;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: lvl1;
+  }
+
+  &__item {
+    counter-increment: lvl1;
+  }
+
+  &__link {
+    @include Title-52;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    color: $primary;
+    background-color: transparent;
+    text-decoration: none;
+    gap: 24px;
+    transition:
+      padding $transition-duration,
+      background-color $transition-duration;
+
+    &:hover {
+      @media(min-width: $desktop-only) {
+        padding-right: 24px;
+        padding-left: 24px;
+        background-color: $elevated;
+
+        .catalog-menu {
+
+          &__link-banner {
+            transform: scale(1);
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    &:before {
+      content: counter(lvl1, decimal-leading-zero);
+    }
+
+    &:after {
+      width: 48px;
+      height: 48px;
+      margin-left: auto;
+      color: inherit;
+      background-color: currentColor;
+      mask-size: cover;
+      mask-position: center right;
+      mask-repeat: no-repeat;
+      mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjE3IDExTDEyLjU5IDcuNDFMMTQgNkwyMCAxMkwxNCAxOEwxMi41OSAxNi41OUwxNi4xNyAxM0w0IDEzTDQgMTFMMTYuMTcgMTFaIiBmaWxsPSIjMUMxQzFDIi8+Cjwvc3ZnPgo=");
+      flex-shrink: 0;
+      content: '';
+    }
+  }
+
+  &__link-banner {
+    position: absolute;
+    z-index: 5;
+    top: -105px;
+    right: 240px;
+    height: 340px;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    transform: scale(0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility 0.3s,
+      opacity 0.3s,
+      transform 0.3s;
+
+    img {
+      height: 100%;
+      width: auto;
+      display: block;
+    }
+  }
+}
