@@ -2,6 +2,9 @@ section.popUp.cookie
   div.container
     div.cookie__wrapper
       div.cookie__main
-        p.cookie__text Продолжая использовать сайт <a href="https://dev3.opt.defagroup.com" target="_blank" rel=" noopener noreferrer">dev3.opt.defagroup.com</a> вы соглашаетесь на использование файлов cookie. Более подробную информацию можно найти в <a href="/urinfo/privacy/" target="_blank" rel=" noopener noreferrer">Политике конфиденциальности</a>.
+        i.cookie__icon
+          img(src="./assets/images/icon-cookie.png" width='24' height='24' alt="Печенька")
+        p Мы используем cookie для удобства работы сайта. Вы можете отключить их в настройках браузера. Продолжая пользоваться сайтом, вы соглашаетесь с нашей #[a(href="#" target="_blank" rel=" noopener noreferrer") Политикой обработки данных].
 
-      button(type="button" aria-label="Закрыть").button.cookie__button Принять
+      button(type="button" aria-label="Закрыть").cookie__button
+        span

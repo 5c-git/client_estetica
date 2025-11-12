@@ -2,12 +2,19 @@
 
   &__wrapper {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 800px;
-    gap: 120px;
+    grid-template-columns: minmax(0, 680px) minmax(0, 800px);
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
   }
 
   &__banner {
-    height: 720px;
     margin: 0;
     padding: 0;
     border-radius: 16px;
@@ -21,22 +28,45 @@
     }
   }
 
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    @media(max-width: $tablet) {
+      display: contents;
+    }
+  }
+
   &__title {
     @include Title-52;
     margin: 0;
-    margin-bottom: 48px;
+
+    @media(max-width: $tablet) {
+      order: -1;
+    }
   }
 
   &__form {
+    width: 100%;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 200px;
     gap: 32px;
-    margin-bottom: 24px;
+
+    @media(max-width: $desktop) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media(max-width: $tablet) {
+      gap: 24px;
+    }
   }
 
   &__legal {
     @include Body-16;
     color: $secondary;
+    grid-column: -1 / 1;
 
     p {
       margin: 0;

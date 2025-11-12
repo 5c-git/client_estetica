@@ -34,6 +34,7 @@ html {
 }
 
 body {
+  @include Body-20;
   display: flex;
   min-width: 320px;
   min-height: calc(var(--vh, 1vh) * 100);

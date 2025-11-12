@@ -17,7 +17,12 @@
   &__header {
     display: flex;
     flex-direction: column;
+    margin-bottom: 60px;
     gap: 24px;
+
+    @media(max-width: $tablet) {
+      margin-bottom: 36px;
+    }
   }
 
   &__title {
@@ -50,6 +55,11 @@
     padding-top: 160px;
     padding-bottom: 160px;
     background-color: $elevated;
+
+    @media(max-width: $phone) {
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
   }
 
   &--dark {
@@ -59,5 +69,10 @@
     padding-bottom: 160px;
     color: $inverted;
     background-color: $dark;
+
+    @media(max-width: $phone) {
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
   }
 }

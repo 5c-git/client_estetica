@@ -10,11 +10,24 @@
     grid-template-columns: repeat(2, 1fr);
     padding-top: 144px;
     padding-bottom: 60px;
-    gap: 120px;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 96px;
+      padding-bottom: 44px;
+      gap: 44px;
+    }
   }
 
   &__logo {
     width: 226px;
+
+    @media(max-width: $phone) {
+      width: 152px;
+    }
 
     img {
       width: 100%;
@@ -29,6 +42,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
+
+    @media(max-width: $tablet) {
+      align-items: center;
+      text-align: center;
+    }
 
     a:not([class]) {
       color: inherit;
@@ -51,7 +69,16 @@
     padding-top: 60px;
     padding-bottom: 60px;
     border-top: 1px solid $default;
-    gap: 120px;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 44px;
+      gap: 44px;
+    }
   }
 
   &__info {
@@ -59,6 +86,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 44px;
+
+    @media(max-width: $tablet) {
+      order: 1;
+    }
 
     a {
       color: $secondary;
@@ -77,11 +109,23 @@
 
   &__copyright {
     color: $secondary;
+
+    @media(max-width: $tablet) {
+      order: 1;
+    }
   }
 
   &__politics {
     display: flex;
     gap: 70px;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 44px;
+    }
   }
 
   &__nav {
@@ -89,6 +133,14 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr) auto;
     gap: 24px;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 36px;
+    }
   }
 
   &__nav-title {
@@ -96,6 +148,10 @@
     margin: 0;
     margin-bottom: 16px;
     color: $primary;
+
+    @media(max-width: $tablet) {
+      margin-bottom: 24px;
+    }
   }
 
   &__nav-list {
@@ -105,6 +161,10 @@
     padding: 0;
     list-style: none;
     gap: 16px;
+
+    @media(max-width: $tablet) {
+      gap: 24px;
+    }
   }
 
   &__nav-item {

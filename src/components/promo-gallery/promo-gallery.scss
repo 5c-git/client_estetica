@@ -3,6 +3,16 @@
   color: $inverted;
 
   &__wrapper {
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    @media(max-width: $phone) {
+      gap: 36px;
+    }
   }
 
   &__header {
@@ -13,12 +23,20 @@
     text-align: center;
     grid-column: 2;
     grid-row: 1;
+    gap: 48px;
+
+    @media(max-width: $tablet) {
+      display: contents;
+    }
+
+    @media(max-width: $phone) {
+      @include Subtitle-30;
+    }
   }
 
   &__title {
     @include Display-92;
     margin: 0;
-    margin-bottom: 48px;
   }
 
   &__post-title {
@@ -29,6 +47,11 @@
     flex-direction: column;
     gap: 24px;
 
+    @media(max-width: $tablet) {
+      max-width: unset;
+      order: 1;
+    }
+
     p {
       margin: 0;
     }
@@ -36,43 +59,95 @@
 
   &__banners {
     position: absolute;
+    width: 100%;
     display: grid;
     grid-template-columns: minmax(0, 425px) 600px minmax(0, 425px);
+    grid-template-columns: minmax(0, 425px) minmax(0, 600px) minmax(0, 425px);
     justify-content: space-between;
     align-items: flex-end;
-    gap: 100px;
+    gap: 60px;
+
+    @media(max-width: $desktop) {
+      grid-template-columns: minmax(0, 425px) minmax(0, 600px) minmax(0, 425px);
+    }
+
+    @media(max-width: $tablet) {
+      position: unset;
+      grid-template-columns: 1fr;
+    }
+
+    @media(max-width: $tablet) {
+      gap: 0;
+    }
   }
 
   &__banner {
     margin: 0;
     padding: 0;
 
+    @media(max-width: $tablet) {
+      position: relative;
+      display: flex;
+    }
+
     &:nth-child(1) {
-      grid-column: 1;
-      grid-row: 1;
+      @media(min-width: $desktop-only) {
+        grid-column: 1;
+        grid-row: 1;
+      }
     }
 
     &:nth-child(2) {
-      margin-bottom: 50px;
-      grid-column: 3;
-      grid-row: 1;
+      @media(min-width: $desktop-only) {
+        margin-bottom: 50px;
+        grid-column: 3;
+        grid-row: 1;
+      }
     }
 
     &:nth-child(3) {
-      margin-bottom: 40px;
-      grid-column: 1;
-      grid-row: 2;
+      @media(min-width: $desktop-only) {
+        margin-bottom: 40px;
+        grid-column: 1;
+        grid-row: 2;
+      }
     }
 
     &:nth-child(4) {
-      grid-column: 2;
-      grid-row: 2;
+      @media(min-width: $desktop-only) {
+        grid-column: 2;
+        grid-row: 2;
+      }
     }
 
     &:nth-child(5) {
-      margin-bottom: 190px;
-      grid-column: 3;
-      grid-row: 2;
+      @media(min-width: $desktop-only) {
+        margin-bottom: 190px;
+        grid-column: 3;
+        grid-row: 2;
+      }
+    }
+
+    &:nth-child(odd) {
+      @media(max-width: $tablet) {
+        &:after {
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          content: '';
+        }
+      }
+    }
+
+    &:nth-child(even) {
+      @media(max-width: $tablet) {
+        &:before {
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          content: '';
+        }
+      }
     }
 
     img {

@@ -2,10 +2,21 @@
 
   &__wrapper {
     display: grid;
+    grid-template-columns: minmax(0, 400px) 500px minmax(0, 400px);
+    justify-content: space-between;
     align-items: center;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-    gap: 120px;
+    gap: 60px;
+
+    @media(max-width: $desktop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(max-width: $phone) {
+      display: flex;
+      flex-direction: column;
+      align-items: unset;
+      gap: 36px;
+    }
   }
 
   &__header {
@@ -13,6 +24,16 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 120px;
+
+    @media(max-width: $desktop) {
+      gap: 44px;
+      grid-column: -1 / 1;
+      order: -1;
+    }
+
+    @media(max-width: $phone) {
+      display: contents;
+    }
   }
 
   &__desc {
@@ -26,11 +47,15 @@
   }
 
   &__media {
-    width: 500px;
-    height: 500px;
     display: flex;
     object-fit: contain;
     flex-shrink: 0;
+
+    video,
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
   }
 
   &__main {
@@ -39,6 +64,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 60px;
+
+    @media(max-width: $phone) {
+      @include Body-16;
+      display: contents;
+    }
 
     p {
       margin: 0;

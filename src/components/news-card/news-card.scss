@@ -31,10 +31,10 @@
 
   &__banner {
     position: relative;
-    height: 440px;
     margin: 0;
     padding: 0;
     border-radius: 16px;
+    aspect-ratio: 400 / 440;
     overflow: hidden;
 
     &:before {

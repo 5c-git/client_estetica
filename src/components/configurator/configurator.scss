@@ -2,8 +2,19 @@
 
   &__wrapper {
     display: grid;
-    grid-template-columns: 550px minmax(0, 1fr);
-    gap: 120px;
+    grid-template-columns: 550px minmax(0, 950px);
+    justify-content: space-between;
+    gap: 60px;
+
+    @media(max-width: $desktop) {
+      grid-template-columns: 350px minmax(0, 950px);
+    }
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
   }
 
   &__main {
@@ -11,6 +22,10 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 60px;
+
+    @media(max-width: $tablet) {
+      display: contents;
+    }
   }
 
   &__header {
@@ -34,6 +49,10 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+
+    @media(max-width: $tablet) {
+      order: 1;
+    }
   }
 
   &__fieldset {
@@ -45,6 +64,11 @@
     border: 0;
     border-bottom: 1px solid $default;
     gap: 16px;
+
+    @media(max-width: $phone) {
+      padding-bottom: unset;
+      border: 0;
+    }
   }
 
   &__label {
@@ -78,6 +102,11 @@
       height: 36px;
       display: block;
       object-fit: cover;
+
+      @media(max-width: $phone) {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 
