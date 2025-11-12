@@ -33,6 +33,7 @@ const showMessage = () => {
   if (closeButton) {
     closeButton.addEventListener("click", () => {
       setCookie("agreeCookie", true);
+      (0,_popUp_popUp__WEBPACK_IMPORTED_MODULE_0__.removePopUp)("#cookie");
     });
   }
 };
