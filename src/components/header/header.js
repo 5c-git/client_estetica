@@ -15,8 +15,8 @@ if (header) {
     getPaddingFromBody();
     header.classList.remove('header--dropdown');
 
-    header.querySelectorAll('.mobile-nav__nav-item--sub').forEach((el) => {
-      el.classList.remove('mobile-nav__nav-item--sub');
+    header.querySelectorAll('.mobile-nav__item--sub').forEach((el) => {
+      el.classList.remove('mobile-nav__item--sub');
     });
 
     header.querySelectorAll('.mobile-dropdown__sub--active').forEach((el) => {

@@ -18,8 +18,8 @@ buttons.forEach((button) => {
 const subOut = document.querySelector('.mobile-dropdown__sub-out');
 if (subOut) {
   subOut.addEventListener('click', () => {
-    document.querySelectorAll('.mobile-nav__nav-item--sub').forEach((el) => {
-      el.classList.remove('mobile-nav__nav-item--sub');
+    document.querySelectorAll('.mobile-nav__item--sub').forEach((el) => {
+      el.classList.remove('mobile-nav__item--sub');
     });
 
     document.querySelectorAll('.mobile-dropdown__sub--active').forEach((el) => {

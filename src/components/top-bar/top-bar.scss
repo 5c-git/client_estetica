@@ -1,6 +1,6 @@
 .top-bar {
-  position: relative;
-  z-index: 6;
+  position: fixed;
+  z-index: 5;
   top: 0;
   color: $base;
   background-color: $dark;

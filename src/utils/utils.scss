@@ -59,10 +59,14 @@ $transition-duration: 0.3s;
     padding-left: 30px;
   }
 
-  @media(max-width: $phone) {
+  @media(max-width: $tablet) {
     padding-right: 15px;
     padding-left: 15px;
   }
+}
+
+@mixin liquid-glass {
+  backdrop-filter: blur(8px) saturate(1.2);
 }
 
 @mixin Shadow-L {
