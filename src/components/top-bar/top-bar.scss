@@ -1,0 +1,33 @@
+.top-bar {
+  position: relative;
+  z-index: 6;
+  top: 0;
+  color: $base;
+  background-color: $dark;
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+
+  &__padding {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  &__fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: $dark;
+  }
+}

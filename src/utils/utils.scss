@@ -54,7 +54,7 @@ $transition-duration: 0.3s;
   padding-right: 50px;
   padding-left: 50px;
 
-  @media(max-width: $tablet) {
+  @media(max-width: $desktop) {
     padding-right: 30px;
     padding-left: 30px;
   }
@@ -208,4 +208,12 @@ $transition-duration: 0.3s;
   @media(max-width: $phone) {
     @include Body-16;
   }
+}
+
+@mixin Caption-14 {
+  font-family: $main-font;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
 }

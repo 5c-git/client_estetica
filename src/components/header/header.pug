@@ -1,2 +1,39 @@
 header.header
-  div.container
+  div.header__fixed
+    div.container
+      div.header__wrapper
+
+        a(href="#").header__logo
+          img(src="./assets/images/logo-footer.svg" width='226' height='36' alt="")
+          
+        nav.header__nav
+          ul.header__nav-list
+            li(data-hover='catalog').header__nav-item
+              a(href="#").header__link Каталог
+            li.header__nav-item
+              a(href="#").header__link О компании
+            li.header__nav-item
+              a(href="#").header__link Новости
+            li.header__nav-item
+              a(href="#").header__link Дизайнерам
+            li.header__nav-item
+              a(href="#").header__link Салоны
+            li.header__nav-item
+              a(href="#").header__link Discount
+          div.header__contacts 
+            a(href="tel:+74951351164").header__link +7 (495) 135-11-64
+
+        div.header__mobile-header
+          a(href="tel:+74951351164")
+            img(src="./assets/images/icon-phone.svg" width='24' height='24' alt="")
+          
+          button(type='button').header__burger
+            span 
+
+      div.header__mobile-nav
+        div.header__mobile-nav-wrapper
+          include ../mobile-nav/mobile-nav
+
+
+  div(data-hover='catalog').header__dropdown
+    include ../header-dropdown/header-dropdown
