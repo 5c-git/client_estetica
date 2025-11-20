@@ -64,9 +64,9 @@
   }
 
   &__wrapper {
+    position: relative;
     display: inline-flex;
-    grid-auto-flow: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 16px;
     transition: transform $transition-duration;

@@ -1,0 +1,83 @@
+.intro-partner {
+  margin-top: -168px;
+  padding-top: 224px;
+  padding-bottom: 130px;
+  color: $base;
+  background-color: $dark;
+
+  @media(max-width: $tablet) {
+    margin-top: -200px;
+    padding-top: 200px;
+    padding-bottom: 80px;
+  }
+
+  @media(max-width: $phone) {
+    padding-bottom: 40px;
+  }
+
+  &__wrapper {
+    min-height: 560px;
+    display: grid;
+    grid-template-columns: minmax(0, 700px) minmax(0, 560px);
+    justify-content: space-between;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+  }
+
+  &__title {
+    @include Title-62;
+    margin: 0;
+  }
+
+  &__media {
+    display: flex;
+    object-fit: contain;
+    flex-shrink: 0;
+
+    @media(max-width: $tablet) {
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    video,
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      display: contents;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+
+    @media(max-width: $tablet) {
+      gap: 24px;
+      order: 1;
+    }
+  }
+
+  &__content {
+
+    p:not([class]) {
+      margin: 0;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+.breadcrumbs {
+  @include Body-16;
+  position: relative;
+  z-index: 1;
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  @media print {
+    display: none;
+  }
+
+  @media(max-width: $phone) {
+    margin-top: 22px;
+    margin-bottom: 36px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-y: hidden;
+    overflow-x: auto;
+    gap: 8px;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    @media(max-width: $desktop) {
+      margin-right: -30px;
+      margin-left: -30px;
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+
+    @media(max-width: $tablet) {
+      margin-right: -15px;
+      margin-left: -15px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 8px;
+
+    &:not(:first-child) {
+
+      &:before {
+        width: 4px;
+        height: 4px;
+        background-color: currentColor;
+        border-radius: 50%;
+        content: '';
+      }
+    }
+
+    a {
+      color: $secondary;
+      text-decoration: underline;
+      transition: text-decoration-color $transition-duration;
+      text-decoration-color: transparent;
+      text-underline-position: under;
+
+      &:hover {
+        @media(min-width: $desktop-only) {
+          text-decoration-color: currentcolor;
+        }
+      }
+    }
+  }
+}

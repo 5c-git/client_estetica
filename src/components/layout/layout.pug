@@ -10,3 +10,9 @@ mixin layout(props)
 
       div.layout__wrapper
         block
+
+      if props.action
+        div.layout__action
+          img(src="./assets/images/icon-locked.svg" width='44' height='44' alt="")
+          button(type='button').button
+            span.button__wrapper=props.action

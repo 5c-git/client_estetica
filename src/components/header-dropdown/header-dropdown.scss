@@ -29,11 +29,12 @@
     color: inherit;
     text-decoration: none;
     text-transform: uppercase;
-    transition: color $transition-duration;
+    transition: opacity $transition-duration;
 
     &:hover {
       @media(min-width: $desktop-only) {
-        color: $hover;
+        color: inherit;
+        opacity: 0.5;
       }
     }
   }

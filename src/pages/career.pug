@@ -1,0 +1,9 @@
+extends ../templates/default
+
+block header
+  +header({
+    mixin: 'header--liquid',
+  })
+
+block main
+  include ../components/breadcrumbs/breadcrumbs

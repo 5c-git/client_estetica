@@ -70,6 +70,14 @@ const initPromoGalleryAnimation = () => {
 
   mm.add("(max-width: 991px)", () => {
     // Ничего не делаем — при ресайзе gsap сам уберёт все связанные ScrollTrigger'ы
+    // Вручную убираем transform.
+    const banners = document.querySelector('.promo-gallery__banners');
+    if (banners) {
+      banners.style.transform = "";
+    }
+
+    // Полная очистка всех ScrollTriggers по этому breakpoint
+    ScrollTrigger.getAll().forEach(st => st.kill());
   });
 };
 

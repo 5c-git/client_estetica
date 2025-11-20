@@ -46,20 +46,27 @@ body {
   box-sizing: border-box;
   font-feature-settings: 'tnum' on, 'lnum' on;
 
-  @media(max-width: $phone) {
-    font-size: 14px;
-    line-height: 20px;
-  }
-
   &:has(.top-bar) {
-    .header {
-      top: 52px;
-    }
+    // .header {
+    //   top: 52px;
+    // }
 
     .header__fixed {
+      top: 52px;
+
       @media(max-width: $tablet) {
         top: 52px;
       }
+    }
+
+    .intro {
+      height: calc(var(--vh, 1vh) * 100 - 52px);
+    }
+  }
+
+  &:has(.intro-partner) {
+    .breadcrumbs {
+      color: $base;
     }
   }
 }

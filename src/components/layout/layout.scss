@@ -10,8 +10,39 @@
 
   &:has(.promo),
   &:has(.promo-gallery),
-  &:has(.promo-news) {
+  &:has(.promo-news),
+  &:has(.gallery) {
     overflow: hidden;
+  }
+
+  &:has(.request) {
+    @media(max-width: $tablet) {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 160px;
+      padding-bottom: 160px;
+      background-color: $elevated;
+    }
+
+    @media(max-width: $phone) {
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
+  }
+
+  &:has(.subscribe-tg) {
+    @media(max-width: $tablet) {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 160px;
+      padding-bottom: 160px;
+      background-color: $dark;
+    }
+
+    @media(max-width: $phone) {
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
   }
 
   &__header {
@@ -27,6 +58,7 @@
 
   &__title {
     @include Title-52;
+    width: min(100%, 800px);
     margin: 0;
   }
 
@@ -34,6 +66,26 @@
     @include Body-24;
     margin: 0;
     color: $secondary;
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 50px;
+
+    @media(max-width: $phone) {
+      margin-top: 36px;
+    }
+
+    .button {
+
+      @media(max-width: $phone) {
+        width: auto;
+        flex-grow: 1;
+      }
+    }
   }
 
   &--header-center {
@@ -73,6 +125,22 @@
     @media(max-width: $phone) {
       padding-top: 96px;
       padding-bottom: 96px;
+    }
+  }
+
+  &--column2 {
+
+    .layout {
+
+      &__wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+
+        @media(max-width: $phone) {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
     }
   }
 }

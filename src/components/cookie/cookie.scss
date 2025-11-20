@@ -2,13 +2,15 @@
   @include Body-16;
   position: fixed;
   top: unset;
-  right: 0;
+  right: 16px;
   bottom: 0;
   left: unset;
   z-index: 15;
   width: auto;
   height: auto;
-  padding: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
   color: $inverted;
   pointer-events: none;
   overflow: initial;
@@ -24,6 +26,7 @@
   }
 
   &__wrapper {
+    @include liquid-glass;
     display: flex;
     max-width: 430px;
     justify-content: space-between;

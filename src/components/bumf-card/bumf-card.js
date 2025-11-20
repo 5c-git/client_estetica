@@ -1,0 +1,1 @@
+import './bumf-card.scss';

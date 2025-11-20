@@ -30,19 +30,22 @@ html(lang="ru")
     block mixins
       include ../components/alert/alert
       include ../components/layout/layout
+      include ../components/header/header
 
     include ../components/top-bar/top-bar
 
     block header
-      include ../components/header/header
+      +header({
+        mixin: 'header--black header--liquid',
+      })
 
     main
       block main
 
     block footer
       include ../components/footer/footer
-      //- include ../components/up/up
-      //- include ../components/widget/widget
+      include ../components/up/up
+      include ../components/widget/widget
 
     include ../components/alert-wrapper/alert-wrapper
 

@@ -1,9 +1,21 @@
 .intro {
   position: relative;
   height: calc(var(--vh, 1vh) * 100);
-  background-color: #1D1D1D;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-top: -96px;
+  padding-top: 96px;
+  background-color: $dark;
+
+  @media(max-width: $tablet) {
+    margin-top: -67px;
+    padding-top: 67px;
+  }
 
   &__media {
+    position: absolute;
+    inset: 0;
     height: 100%;
     transform: scale(0.7);
     transition: transform 0.5s;
@@ -18,11 +30,6 @@
   }
 
   &__wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: end;

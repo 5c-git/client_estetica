@@ -1,0 +1,33 @@
+extends ../templates/default
+
+block header
+  +header({
+    mixin: 'header--black',
+  })
+
+block main
+  include ../components/breadcrumbs/breadcrumbs
+
+  include ../components/intro-partner/intro-partner
+
+  +layout({
+    title: 'Создавайте интерьеры<br> с мебелью которая вдохновляет',
+  })
+    include ../components/gallery/gallery
+
+  +layout({})
+    include ../components/advantages/advantages
+
+  +layout({})
+    include ../components/request/request
+
+  +layout({
+    mixin: 'layout--column2',
+    title: 'Доступные материалы',
+    postTitle: 'Все материалы для вашей работы — в одном месте',
+    action: 'Запросить доступ',
+  })
+    include ../components/bumf-card/bumf-card
+
+  +layout({})
+    include ../components/subscribe-tg/subscribe-tg
