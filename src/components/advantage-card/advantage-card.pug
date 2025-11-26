@@ -1,34 +1,7 @@
-div.advantage-card
-  div.advantage-card__content
-    span.advantage-card__title Сроки поставки от 30 дней
-    span.advantage-card__desc Прописываем в договоре
-  figure.advantage-card__banner
-    img(src="./assets/images/promo-gallery-1.png", alt="")
-
-div.advantage-card
-  div.advantage-card__content
-    span.advantage-card__title Защита клиента и  комиссия
-    span.advantage-card__desc Безопасное сотрудничество
-  figure.advantage-card__banner
-    img(src="./assets/images/promo-gallery-2.png", alt="")
-
-div.advantage-card
-  div.advantage-card__content
-    span.advantage-card__title Кастомизация под проект
-    span.advantage-card__desc Ткань, размеры, фурнитура
-  figure.advantage-card__banner
-    img(src="./assets/images/promo-gallery-3.png", alt="")
-
-div.advantage-card
-  div.advantage-card__content
-    span.advantage-card__title Мгновенное КП
-    span.advantage-card__desc С 3D визуализацией для конечного клиента
-  figure.advantage-card__banner
-    img(src="./assets/images/promo-gallery-4.png", alt="")
-
-div.advantage-card
-  div.advantage-card__content
-    span.advantage-card__title Hedonist Club by Estetica Vision
-    span.advantage-card__desc Сообщество, обучение и PR-поддержка
-  figure.advantage-card__banner
-    img(src="./assets/images/promo-gallery-5.png", alt="")
+mixin advantage-card(props)
+  div.advantage-card
+    i.advantage-card__icon
+      img(src=props.icon width='96' height='96' alt="")
+    div.advantage-card__content
+      span.advantage-card__title=props.title
+      span.advantage-card__desc=props.desc

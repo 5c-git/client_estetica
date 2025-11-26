@@ -1,0 +1,72 @@
+.layout-heder {
+  margin-bottom: 160px;
+
+  @media(max-width: $phone) {
+    margin-bottom: 96px;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 700px) minmax(0, 800px);
+    justify-content: space-between;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+  }
+
+  &__media {
+    display: flex;
+    object-fit: contain;
+    border-radius: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    @media(max-width: $tablet) {}
+
+    video,
+    figure,
+    img {
+      width: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    padding-top: 85px;
+    gap: 36px;
+
+    @media(max-width: $tablet) {
+      display: contents;
+    }
+  }
+
+  &__title {
+    @include Title-62;
+    margin: 0;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+
+    @media(max-width: $tablet) {
+      gap: 24px;
+      order: 1;
+    }
+
+    p:not([class]) {
+      margin: 0;
+    }
+  }
+}

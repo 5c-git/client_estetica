@@ -1,0 +1,112 @@
+include ../history-card/history-card
+
+div.our-history
+  h2.our-history__title История компании
+  div.our-history__wrapper
+    div.swiper.our-history__nav
+      ul.swiper-wrapper.our-history__nav-list
+        li.swiper-slide.our-history__nav-item
+          span 2006
+        li.swiper-slide.our-history__nav-item
+          span 2011
+        li.swiper-slide.our-history__nav-item
+          span 2015
+        li.swiper-slide.our-history__nav-item
+          span 2016
+        li.swiper-slide.our-history__nav-item
+          span 2017
+        li.swiper-slide.our-history__nav-item
+          span 2020
+        li.swiper-slide.our-history__nav-item
+          span 2021
+        li.swiper-slide.our-history__nav-item
+          span 2022
+        li.swiper-slide.our-history__nav-item
+          span 2023
+        li.swiper-slide.our-history__nav-item
+          span 2024
+
+
+    div.swiper.our-history__main
+      ul.swiper-wrapper.our-history__main-list
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2006',
+            title: 'Зарождение компании',
+            desc: 'Открыт первый премиальный салон ESTETICA.',
+            src: './assets/images/promo-gallery-1.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2011',
+            title: 'Открытие второй фабрики Sleepeesleep.',
+            desc: 'Мы приступаем к производству матрасов с ортопедическим эффектом используя новые технологии производства.',
+            src: './assets/images/promo-gallery-2.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2015',
+            title: 'Партнёрство со SWAROVSKI',
+            desc: 'Компания ESTETICA стала единственным официальным партнёром SWAROVSKI на мебельном рынке.',
+            src: './assets/images/promo-gallery-3.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2016',
+            title: 'Представили рынку неповторимую продукцию в стиле арт-деко',
+            desc: 'Представлены коллекции в стиле арт-деко с элементами модерна под брендом ESTETICA VISION, основанные на гармоничном сочетании всех элементов интерьера.',
+            src: './assets/images/promo-gallery-4.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2017',
+            title: 'Сотрудничество с Mercedes-Benz Russia',
+            desc: 'Установлены официальные партнёрские отношения с Mercedes-Benz Russia.',
+            src: './assets/images/promo-gallery-5.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2020',
+            title: 'Новая линейка мебели',
+            desc: 'Презентация функциональной мягкой мебели ESTETICA LITE.',
+            src: './assets/images/promo-gallery-3.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2021',
+            title: 'Сотрудничество с Rolls-Royce Motor Cars',
+            desc: 'Начато партнёрство с Rolls-Royce Motor Cars АВИЛОН и российским брендом AURUS.',
+            src: './assets/images/promo-gallery-2.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2022',
+            title: 'Расширение в Москве и регионах',
+            desc: 'Открытие флагманского салона в Хамовниках (Московский Шёлк, 500 м²) и салона в Санкт-Петербурге (Дизайн Центр, проспект Медиков).',
+            src: './assets/images/promo-gallery-1.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2023',
+            title: 'ESTETICA VISION в Казани',
+            desc: 'Открытие нового салона ESTETICA VISION в столице республики Татарстан — городе Казань.',
+            src: './assets/images/promo-gallery-5.png',
+          })
+
+        li.swiper-slide.our-history__main-item
+          +history-card({
+            year: '2024',
+            title: 'Расширение сети, открытие новых салонов в Москве',
+            desc: 'В современном арт-пространстве THE DOM открылся салон ESTETICA VISION и в центре дизайна и архитектуры ARTPAY.',
+            src: './assets/images/promo-gallery-4.png',
+          })
+          

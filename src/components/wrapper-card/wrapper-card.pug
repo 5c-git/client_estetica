@@ -1,0 +1,33 @@
+mixin wrapper-card(props)
+  if props.ver1
+    div.wrapper-card
+      figure.wrapper-card__banner
+        img(src='./assets/images/our-mission-3.png' alt="")
+
+      div.wrapper-card__content
+        span.wrapper-card__title Приглашаем в команду
+        p Открыты вакансии в торговой сети, офисе и на производстве.
+        p 
+          em Не важно, начинаете ли вы карьеру или уже профессионал — у нас можно расти, развиваться и достигать высоких результатов.
+  
+  else if props.ver2
+    div.wrapper-card
+      div.wrapper-card__content
+        span.wrapper-card__title Приглашаем в команду
+        p Открыты вакансии в торговой сети, офисе и на производстве.
+        p 
+          em Не важно, начинаете ли вы карьеру или уже профессионал — у нас можно расти, развиваться и достигать высоких результатов.
+
+      figure.wrapper-card__banner
+        img(src='./assets/images/request-catalog-1.png' alt="")
+  
+  else if props.ver3
+    div.wrapper-card
+      figure.wrapper-card__banner
+        img(src='./assets/images/promo-gallery-3.png' alt="")
+
+      div.wrapper-card__content
+        span.wrapper-card__title Приглашаем в команду
+        p Открыты вакансии в торговой сети, офисе и на производстве.
+        p 
+          em Не важно, начинаете ли вы карьеру или уже профессионал — у нас можно расти, развиваться и достигать высоких результатов.

@@ -1,0 +1,66 @@
+.statistics {
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      gap: 36px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 24px;
+    row-gap: 48px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @media(max-width: $phone) {
+      gap: 24px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @media(max-width: $phone) {
+      gap: 16px;
+    }
+
+    hr {
+      margin: 0;
+      border: 0;
+      border-top: 1px solid $default;
+    }
+
+    span:not([class]) {
+      color: $secondary;
+    }
+  }
+
+  &__item-title {
+    @include Title-62;
+  }
+
+  &__media {
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    video,
+    figure,
+    img {
+      width: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

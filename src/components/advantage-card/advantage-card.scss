@@ -1,58 +1,33 @@
 .advantage-card {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
   background-color: $elevated;
   border-radius: 16px;
-  gap: 36px;
   overflow: hidden;
+  gap: 48px;
 
   @media(max-width: $phone) {
-    display: flex;
-    flex-direction: column;
+    padding: 16px;
+  }
+
+  &__icon {
+    width: 96px;
+    height: 96px;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    padding: 24px;
     gap: 16px;
-
-    @media(max-width: $phone) {
-      padding: 16px;
-    }
   }
 
   &__title {
-    @include Title-36;
     margin: 0;
-
-    @media(max-width: $phone) {
-      @include Body-20;
-    }
   }
 
   &__desc {
-    @include Body-24;
-    margin-top: auto;
-    color: $secondary;
-  }
-
-  &__banner {
-    height: 440px;
     margin: 0;
-    border-radius: 16px;
-    overflow: hidden;
-
-    @media(max-width: $phone) {
-      height: auto;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
+    color: $secondary;
   }
 }

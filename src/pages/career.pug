@@ -1,5 +1,7 @@
 extends ../templates/default
 
+include ../components/wrapper-card/wrapper-card
+
 block header
   +header({
     mixin: 'header--liquid',
@@ -7,3 +9,34 @@ block header
 
 block main
   include ../components/breadcrumbs/breadcrumbs
+
+  include ../components/layout-heder/layout-heder
+
+  +layout({
+    title: 'Группа компаний ESTETICA - лидер по<br> производству мебели премиум класса в России',
+  })
+    include ../components/statistics/statistics
+
+  +layout({})
+    include ../components/our-mission/our-mission
+
+  +layout({
+    mixin: 'layout--grey',
+  })
+    include ../components/our-history/our-history
+
+  +layout({})
+    +wrapper-card({
+      ver1: true,
+    })
+    +wrapper-card({
+      ver2: true,
+    })
+    +wrapper-card({
+      ver3: true,
+    })
+
+  +layout({
+    title: 'Преимущества работы<br> в ESTETICA',
+  })
+    include ../components/slider4/slider4

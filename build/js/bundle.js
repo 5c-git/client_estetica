@@ -63,7 +63,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var map = {
 	"./advantage-card/advantage-card.js": 75,
-	"./advantages/advantages.js": 9907,
 	"./alert-wrapper/alert-wrapper.js": 3937,
 	"./alert/alert.js": 4009,
 	"./breadcrumbs/breadcrumbs.js": 4073,
@@ -78,12 +77,18 @@ var map = {
 	"./gallery/gallery.js": 5377,
 	"./header-dropdown/header-dropdown.js": 7025,
 	"./header/header.js": 6689,
+	"./history-card/history-card.js": 9585,
 	"./intro-partner/intro-partner.js": 2537,
 	"./intro/intro.js": 4189,
+	"./layout-heder/layout-heder.js": 8865,
 	"./layout/layout.js": 1995,
 	"./mobile-dropdown/mobile-dropdown.js": 7945,
 	"./mobile-nav/mobile-nav.js": 9143,
 	"./news-card/news-card.js": 5401,
+	"./our-history/our-history.js": 6505,
+	"./our-mission/our-mission.js": 3977,
+	"./participant-card/participant-card.js": 4031,
+	"./participants/participants.js": 4855,
 	"./popUp/popUp.js": 9417,
 	"./pro/pro.js": 4217,
 	"./promo-gallery/promo-gallery.js": 445,
@@ -94,7 +99,9 @@ var map = {
 	"./request-catalog/request-catalog.js": 993,
 	"./request/request.js": 5745,
 	"./slider/slider.js": 5073,
+	"./slider4/slider4.js": 209,
 	"./socials/socials.js": 4741,
+	"./statistics/statistics.js": 1733,
 	"./subscribe-tg/subscribe-tg.js": 6671,
 	"./tooltip/tooltip.js": 281,
 	"./top-bar/top-bar.js": 5945,
@@ -104,8 +111,8 @@ var map = {
 	"./wave-text/wave-text.js": 3057,
 	"./widget/widget.js": 2079,
 	"./window/window.js": 6919,
+	"./wrapper-card/wrapper-card.js": 2231,
 	"components/advantage-card/advantage-card.js": 75,
-	"components/advantages/advantages.js": 9907,
 	"components/alert-wrapper/alert-wrapper.js": 3937,
 	"components/alert/alert.js": 4009,
 	"components/breadcrumbs/breadcrumbs.js": 4073,
@@ -120,12 +127,18 @@ var map = {
 	"components/gallery/gallery.js": 5377,
 	"components/header-dropdown/header-dropdown.js": 7025,
 	"components/header/header.js": 6689,
+	"components/history-card/history-card.js": 9585,
 	"components/intro-partner/intro-partner.js": 2537,
 	"components/intro/intro.js": 4189,
+	"components/layout-heder/layout-heder.js": 8865,
 	"components/layout/layout.js": 1995,
 	"components/mobile-dropdown/mobile-dropdown.js": 7945,
 	"components/mobile-nav/mobile-nav.js": 9143,
 	"components/news-card/news-card.js": 5401,
+	"components/our-history/our-history.js": 6505,
+	"components/our-mission/our-mission.js": 3977,
+	"components/participant-card/participant-card.js": 4031,
+	"components/participants/participants.js": 4855,
 	"components/popUp/popUp.js": 9417,
 	"components/pro/pro.js": 4217,
 	"components/promo-gallery/promo-gallery.js": 445,
@@ -136,7 +149,9 @@ var map = {
 	"components/request-catalog/request-catalog.js": 993,
 	"components/request/request.js": 5745,
 	"components/slider/slider.js": 5073,
+	"components/slider4/slider4.js": 209,
 	"components/socials/socials.js": 4741,
+	"components/statistics/statistics.js": 1733,
 	"components/subscribe-tg/subscribe-tg.js": 6671,
 	"components/tooltip/tooltip.js": 281,
 	"components/top-bar/top-bar.js": 5945,
@@ -145,7 +160,8 @@ var map = {
 	"components/video/video.js": 2305,
 	"components/wave-text/wave-text.js": 3057,
 	"components/widget/widget.js": 2079,
-	"components/window/window.js": 6919
+	"components/window/window.js": 6919,
+	"components/wrapper-card/wrapper-card.js": 2231
 };
 
 
@@ -167,6 +183,16 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = 147;
+
+/***/ }),
+
+/***/ 209:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
 
 /***/ }),
 
@@ -428,6 +454,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 1733:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
 /***/ 1995:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -478,6 +514,16 @@ if (widget) {
     }
   });
 }
+
+
+/***/ }),
+
+/***/ 2231:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
 
 
 /***/ }),
@@ -973,6 +1019,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 3977:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
 /***/ 4009:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1036,6 +1092,16 @@ const summonAlert = (input) => {
   body.append(templateContent);
   alert.classList.add("alert--bounce");
 };
+
+
+
+/***/ }),
+
+/***/ 4031:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 
 
 
@@ -1731,6 +1797,105 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 4855:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5880);
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6575);
+
+
+
+gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u);
+const initParticipantsAnimation = () => {
+  const section = document.querySelector(".participants");
+  if (!section)
+    return;
+  const items = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.utils.toArray(".participants__item");
+  if (items.length < 2)
+    return;
+  const first = items[0];
+  const rest = items.slice(1);
+  const createTimeline = () => {
+    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.getAll().forEach((st) => {
+      if (st.trigger === section || st.animation && st.animation._targets && st.animation._targets.length && st.animation._targets.some((t) => section.contains(t))) {
+        st.kill();
+      }
+    });
+    const firstRect = first.getBoundingClientRect();
+    const offsets = items.map((item) => {
+      const r = item.getBoundingClientRect();
+      const yMove = firstRect.top - r.top;
+      return yMove;
+    });
+    const totalSteps = rest.length;
+    const stepHeight = 220;
+    const totalScroll = totalSteps * stepHeight;
+    const tl = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "center center",
+        end: "+=" + totalScroll,
+        scrub: true,
+        pin: true,
+        pinSpacing: true
+        //markers: true,
+      }
+    });
+    rest.forEach((card, i) => {
+      const stepLabel = `step${i}`;
+      tl.addLabel(stepLabel);
+      const targetY = (i + 1) * -95;
+      console.log(targetY);
+      tl.to(card, {
+        yPercent: targetY,
+        duration: 1,
+        ease: "none"
+      }, stepLabel);
+      for (let j = 0; j <= i; j++) {
+        const prev = items[j];
+        const stepScale = 0.04;
+        const scaleTarget = Math.max(0.7, 1 - stepScale * (i - j + 1));
+        tl.to(prev, {
+          scale: scaleTarget,
+          transformOrigin: "top center",
+          duration: 1,
+          ease: "none"
+        }, stepLabel);
+      }
+    });
+    return tl;
+  };
+  let tlInstance = createTimeline();
+  let resizeTimer;
+  const onResize = () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.refresh(true);
+      tlInstance = createTimeline();
+    }, 150);
+  };
+  window.addEventListener("resize", onResize);
+  return () => {
+    window.removeEventListener("resize", onResize);
+    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.getAll().forEach((st) => {
+      if (st.trigger === section || st.animation && st.animation._targets && st.animation._targets.length && st.animation._targets.some((t) => section.contains(t))) {
+        st.kill();
+      }
+    });
+    if (tlInstance)
+      tlInstance.kill();
+  };
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initParticipantsAnimation);
+
+
+/***/ }),
+
 /***/ 4881:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1800,7 +1965,7 @@ if (up) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1236);
-/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(150);
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1708);
 
 
 
@@ -1848,7 +2013,7 @@ sliders.forEach((el) => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1236);
-/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(150);
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1708);
 
 
 
@@ -1971,6 +2136,70 @@ if (import_meta.webpackHot) {
 
 /***/ }),
 
+/***/ 6505:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1236);
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1708);
+
+
+
+const clubCardsNew = document.querySelector(".our-history");
+if (clubCardsNew) {
+  const nav = clubCardsNew.querySelector(".our-history__nav");
+  const main = clubCardsNew.querySelector(".our-history__main");
+  let swiperMainDesktop;
+  let swiperNav;
+  const swiperNavInit = () => {
+    console.log("swiperNavInit");
+    swiperNav = new swiper__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A(nav, {
+      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__/* .FreeMode */ .U1],
+      spaceBetween: 0,
+      slidesPerView: "auto",
+      watchSlidesProgress: true,
+      freeMode: {
+        enabled: true,
+        minimumVelocity: 0.2,
+        momentum: false,
+        sticky: true
+      }
+    });
+  };
+  const swiperMainDesktopInit = () => {
+    console.log("swiperMainDesktopInit");
+    swiperMainDesktop = new swiper__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A(main, {
+      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__/* .Thumbs */ .WO, swiper_modules__WEBPACK_IMPORTED_MODULE_1__/* .EffectFade */ ._R],
+      allowTouchMove: true,
+      slidesPerView: 1,
+      spaceBetween: 0,
+      effect: "fade",
+      fadeEffect: {
+        crossFade: true
+      },
+      watchSlidesProgress: true,
+      thumbs: {
+        swiper: swiperNav,
+        slideThumbActiveClass: "our-history__nav-item--active"
+      },
+      breakpoints: {
+        768: {}
+      },
+      on: {
+        init: () => {
+          swiperNav.update();
+        }
+      }
+    });
+  };
+  swiperNavInit();
+  swiperMainDesktopInit();
+}
+
+
+/***/ }),
+
 /***/ 6671:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2041,6 +2270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3670);
 /* harmony import */ var _promo_gallery_promo_gallery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(445);
 /* harmony import */ var _promo_promo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2945);
+/* harmony import */ var _participants_participants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4855);
+
 
 
 
@@ -2078,7 +2309,8 @@ window.Corners5ProjectLayout = {
   activateRequestButtons: _utils_utils__WEBPACK_IMPORTED_MODULE_4__/* .activateRequestButtons */ .Qs,
   updateButtonState: _utils_utils__WEBPACK_IMPORTED_MODULE_4__/* .updateButtonState */ .Dl,
   initPromoGalleryAnimation: _promo_gallery_promo_gallery__WEBPACK_IMPORTED_MODULE_5__["default"],
-  initPromoAnimation: _promo_promo__WEBPACK_IMPORTED_MODULE_6__["default"]
+  initPromoAnimation: _promo_promo__WEBPACK_IMPORTED_MODULE_6__["default"],
+  initParticipantsAnimation: _participants_participants__WEBPACK_IMPORTED_MODULE_7__["default"]
 };
 
 
@@ -2141,6 +2373,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 8417:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ 8865:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2321,7 +2563,7 @@ const removePopUp = (arg) => {
 
 /***/ }),
 
-/***/ 9907:
+/***/ 9585:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

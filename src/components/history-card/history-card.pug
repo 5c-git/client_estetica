@@ -1,0 +1,10 @@
+mixin history-card(props)
+
+  div.history-card
+    div.history-card__content
+      span.history-card__year=props.year
+      span.history-card__title=props.title
+      em.history-card__desc=props.desc
+
+    figure.history-card__banner
+      img(src=props.src alt="")

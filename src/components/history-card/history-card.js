@@ -1,0 +1,1 @@
+import './history-card.scss';

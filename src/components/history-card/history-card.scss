@@ -1,0 +1,80 @@
+.history-card {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 600px) minmax(0, 828px);
+  gap: 60px;
+
+  @media(max-width: $tablet) {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  &__banner {
+    margin: 0;
+    padding: 0;
+    border-radius: 16px;
+    aspect-ratio: 828 / 600;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    @media(max-width: $tablet) {
+      width: min(100%, 360px);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 24px;
+    // transition: transform 0s ease;
+    // transform: translateX(-100px);
+
+    @media(max-width: $tablet) {
+      display: contents;
+    }
+  }
+
+  &__year {
+    @include Display-144;
+    margin: 0;
+
+    @media(max-width: $desktop) {
+      @include Title-52;
+    }
+  }
+
+  &__title {
+    @include Title-44;
+    margin: 0;
+
+    @media(max-width: $desktop) {
+      @include Title-36;
+    }
+  }
+
+  &__desc {
+    @include Body-24;
+    margin: 0;
+    margin-top: auto;
+    color: $secondary;
+
+    @media(max-width: $desktop) {
+      @include Body-20;
+    }
+
+    @media(max-width: $tablet) {
+      margin-top: unset;
+      order: 1;
+    }
+  }
+}

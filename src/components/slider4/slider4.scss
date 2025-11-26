@@ -1,0 +1,29 @@
+.slider4 {
+
+  &__swiper {
+
+    @media(max-width: $tablet) {
+      margin-right: -15px;
+      margin-left: -15px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    gap: 24px;
+  }
+
+  &__item {
+
+    .advantage-card {
+      height: 100%;
+    }
+  }
+}

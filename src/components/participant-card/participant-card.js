@@ -1,0 +1,1 @@
+import './participant-card.scss';
