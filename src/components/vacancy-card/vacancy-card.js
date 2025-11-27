@@ -1,0 +1,1 @@
+import './vacancy-card.scss';

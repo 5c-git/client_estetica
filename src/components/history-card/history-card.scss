@@ -10,6 +10,10 @@
     gap: 36px;
   }
 
+  @media(max-width: $phone) {
+    gap: 24px;
+  }
+
   &__banner {
     margin: 0;
     padding: 0;
@@ -47,10 +51,6 @@
   &__year {
     @include Display-144;
     margin: 0;
-
-    @media(max-width: $desktop) {
-      @include Title-52;
-    }
   }
 
   &__title {

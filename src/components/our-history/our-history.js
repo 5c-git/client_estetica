@@ -47,7 +47,8 @@ if (clubCardsNew) {
         slideThumbActiveClass: 'our-history__nav-item--active',
       },
       breakpoints: {
-        768: {
+        992: {
+          allowTouchMove: false,
         },
       },
       on: {
@@ -61,4 +62,3 @@ if (clubCardsNew) {
   swiperNavInit();
   swiperMainDesktopInit();
 }
-

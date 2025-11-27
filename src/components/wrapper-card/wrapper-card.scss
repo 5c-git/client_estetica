@@ -9,12 +9,25 @@
     gap: 60px;
   }
 
+  @media(max-width: $tablet) {
+    gap: 36px;
+  }
+
+  @media(max-width: $phone) {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__banner {
     margin: 0;
     padding: 0;
     border-radius: 16px;
     overflow: hidden;
     aspect-ratio: 686 / 520;
+
+    @media(max-width: $phone) {
+      order: 1;
+    }
 
     img {
       width: 100%;
@@ -26,10 +39,12 @@
 
   &__content {
     @include Body-24;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
-    p:not([class]) {
-      margin-top: 16px;
-      margin-bottom: 16px;
+    p {
+      margin: 0;
     }
 
     em {
@@ -42,6 +57,10 @@
     @include Title-62;
     display: block;
     margin-top: 0;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
+
+    @media(max-width: $phone) {
+      margin-bottom: unset;
+    }
   }
 }

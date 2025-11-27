@@ -1,0 +1,54 @@
+include ../vacancy-card/vacancy-card
+
+div.card-catalog
+  div.card-catalog__wrapper
+    h2.card-catalog__title Вакансии
+      span.card-catalog__amount 4
+
+    div.card-catalog__nav
+      form(action="#" method='post')
+        fieldset 
+          label
+            input(type='radio' value='Все' name='filter' checked) 
+            span Все
+          label
+            input(type='radio' value='Продажи' name='filter') 
+            span Продажи
+          label
+            input(type='radio' value='Дизайн' name='filter') 
+            span Дизайн
+          label
+            input(type='radio' value='Офис' name='filter') 
+            span Офис
+          label
+            input(type='radio' value='Производство' name='filter') 
+            span Производство
+          label
+            input(type='radio' value='Логистика' name='filter') 
+            span Логистика
+          label
+            input(type='radio' value='Склад' name='filter') 
+            span Склад
+        select(name="sort")
+          option Сначала новые
+          option Сначала старые
+          option Популярные
+          option С большой зарплатой
+          option Самые красивые
+
+    div.card-catalog__list
+      +vacancy-card({
+        title: 'Менеджер по продажам',
+        price: '120 000 - 200 000 ₽ в месяц, до вычета налогов',
+        shop: 'МО, Красногорск, ТЦ РИГАМОЛЛ',
+      })
+      +vacancy-card({
+        title: 'Менеджер по ремонту, оформитель стендов и площадок',
+        price: '120 000 - 200 000 ₽ в месяц, до вычета налогов',
+        shop: 'Александровск-Сахалинский, Нахимовский проспект, 24/1',
+      })
+      +vacancy-card({
+        title: '',
+        price: '',
+        shop: '',
+      })

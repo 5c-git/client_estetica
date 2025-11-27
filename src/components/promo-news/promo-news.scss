@@ -1,5 +1,12 @@
 .promo-news {
 
+  .slider {
+
+    &__swiper {
+      overflow: unset;
+    }
+  }
+
   &__wrapper {
     display: grid;
     grid-template-columns: 400px minmax(0, 1fr);

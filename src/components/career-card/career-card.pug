@@ -1,0 +1,12 @@
+mixin career-card(props)
+  div.career-card
+    figure.career-card__banner
+      img(src=props.photo width='220' height='220' alt="")
+    div.career-card__body
+      div.career-card__main
+        div.career-card__content
+          p!=props.text
+        button(type='button').career-card__more Показать ещё
+      div.career-card__footer
+        span.career-card__name=props.name
+        span.career-card__about=props.about

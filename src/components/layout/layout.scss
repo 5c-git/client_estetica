@@ -8,10 +8,18 @@
     margin-bottom: 96px;
   }
 
+  .slider {
+
+    &__swiper {
+      overflow: unset;
+    }
+  }
+
   &:has(.promo),
   &:has(.promo-gallery),
   &:has(.promo-news),
-  &:has(.gallery) {
+  &:has(.gallery),
+  &:has(.slider) {
     overflow: hidden;
   }
 
@@ -72,6 +80,10 @@
     display: flex;
     flex-direction: column;
     gap: 100px;
+
+    @media(max-width: $phone) {
+      gap: 96px;
+    }
   }
 
   &__action {

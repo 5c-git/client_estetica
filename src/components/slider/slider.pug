@@ -1,37 +1,84 @@
 include ../news-card/news-card
+include ../career-card/career-card
 
-div.slider
-  div.swiper.slider__swiper
-    ul.swiper-wrapper.slider__list
-      li.swiper-slide.slider__item
-        +news-card({
-          src: './assets/images/promo-gallery-1.png',
-          title: 'Как правильно ухаживать за мебелью: Ваш гид по составу ткани',
-        })
-      li.swiper-slide.slider__item
-        +news-card({
-          src: './assets/images/promo-gallery-2.png',
-          title: 'iSaloni 2024 в Краснодаре',
-        })
-      li.swiper-slide.slider__item
-        +news-card({
-          src: './assets/images/promo-gallery-3.png',
-          title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
-        })
-      li.swiper-slide.slider__item
-        +news-card({
-          src: './assets/images/promo-gallery-4.png',
-          title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
-        })
-      li.swiper-slide.slider__item
-        +news-card({
-          src: './assets/images/promo-gallery-5.png',
-          title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
-        })
+mixin slider(props)
+  div.slider
+    div.swiper.slider__swiper
+      ul.swiper-wrapper.slider__list
 
-  div.slider__nav
-    div.slider__pagination
+        li.swiper-slide.slider__item
+          if props.news
+            +news-card({
+              src: './assets/images/promo-gallery-1.png',
+              title: 'Как правильно ухаживать за мебелью: Ваш гид по составу ткани',
+            })
+          if props.career
+            +career-card({
+              photo: './assets/images/our-mission-3.png',
+              text: 'Мой профессиональный путь не был простым и лёгким, но это интересный путь однозначно!<br>Вышла на должность менеджера по продажам в г.. Волгоград. Спустя год работы в компании стала администратором. Проработав 5 лет я поняла, что выросла. Я попросила перевод в Москву и уже через 2 недели поменяла город своей карьеры. Никогда не приходилось мне искать работу, она сама меня находила.<br>И я благодарна судьбе за то, что она всегда окружала меня людьми, которые были моим «фейс-контролем», «гарантом», «проводником» в мир профессии и новой работы.',
+              name: 'Деркач Юлия',
+              about: 'Москва, работает с 2014 года',
+            })
 
-    div.slider__buttons
-      button(type='button' aria-label='Предыдущий слайд.').slider__button.slider__button--prev
-      button(type='button' aria-label='Следующий слайд.').slider__button.slider__button--next
+        li.swiper-slide.slider__item
+          if props.news
+            +news-card({
+              src: './assets/images/promo-gallery-2.png',
+              title: 'iSaloni 2024 в Краснодаре',
+            })
+          if props.career
+            +career-card({
+              photo: './assets/images/our-mission-1.png',
+              text: 'Считается, что человек добился успеха, если он хорошо живёт и любит то, чем занимается.<br>В 2013 году я была в поисках работы и пришла на собеседование в компанию, которая стала мне домом на многие годы. Я всегда тяготела ко всему прекрасному, а ESTETICA — это «купор» среди мебельных компаний.Окружённая красивыми интерьерами, опытными коллегами и взыскательными клиентами я ежедневно работала над собой и формировалась как профессионал.',
+              name: 'Константин Константинович Константинопольский',
+              about: 'Александровск-Сахалинский, работает с 2022 года ',
+            })
+
+        li.swiper-slide.slider__item
+          if props.news
+            +news-card({
+              src: './assets/images/promo-gallery-3.png',
+              title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
+            })
+          if props.career
+            +career-card({
+              photo: './assets/images/our-mission-2.png',
+              text: 'Мой путь в компании начался в 2021 году, когда мне было всего 20 лет. В тот момент у меня было главное — амбиции, энергия и желание делать этот мир лучше . «Эстетика» стала пространством, где эти качества обрели практическое воплощение.<br>Уже через 9 месяцев я получила возможность перейти на позицию старшего менеджера в другом салоне. Это стало для меня подтверждением того, что стремление к развитию, ответственность и искренний интерес к делу всегда находят отклик.Работа в «Эстетике» для меня — это больше, чем профессия. Это путь личностного и профессионального роста, возможность быть частью бренда, который задаёт стандарты премиального сервиса и формирует культуру красоты. Каждый день я убеждаюсь: когда ты любишь своё дело, открываются новые горизонты, а рост и успех становятся естественным продолжением твоего пути.',
+              name: 'Мушинская Алина',
+              about: 'Владивосток, работает с 2021 года',
+            })
+
+        li.swiper-slide.slider__item
+          if props.news
+            +news-card({
+              src: './assets/images/promo-gallery-4.png',
+              title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
+            })
+          if props.career
+            +career-card({
+              photo: './assets/images/our-mission-3.png',
+              text: 'Мой путь в компании ESTETICA начался 11 лет назад. Тогда я была обычным менеджером по продажам и только мечтала о том, чтобы однажды достичь большего. <br>На сегодняшний день, я — администратор одного из лучших салонов в центре Москвы, и за каждым шагом моего роста стоит эта компания.ESTETICA подарила мне бесценный опыт: умение всегда стремиться выше, верить в собственные силы и при этом оставаться человеком. Всё это стало возможным благодаря невероятным людям рядом — настоящим профессионалам, которые делятся знаниями, поддерживают и вдохновляют.<br>Мой салон — это отражение моего внутреннего мира. Здесь я могу создавать красоту и стиль, помогая клиентам воплощать их мечты об идеальном интерьере.Я благодарна компании ESTETICA за то, что именно здесь я смогла раскрыть себя, обрести уверенность и стать профессионалом, для которого работа — это вдохновение и любовь к своему делу.',
+              name: 'Борисова Елена',
+              about: 'Москва, работает с 2014 года',
+            })
+
+        li.swiper-slide.slider__item
+          if props.news
+            +news-card({
+              src: './assets/images/promo-gallery-5.png',
+              title: 'Заголовок баннера, который может быть длинным и занимать две строки но надо их обрезать через многоточие.',
+            })
+          if props.career
+            +career-card({
+              photo: './assets/images/our-mission-1.png',
+              text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+              name: 'Ташева Олеся',
+              about: 'Владивосток, работает с 2021 года',
+            })
+
+    div.slider__nav
+      div.slider__pagination
+
+      div.slider__buttons
+        button(type='button' aria-label='Предыдущий слайд.').slider__button.slider__button--prev
+        button(type='button' aria-label='Следующий слайд.').slider__button.slider__button--next

@@ -1,0 +1,51 @@
+.store-map {
+  position: relative;
+  width: 100%;
+  display: flex;
+  color: $secondary;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &__track {
+    @include Title-44;
+    width: max-content;
+    display: flex;
+    padding-right: 24px;
+    gap: 24px;
+    white-space: nowrap;
+    animation: scroll 20s linear infinite;
+
+    @media(max-width: $phone) {
+      padding-right: 16px;
+      gap: 16px;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+
+      @media(max-width: $phone) {
+        gap: 16px;
+      }
+
+      &:after {
+        width: 4px;
+        height: 4px;
+        background-color: currentColor;
+        border-radius: 50%;
+        content: '';
+      }
+    }
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}

@@ -1,0 +1,74 @@
+.training-card {
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  background-color: $base;
+  border-radius: 16px;
+  overflow: hidden;
+  gap: 48px;
+
+  @media(max-width: $tablet) {
+    padding: 16px;
+  }
+
+  &__icon {
+    width: 144px;
+    height: 144px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    @media(max-width: $tablet) {
+      width: 96px;
+      height: 96px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    p:not([class]) {
+      margin: 0;
+    }
+
+    em {
+      font-style: normal;
+      color: $secondary;
+    }
+
+    ul:not([class]) {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li:not([class]) {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        padding-left: 10px;
+
+        &:before {
+          position: absolute;
+          top: 5px;
+          left: 0;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: currentColor;
+          content: '';
+        }
+      }
+    }
+  }
+}

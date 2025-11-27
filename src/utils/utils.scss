@@ -96,50 +96,13 @@ $transition-duration: 0.3s;
   font-weight: 400;
   font-style: normal;
   line-height: 36px;
-}
-
-@mixin Title-62 {
-  font-family: $main-font;
-  font-size: 62px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 72px;
 
   @media(max-width: $phone) {
-    @include Subtitle-32;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 28px;
   }
-}
-
-@mixin Title-52 {
-  font-family: $main-font;
-  font-size: 52px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 62px;
-
-  @media(max-width: $phone) {
-    @include Subtitle-30;
-  }
-}
-
-@mixin Title-44 {
-  font-family: $main-font;
-  font-size: 44px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 52px;
-
-  @media(max-width: $phone) {
-    @include Subtitle-30;
-  }
-}
-
-@mixin Title-36 {
-  font-family: $main-font;
-  font-size: 36px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1;
 }
 
 @mixin Display-144 {
@@ -148,6 +111,13 @@ $transition-duration: 0.3s;
   font-weight: 400;
   font-style: normal;
   line-height: 144px;
+
+  @media(max-width: $phone) {
+    font-size: 62px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 72px;
+  }
 }
 
 @mixin Display-92 {
@@ -194,6 +164,57 @@ $transition-duration: 0.3s;
   }
 }
 
+@mixin Title-62 {
+  font-family: $main-font;
+  font-size: 62px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 72px;
+
+  @media(max-width: $phone) {
+    @include Subtitle-32;
+  }
+}
+
+@mixin Title-52 {
+  font-family: $main-font;
+  font-size: 52px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 62px;
+
+  @media(max-width: $phone) {
+    @include Subtitle-30;
+  }
+}
+
+@mixin Title-44 {
+  font-family: $main-font;
+  font-size: 44px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 52px;
+
+  @media(max-width: $phone) {
+    @include Subtitle-30;
+  }
+}
+
+@mixin Title-36 {
+  font-family: $main-font;
+  font-size: 36px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+
+  @media(max-width: $phone) {
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 32px;
+  }
+}
+
 @mixin Button-16 {
   font-family: $main-font;
   font-size: 16px;
@@ -220,4 +241,12 @@ $transition-duration: 0.3s;
   font-weight: 400;
   font-style: normal;
   line-height: 20px;
+}
+
+@mixin Footnote-12 {
+  font-family: $main-font;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 16px;
 }

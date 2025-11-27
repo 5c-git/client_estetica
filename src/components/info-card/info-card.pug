@@ -1,0 +1,22 @@
+mixin info-card(props)
+  div.info-card(class=props.mixin)
+    i.info-card__icon
+      img(src=props.icon width='96' height='96' alt="")
+
+    div.info-card__content
+      if props.title
+        p.info-card__title=props.title
+
+      if props.text
+        p=props.text
+
+      if props.desc
+        p
+          em=props.desc
+          
+      if props.list
+        em
+          ul
+            li Программа учебного центра предлагает обучение для всех категорий персонала.
+            li Вы получите успешный опыт работы с дизайнерами и архитекторами.
+            li Наставник поможет вам планово и мягко погрузиться в мир интерьеров премиум класса.

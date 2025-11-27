@@ -1,3 +1,5 @@
+include ../slider/slider
+
 div.promo-news
   div.promo-news__wrapper
     div.promo-news__header
@@ -10,4 +12,6 @@ div.promo-news
 
     div.promo-news__main
       div.promo-news__slider
-        include ../slider/slider
+        +slider({
+          news: true,
+        })

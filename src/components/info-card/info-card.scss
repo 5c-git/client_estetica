@@ -1,0 +1,80 @@
+.info-card {
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  background-color: $elevated;
+  border-radius: 16px;
+  overflow: hidden;
+  gap: 48px;
+
+  @media(max-width: $tablet) {
+    padding: 16px;
+  }
+
+  &__icon {
+    width: 96px;
+    height: 96px;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+
+    @media(max-width: $tablet) {
+      width: 64px;
+      height: 64px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    p:not([class]) {
+      margin: 0;
+    }
+
+    em {
+      font-style: normal;
+      color: $secondary;
+    }
+
+    ul:not([class]) {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li:not([class]) {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        gap: 10px;
+
+        &:before {
+          font-size: 150%;
+          content: '•';
+        }
+      }
+    }
+  }
+
+  &__title {
+    @include Title-36;
+    margin: 0;
+    margin-bottom: 20px;
+
+    @media(max-width: $phone) {
+      margin-bottom: 8px;
+    }
+  }
+
+  &--white {
+    background-color: $base;
+  }
+}

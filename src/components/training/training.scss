@@ -1,0 +1,120 @@
+.training {
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 160px;
+
+    @media(max-width: $tablet) {
+      gap: 60px;
+    }
+
+    @media(max-width: $phone) {
+      gap: 36px;
+    }
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: minmax(0, 830px) minmax(0, 680px);
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+
+    @media(max-width: $tablet) {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+
+    @media(max-width: $tablet) {
+      display: contents;
+    }
+  }
+
+  &__title {
+    @include Title-62;
+    margin: 0;
+
+    @media(max-width: $tablet) {
+      order: -1;
+    }
+  }
+
+  &__statistics-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    column-gap: 24px;
+    row-gap: 48px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @media(max-width: $phone) {
+      gap: 24px;
+    }
+  }
+
+  &__statistics-item {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @media(max-width: $phone) {
+      gap: 16px;
+    }
+
+    hr {
+      margin: 0;
+      border: 0;
+      border-top: 1px solid $default;
+    }
+
+    span:not([class]) {
+      color: $secondary;
+    }
+  }
+
+  &__statistics-title {
+    @include Title-62;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  &__banner {
+    margin: 0;
+    padding: 0;
+    border-radius: 16px;
+    overflow: hidden;
+
+    @media(max-width: $tablet) {
+      order: -1;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  &__advantages {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: flex-start;
+    gap: 24px;
+
+    @media(max-width: $phone) {
+      grid-template-columns: 1fr;
+    }
+  }
+}

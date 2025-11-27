@@ -48,26 +48,18 @@ cookie();
 
 /***/ }),
 
-/***/ 75:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-
-
-
-/***/ }),
-
 /***/ 147:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./advantage-card/advantage-card.js": 75,
 	"./alert-wrapper/alert-wrapper.js": 3937,
 	"./alert/alert.js": 4009,
+	"./article/article.js": 1217,
 	"./breadcrumbs/breadcrumbs.js": 4073,
 	"./bumf-card/bumf-card.js": 6697,
 	"./button/button.js": 2271,
+	"./card-catalog/card-catalog.js": 8459,
+	"./career-card/career-card.js": 2497,
 	"./catalog-menu/catalog-menu.js": 4977,
 	"./components.js": 2820,
 	"./configurator/configurator.js": 4881,
@@ -78,6 +70,7 @@ var map = {
 	"./header-dropdown/header-dropdown.js": 7025,
 	"./header/header.js": 6689,
 	"./history-card/history-card.js": 9585,
+	"./info-card/info-card.js": 9669,
 	"./intro-partner/intro-partner.js": 2537,
 	"./intro/intro.js": 4189,
 	"./layout-heder/layout-heder.js": 8865,
@@ -102,22 +95,28 @@ var map = {
 	"./slider4/slider4.js": 209,
 	"./socials/socials.js": 4741,
 	"./statistics/statistics.js": 1733,
+	"./store-map/store-map.js": 7681,
 	"./subscribe-tg/subscribe-tg.js": 6671,
 	"./tooltip/tooltip.js": 281,
 	"./top-bar/top-bar.js": 5945,
+	"./training-card/training-card.js": 1921,
+	"./training/training.js": 7827,
 	"./up/up.js": 5057,
+	"./vacancy-card/vacancy-card.js": 7599,
 	"./validator/validator.js": 4489,
 	"./video/video.js": 2305,
 	"./wave-text/wave-text.js": 3057,
 	"./widget/widget.js": 2079,
 	"./window/window.js": 6919,
 	"./wrapper-card/wrapper-card.js": 2231,
-	"components/advantage-card/advantage-card.js": 75,
 	"components/alert-wrapper/alert-wrapper.js": 3937,
 	"components/alert/alert.js": 4009,
+	"components/article/article.js": 1217,
 	"components/breadcrumbs/breadcrumbs.js": 4073,
 	"components/bumf-card/bumf-card.js": 6697,
 	"components/button/button.js": 2271,
+	"components/card-catalog/card-catalog.js": 8459,
+	"components/career-card/career-card.js": 2497,
 	"components/catalog-menu/catalog-menu.js": 4977,
 	"components/components.js": 2820,
 	"components/configurator/configurator.js": 4881,
@@ -128,6 +127,7 @@ var map = {
 	"components/header-dropdown/header-dropdown.js": 7025,
 	"components/header/header.js": 6689,
 	"components/history-card/history-card.js": 9585,
+	"components/info-card/info-card.js": 9669,
 	"components/intro-partner/intro-partner.js": 2537,
 	"components/intro/intro.js": 4189,
 	"components/layout-heder/layout-heder.js": 8865,
@@ -152,10 +152,14 @@ var map = {
 	"components/slider4/slider4.js": 209,
 	"components/socials/socials.js": 4741,
 	"components/statistics/statistics.js": 1733,
+	"components/store-map/store-map.js": 7681,
 	"components/subscribe-tg/subscribe-tg.js": 6671,
 	"components/tooltip/tooltip.js": 281,
 	"components/top-bar/top-bar.js": 5945,
+	"components/training-card/training-card.js": 1921,
+	"components/training/training.js": 7827,
 	"components/up/up.js": 5057,
+	"components/vacancy-card/vacancy-card.js": 7599,
 	"components/validator/validator.js": 4489,
 	"components/video/video.js": 2305,
 	"components/wave-text/wave-text.js": 3057,
@@ -191,7 +195,38 @@ webpackContext.id = 147;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1236);
 
+
+const breakpoint = 991;
+let swiper = null;
+const container = document.querySelector(".slider4__swiper");
+if (container) {
+  const mql = window.matchMedia(`(max-width: ${breakpoint}px)`);
+  const enableSlider = () => {
+    if (swiper)
+      return;
+    swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A(container, {
+      // modules: [Navigation, Pagination],
+      slidesPerView: "auto",
+      spaceBetween: 0
+    });
+  };
+  const destroySlider = () => {
+    if (!swiper)
+      return;
+    swiper.destroy(true, true);
+    swiper = null;
+  };
+  const check = (matches = mql.matches) => {
+    if (matches && !swiper)
+      enableSlider();
+    if (!matches && swiper)
+      destroySlider();
+  };
+  check();
+  mql.addEventListener("change", (e) => check(e.matches));
+}
 
 
 /***/ }),
@@ -454,7 +489,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 1217:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
 /***/ 1733:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ 1921:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -589,6 +644,16 @@ const findVideos = () => {
 };
 findVideos();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (findVideos);
+
+
+/***/ }),
+
+/***/ 2497:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
 
 
 /***/ }),
@@ -2184,7 +2249,9 @@ if (clubCardsNew) {
         slideThumbActiveClass: "our-history__nav-item--active"
       },
       breakpoints: {
-        768: {}
+        992: {
+          allowTouchMove: false
+        }
       },
       on: {
         init: () => {
@@ -2326,6 +2393,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 7599:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ 7681:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ 7827:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
 /***/ 7945:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2373,6 +2470,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 8417:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ 8459:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2564,6 +2671,16 @@ const removePopUp = (arg) => {
 /***/ }),
 
 /***/ 9585:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ 9669:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

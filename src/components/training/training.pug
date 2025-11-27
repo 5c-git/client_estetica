@@ -1,0 +1,44 @@
+div.training
+  div.training__wrapper
+    div.training__main
+      div.training__content
+        h2.training__title Корпоративное обучение
+        div.training__statistics
+          ul.training__statistics-list
+            li.training__statistics-item
+              span.training__statistics-title 10+
+              hr
+              span образовательных методик повышения квалификации
+
+            li.training__statistics-item
+              span.training__statistics-title 60+
+              hr
+              span авторских тренингов по продукту
+
+            li.training__statistics-item
+              span.training__statistics-title 15
+              hr
+              span образовательным программам по развитию Hard и Soft Skills
+              
+        div.training__cards
+          include ../training-card/training-card
+
+      figure.training__banner
+        img(src="./assets/images/request-catalog-1.png"  alt="")
+        
+    div.training__advantages
+      +info-card({
+        mixin: 'info-card--white',
+        icon: './assets/images/info-card-9.svg',
+        title: 'Приглашаем студентов и выпускников в нашу команду.',
+        text: 'Мы предлагаем получить опыт с нуля в организации комфортного красивого пространства.',
+        list: true,
+      })
+      +info-card({
+        mixin: 'info-card--white',
+        icon: './assets/images/info-card-10.svg',
+        title: 'Рост для каждого',
+        text: 'Наша первостепенная цель — вырастить специалиста высокого уровня',
+        desc: 'Расширить его профессиональные компетенции и впоследствии дать возможность расширить собственную сферу деятельности.',
+      })
+

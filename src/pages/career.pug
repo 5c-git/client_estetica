@@ -1,6 +1,7 @@
 extends ../templates/default
 
 include ../components/wrapper-card/wrapper-card
+include ../components/slider/slider
 
 block header
   +header({
@@ -40,3 +41,27 @@ block main
     title: 'Преимущества работы<br> в ESTETICA',
   })
     include ../components/slider4/slider4
+
+  +layout({
+    mixin: 'layout--grey',
+  })
+    include ../components/training/training
+
+  +layout({
+    title: 'Истории успеха',
+  })
+    +slider({
+      career: true,
+    })
+
+  +layout({
+    title: 'Фирменная сеть салонов в городах России',
+  })
+    +article({
+      storeMap: true,
+    })
+
+  include ../components/store-map/store-map
+
+  +layout({})
+    include ../components/card-catalog/card-catalog
