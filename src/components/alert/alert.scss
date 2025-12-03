@@ -1,6 +1,8 @@
 .alert {
 
   &:not(.alert-danger):not(.alert-warning):not(.alert-success):not(.alert-hide):not(.alert-show) {
+    @include liquid-glass;
+    @include Body-16;
     position: relative;
     max-width: 440px;
     min-height: 64px;
@@ -11,10 +13,10 @@
     padding-right: 18px;
     padding-bottom: 20px;
     padding-left: 18px;
-    border-radius: 6px;
-    color: inherit;
-    background-color: #ffffff;
-    box-shadow: 0 0 20px rgba($color: #111111, $alpha: 15%);
+    color: $inverted;
+    background-color: $overlay-dark;
+    border-radius: 16px;
+    box-shadow: 0 25px 40px rgba($color: #111111, $alpha: 20%);
     gap: 15px;
 
     @media(max-width: 767px) {
@@ -22,17 +24,6 @@
       padding-right: 16px;
       padding-bottom: 14px;
       padding-left: 16px;
-    }
-
-    &:before {
-      width: 24px;
-      height: 24px;
-      margin-bottom: auto;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-color: transparent;
-      flex-shrink: 0;
-      content: '';
     }
 
     .alert {
@@ -79,13 +70,16 @@
         margin-bottom: auto;
         padding: 0;
         border: 0;
+        color: inherit;
         background-color: transparent;
-        transition: color 0.3s;
+        transition: transform $transition-duration;
         outline: none;
         cursor: pointer;
 
         &:hover {
-          @media(min-width: $desktop-only) {}
+          @media(min-width: $desktop-only) {
+            transform: rotate(90deg);
+          }
         }
 
         span {

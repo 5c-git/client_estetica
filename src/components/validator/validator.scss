@@ -10,14 +10,14 @@
   &__input {
 
     &--valid {
-      border-color: transparent !important;
+      // border-color: transparent !important;
       // box-shadow: inset 0 -1px 0 $green !important;
     }
 
     &--error {
-      // border-color: $mistake !important;
-      outline: 2px solid $mistake !important;
-      outline-offset: -2px;
+      border-color: $mistake !important;
+      // outline: 2px solid $mistake !important;
+      // outline-offset: -2px;
 
       // &::placeholder {
       //   color: #ff1212 !important;

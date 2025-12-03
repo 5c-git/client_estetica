@@ -247,6 +247,12 @@ summary::-webkit-details-marker {
   src: url("../assets/fonts/SuisseIntl/SuisseIntl-Bold.woff2") format("woff2");
 }
 .alert:not(.alert-danger):not(.alert-warning):not(.alert-success):not(.alert-hide):not(.alert-show) {
+  backdrop-filter: blur(8px) saturate(1.2);
+  font-family: "SuisseIntl", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
   position: relative;
   max-width: 440px;
   min-height: 64px;
@@ -257,10 +263,10 @@ summary::-webkit-details-marker {
   padding-right: 18px;
   padding-bottom: 20px;
   padding-left: 18px;
-  border-radius: 6px;
-  color: inherit;
-  background-color: #ffffff;
-  box-shadow: 0 0 20px rgba(17, 17, 17, 0.15);
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.36);
+  border-radius: 16px;
+  box-shadow: 0 25px 40px rgba(17, 17, 17, 0.2);
   gap: 15px;
 }
 @media (max-width: 767px) {
@@ -270,16 +276,6 @@ summary::-webkit-details-marker {
     padding-bottom: 14px;
     padding-left: 16px;
   }
-}
-.alert:not(.alert-danger):not(.alert-warning):not(.alert-success):not(.alert-hide):not(.alert-show):before {
-  width: 24px;
-  height: 24px;
-  margin-bottom: auto;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: transparent;
-  flex-shrink: 0;
-  content: "";
 }
 .alert:not(.alert-danger):not(.alert-warning):not(.alert-success):not(.alert-hide):not(.alert-show) .alert__container {
   margin: 0;
@@ -315,10 +311,16 @@ summary::-webkit-details-marker {
   margin-bottom: auto;
   padding: 0;
   border: 0;
+  color: inherit;
   background-color: transparent;
-  transition: color 0.3s;
+  transition: transform 0.3s;
   outline: none;
   cursor: pointer;
+}
+@media (min-width: 992px) {
+  .alert:not(.alert-danger):not(.alert-warning):not(.alert-success):not(.alert-hide):not(.alert-show) .alert__close:hover {
+    transform: rotate(90deg);
+  }
 }
 .alert:not(.alert-danger):not(.alert-warning):not(.alert-success):not(.alert-hide):not(.alert-show) .alert__close span {
   position: relative;
@@ -441,12 +443,8 @@ summary::-webkit-details-marker {
   visibility: visible;
   pointer-events: none;
 }
-.validator__input--valid {
-  border-color: transparent !important;
-}
 .validator__input--error {
-  outline: 2px solid #C80039 !important;
-  outline-offset: -2px;
+  border-color: #C80039 !important;
 }
 .validator__description {
   margin: 0;
@@ -537,18 +535,19 @@ summary::-webkit-details-marker {
 }
 .alert-wrapper {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  top: 200px;
+  right: 30px;
   z-index: 20;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-@media (max-width: 767px) {
+@media (max-width: tablet) {
   .alert-wrapper {
+    top: 20px;
     right: 0;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 16px;
+    padding-left: 16px;
   }
 }
 .article figure {
@@ -1260,7 +1259,7 @@ summary::-webkit-details-marker {
   line-height: 24px;
   position: fixed;
   top: unset;
-  right: 16px;
+  right: 30px;
   bottom: 0;
   left: unset;
   z-index: 15;
@@ -1272,6 +1271,11 @@ summary::-webkit-details-marker {
   color: #ffffff;
   pointer-events: none;
   overflow: initial;
+}
+@media (max-width: 991px) {
+  .cookie {
+    right: 16px;
+  }
 }
 .cookie .container {
   padding: 0;
@@ -1335,12 +1339,12 @@ summary::-webkit-details-marker {
   color: #ffffff;
   background: 0;
   outline: none;
-  transition: opacity 0.3s;
+  transition: transform 0.3s;
   cursor: pointer;
 }
 @media (min-width: 992px) {
   .cookie__button:hover {
-    opacity: 0.5;
+    transform: rotate(90deg);
   }
 }
 .cookie__button span {
@@ -3661,6 +3665,9 @@ summary::-webkit-details-marker {
   display: block;
   object-fit: cover;
 }
+.participants {
+  min-height: calc(var(--vh, 1vh) * 100);
+}
 .participants__title {
   font-family: "SuisseIntl", sans-serif;
   font-size: 92px;
@@ -4140,6 +4147,7 @@ summary::-webkit-details-marker {
   margin: 0;
 }
 .promo__wrapper {
+  position: relative;
   width: 100%;
   max-width: 1400px;
   display: grid;
@@ -4189,6 +4197,7 @@ summary::-webkit-details-marker {
   }
 }
 .promo__video--center {
+  z-index: 1;
   grid-column: -1/1;
   opacity: 0;
 }
@@ -4196,6 +4205,14 @@ summary::-webkit-details-marker {
   .promo__video--center {
     opacity: 1 !important;
   }
+}
+.promo__black-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #000000;
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0;
 }
 .reels {
   display: flex;

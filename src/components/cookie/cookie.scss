@@ -2,7 +2,7 @@
   @include Body-16;
   position: fixed;
   top: unset;
-  right: 16px;
+  right: 30px;
   bottom: 0;
   left: unset;
   z-index: 15;
@@ -15,7 +15,9 @@
   pointer-events: none;
   overflow: initial;
 
-  @media(max-width: $phone) {}
+  @media(max-width: $tablet) {
+    right: 16px;
+  }
 
   .container {
     padding: 0;
@@ -85,12 +87,12 @@
     color: $inverted;
     background: 0;
     outline: none;
-    transition: opacity $transition-duration;
+    transition: transform $transition-duration;
     cursor: pointer;
 
     &:hover {
       @media(min-width: $desktop-only) {
-        opacity: 0.5;
+        transform: rotate(90deg);
       }
     }
 

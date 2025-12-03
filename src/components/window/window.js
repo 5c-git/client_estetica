@@ -1,7 +1,8 @@
 import {
-  validateForm, maskNumber, maskSimplePhone, maskPhone, maskInternationalPhone,
-  initPasswordEye, initAgreeCheckbox, initFileLoadInput, focusFirstInput,
+  validateForm, maskNumber, maskPhone,
+  initPasswordEye, initFileLoadInput,
   initSelectValidation, initChoicesValidation,
+  focusFirstInput, initAgreeCheckbox,
 } from '../validator/validator';
 import { summonPopUp, removePopUp } from '../popUp/popUp';
 import findVideos from '../video/video';
@@ -25,14 +26,10 @@ import initParticipantsAnimation from '../participants/participants';
 window.Corners5ProjectLayout = {
   validation: {
     validateForm,
-    maskSimplePhone,
     maskNumber,
     maskPhone,
-    maskInternationalPhone,
     initPasswordEye,
-    initAgreeCheckbox,
     initFileLoadInput,
-    focusFirstInput,
     initSelectValidation,
     initChoicesValidation,
   },

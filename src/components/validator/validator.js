@@ -1,355 +1,205 @@
 import './validator.scss';
 import Inputmask from 'inputmask';
 import Bouncer from 'formbouncerjs';
-
 import Choices from 'choices.js';
 
-const validateForm = (form) => {
-  const forma = document.querySelector(`${form}`);
+// ===== УТИЛИТЫ =====
+const getDescription = (field, deep = false) => {
+  if (deep) {
+    return field.parentElement?.parentElement?.parentElement?.querySelector('.validator__description') || null;
+  }
+  return field.parentElement?.querySelector('.validator__description') || null;
+};
 
-  let validator = new Bouncer(form, {
+const setState = (field, isValid, description = null) => {
+  field.classList.toggle('validator__input--valid', isValid);
+  field.classList.toggle('validator__input--error', !isValid);
+
+  if (description) {
+    description.classList.toggle('validator__description--valid', isValid);
+    description.classList.toggle('validator__description--error', !isValid);
+  }
+
+  field.setAttribute('aria-invalid', String(!isValid));
+  return !isValid; // Bouncer ждёт true если ошибка
+};
+
+// ===== ПАТТЕРНЫ =====
+const patterns = {
+  text: /^([a-zA-ZА-Яа-яЁё.-]+\s?)*$/,
+  textarea: /^([\wА-Яа-яЁё\s-!$%^&*()_+|~=`{}\[\]:;<>?",.@#№'"«»\\/]+)*$/,
+  email: /^[a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я-]+\.[a-zA-ZА-Яа-я]{2,}$/,
+  password: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,64}$/,
+};
+
+// ===== КАСТОМНЫЕ ВАЛИДАТОРЫ =====
+const validators = {
+  required(field) {
+    if (!field.classList.contains('validator__required')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    return setState(field, field.value.trim() !== '', description);
+  },
+
+  text(field) {
+    if (!field.classList.contains('validator__text')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    const isValid = patterns.text.test(field.value) &&
+      field.value.length >= 2 &&
+      field.value.length <= 225;
+
+    return setState(field, isValid, description);
+  },
+
+  textarea(field) {
+    if (!field.classList.contains('validator__textarea')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    const isValid = patterns.textarea.test(field.value) &&
+      field.value.length >= 4 &&
+      field.value.length <= 225;
+
+    return setState(field, isValid, description);
+  },
+
+  number(field) {
+    if (!field.classList.contains('validator__number')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    const isValid = field.value.length >= 1 && field.value.length <= 225;
+
+    return setState(field, isValid, description);
+  },
+
+  minmax(field) {
+    if (!field.classList.contains('validator__minmax')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    const min = parseInt(field.getAttribute('minlength'), 10) || 0;
+    const max = parseInt(field.getAttribute('maxlength'), 10) || Infinity;
+
+    const isValid = field.value.length >= min && field.value.length <= max;
+    return setState(field, isValid, description);
+  },
+
+  email(field) {
+    if (!field.classList.contains('validator__mail')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    return setState(field, patterns.email.test(field.value), description);
+  },
+
+  ruPhone(field) {
+    if (!field.classList.contains('validator__phone')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    console.log(field.value.length);
+    return setState(field, field.value.length === 11, description);
+  },
+
+  intPhone(field) {
+    if (!field.classList.contains('validator__country-phone')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    const maskLength = field.getAttribute('data-mask')?.length || 0;
+    return setState(field, field.value.length === maskLength, description);
+  },
+
+  password(field) {
+    if (!field.classList.contains('validator__password')) return false;
+    if (field.disabled) return false;
+
+    const description = getDescription(field);
+    return setState(field, patterns.password.test(field.value), description);
+  },
+
+  passwordMatch(field) {
+    const selector = field.getAttribute('data-bouncer-match');
+    if (!selector) return false;
+    if (field.disabled) return false;
+
+    const otherField = field.form.querySelector(selector);
+    if (!otherField) return false;
+
+    return setState(field, otherField.value === field.value, getDescription(field));
+  },
+
+  select(field) {
+    if (!field.classList.contains('validator__select')) return false;
+    if (field.disabled) return false;
+
+    const isValid = field.options[field.selectedIndex]?.value !== '';
+    return setState(field.parentElement, isValid);
+  },
+
+  choices(field) {
+    if (!field.classList.contains('validator__choices')) return false;
+    if (field.disabled) return false;
+
+    const wrapper = field.parentElement;
+    const description = getDescription(field);
+
+    // Сброс ошибок при изменении
+    field.addEventListener('change', () => {
+      wrapper.classList.remove('validator__input--error');
+      if (description) description.classList.remove('validator__description--error');
+    });
+
+    const isValid = field.hasAttribute('multiple')
+      ? field.selectedIndex !== -1
+      : field.options[field.selectedIndex].value !== '';
+
+    wrapper.classList.toggle('validator__input--valid', isValid);
+    wrapper.classList.toggle('validator__input--error', !isValid);
+
+    if (description) {
+      description.classList.toggle('validator__description--valid', isValid);
+      description.classList.toggle('validator__description--error', !isValid);
+    }
+
+    return !isValid;
+  },
+
+  checkbox(field) {
+    if (!field.classList.contains('validator__checkbox')) return false;
+    if (field.disabled) return false;
+
+    const { name } = field.dataset;
+    const list = document.querySelectorAll(`.validator__checkbox[data-name="${name}"]`);
+
+    const isValid = Array.from(list).some((el) => el.checked);
+
+    list.forEach((el) => {
+      el.classList.toggle('validator__input--valid', isValid);
+      el.classList.toggle('validator__input--error', !isValid);
+    });
+
+    return !isValid;
+  },
+};
+
+
+const validateForm = (formSelector) => {
+  const formEl = document.querySelector(formSelector);
+
+  let validator = new Bouncer(formSelector, {
     fieldClass: 'validator__input--error',
     errorClass: 'validator__error',
     disableSubmit: true,
     emitEvents: true,
-    // messageAfterField: false,
     patterns: {
-      email: /([a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я0-9._-]+\.([a-zA-ZА-Яа-я0-9])+)/,
+      email: /^[a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я-]+\.[a-zA-ZА-Яа-я]{2,}$/,
     },
-    customValidations: {
-      required(field) {
-        const selector = field.classList.contains('validator__required');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        // const cuttedSpacesValue = field.value.replace(/\s\s+/g, ' ');
-        // const trimmedValue = cuttedSpacesValue.trim();
-        // field.value = trimmedValue;
-
-        if (field.value !== '') {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-
-        field.classList.remove('validator__input--valid');
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-        return true;
-      },
-      text(field) {
-        const selector = field.classList.contains('validator__text');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        // const cuttedSpacesValue = field.value.replace(/\s\s+/g, ' ');
-        // const trimmedValue = cuttedSpacesValue.trim();
-        // field.value = trimmedValue;
-
-        // Разрешены только буквы и тире
-        const textRegexp = new RegExp(/^([a-zA-ZА-Яа-яЁё.-]+\s?)*$/);
-        if (field.value.match(textRegexp)
-          && field.value.length >= 2
-          && field.value.length <= 225) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      textarea(field) {
-        const selector = field.classList.contains('validator__textarea');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        // const cuttedSpacesValue = field.value.replace(/\s\s+/g, ' ');
-        // const trimmedValue = cuttedSpacesValue.trim();
-        // field.value = trimmedValue;
-
-        // Разрешены буквы, цифры, спец.симболы
-        const textRegexp = new RegExp(/^([a-zA-ZА-Яа-яЁё0-9-!$%^&amp;*()_+|~=`{}[\]:;;&lt;&gt;?",.@#№'&quot;„;“;“;”;‘;’;(?!…)«;»;/|/\\/]+\s?)*$/);
-
-        if (field.value.match(textRegexp)
-          && field.value.length >= 4
-          && field.value.length <= 225) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      select(field) {
-        const selector = field.classList.contains('validator__select');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        if (field.options[field.selectedIndex].value !== '') {
-          field.parentElement.classList.remove('validator__input--error');
-          return false;
-        }
-        field.parentElement.classList.add('validator__input--error');
-        return true;
-      },
-      choices(field) {
-        const selector = field.classList.contains('validator__choices');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.parentElement.parentElement.querySelector('.validator__description');
-
-        const select = field.parentElement;
-        select.addEventListener('change', () => {
-          if (field.options[field.selectedIndex].value !== '') {
-            select.classList.remove('validator__input--error');
-            select.classList.add('validator__input--valid');
-
-            // description.classList.remove('validator__description--error');
-            // description.classList.add('validator__description--valid');
-          }
-        });
-
-        if (field.options[field.selectedIndex].value !== '') {
-          select.classList.remove('validator__input--error');
-          select.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        select.classList.add('validator__input--error');
-        select.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      number(field) {
-        const selector = field.classList.contains('validator__number');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        if (field.value.length >= 1
-          && field.value.length <= 225) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      minmax(field) {
-        const selector = field.classList.contains('validator__minmax');
-        const min = field.getAttribute('minlength');
-        const max = field.getAttribute('maxlength');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        if (field.value.length >= min
-          && field.value.length <= max) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      email(field) {
-        const selector = field.classList.contains('validator__mail');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const trimmedValue = field.value.trim();
-        // field.value = '';
-        // field.value = trimmedValue;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        const checkPattern = (value) => {
-          const regexPattern = /([a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я0-9._-]+\.([a-zA-ZА-Яа-я0-9])+)/;
-          return regexPattern.test(value);
-        };
-
-        const isValid = checkPattern(field.value);
-        if (isValid) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      ruPhone(field) {
-        const selector = field.classList.contains('validator__phone');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        if (field.value.length === 10) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      intPhone(field) {
-        const selector = field.classList.contains('validator__country-phone');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        if (field.value.length === field.getAttribute('data-mask').length) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      password(field) {
-        const selector = field.classList.contains('validator__password');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        // const description = field.parentElement.querySelector('.validator__description');
-
-        const checkPattern = (value) => {
-          const regexPattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,64}$/;
-          return regexPattern.test(value);
-        };
-
-        const isValid = checkPattern(field.value);
-
-        if (isValid) {
-          field.classList.add('validator__input--valid');
-
-          // description.classList.remove('validator__description--error');
-          // description.classList.add('validator__description--valid');
-
-          return false;
-        }
-        field.classList.remove('validator__input--valid');
-
-        // description.classList.add('validator__description--error');
-        // description.classList.remove('validator__description--valid');
-
-        return true;
-      },
-      passwordMatch(field) {
-        const selector = field.getAttribute('data-bouncer-match');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        const otherField = field.form.querySelector(selector);
-        if (!otherField) return false;
-        return otherField.value !== field.value;
-      },
-      checkbox(field) {
-        const selector = field.classList.contains('validator__checkbox');
-
-        if (!selector) return false;
-        if (selector.disabled === true) return false;
-
-        const { name } = field.dataset;
-        const list = document.querySelectorAll(`.validator__checkbox[data-name="${name}"]`);
-
-        for (let i = 0; i < list.length; i += 1) {
-          const item = list[i];
-
-          if (item.checked) {
-            field.classList.add('validator__input--valid');
-
-            list.forEach((e) => {
-              e.classList.remove('validator__input--error');
-            });
-            return false;
-          }
-        }
-
-        field.classList.remove('validator__input--valid');
-        return true;
-      },
-    },
+    customValidations: validators, // подключаем объект кастомных валидаторов
     messages: {
       missingValue: {
         default: 'Поле обязательно для заполнения!',
@@ -371,219 +221,80 @@ const validateForm = (form) => {
       textarea: 'Неправильно!',
       number: 'Допускаются только цифры!',
       ruPhone: 'Введите телефон!',
-      intPhone: 'Выбери и введи междонародный телефон!',
-      password: 'Пароль должен быть длиной не менее 8 символов, содержать хотя бы одну цифру, строчную и заглавную латинскую букву, а также спецсимвол ,.<>/?;:"[]{}\|`~!@#$%^&*()_+=-.',
+      intPhone: 'Выбери и введи международный телефон!',
+      password: 'Пароль должен быть длиной не менее 8 символов, содержать хотя бы одну цифру, строчную и заглавную латинскую букву, а также спецсимвол.',
       passwordMatch: 'Пароли не совпадают.',
       required: 'Необходимо заполнить поле!',
     },
   });
 
+  // Игнорируем disabled fieldset
   const oldValidate = validator.validate;
   validator.validate = (field, options) => {
-    if (field.closest('fieldset') && field.closest('fieldset').disabled) {
-      return false;
-    }
-
+    if (field.closest('fieldset')?.disabled) return false;
     return oldValidate(field, options);
   };
 
-  forma.addEventListener('reset', () => {
+  // Сбрасываем состояние при reset формы
+  formEl.addEventListener('reset', () => {
     validator.destroy();
-    validator = validateForm(form);
+    validator = validateForm(formSelector);
 
-    // forma.querySelectorAll('.validator__description').forEach((description) => {
-    //   description.classList.remove('validator__description--error');
-    //   description.classList.remove('validator__description--valid');
-    // });
-
-    forma.querySelectorAll('.validator__input--valid').forEach((input) => {
-      input.classList.remove('validator__input--valid');
+    formEl.querySelectorAll('.validator__description').forEach(desc => {
+      desc.classList.remove('validator__description--error', 'validator__description--valid');
     });
-
-    forma.querySelectorAll('.validator__input--error').forEach((input) => {
-      input.classList.remove('validator__input--error');
+    formEl.querySelectorAll('.validator__input--valid, .validator__input--error').forEach(input => {
+      input.classList.remove('validator__input--valid', 'validator__input--error');
     });
-
-    forma.querySelectorAll('textarea').forEach((textarea) => {
-      textarea.setAttribute('style', 'overflow-y: hidden;');
+    formEl.querySelectorAll('textarea').forEach(textarea => {
+      textarea.style.overflowY = 'hidden';
     });
   });
 
   return validator;
 };
 
-const maskNumber = (form, maxNumber) => {
+
+const maskNumber = (formSelector, maxNumber) => {
   const numberMask = new Inputmask(`9{0,${maxNumber}}`, {
     autoUnmask: true,
     showMaskOnHover: false,
+    showMaskOnFocus: false,
+    placeholder: '',
   });
 
-  const inputsContainer = document.querySelector(`${form}`);
-  const inputs = inputsContainer.querySelectorAll('.validator__number');
-
-  inputs.forEach((field) => {
-    numberMask.mask(field);
-  });
+  const inputs = document.querySelectorAll(`${formSelector} .validator__number`);
+  inputs.forEach((field) => numberMask.mask(field));
 };
 
-const maskSimplePhone = (form) => {
-  /* eslint-disable */
-  const mask = function () {
-    let matrix = '+7 (___) ___ ____',
-      i = 0,
-      def = matrix.replace(/\D/g, ''),
-      val = this.value.replace(/\D/g, '');
-    if (def.length >= val.length) val = def;
-    this.value = matrix.replace(/./g, function (a) {
-      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a
-    });
-  };
-  /* eslint-enable */
-
-  const phonesContainer = document.querySelector(`${form}`);
-  const inputs = phonesContainer.querySelectorAll('.validator__simple-phone');
-
-  inputs.forEach((phone) => {
-    phone.addEventListener('input', mask);
-  });
-};
-
-const maskPhone = (form, classPhone) => {
-  const phoneMask = new Inputmask('+7 [(999) 999-99-99]', {
+const maskPhone = (formSelector, phoneClass) => {
+  const phoneMask = new Inputmask('+[9 (999) 999 99 99]', {
     autoUnmask: true,
     showMaskOnHover: false,
-    showMaskOnFocus: true,
+    showMaskOnFocus: false,
+    placeholder: '',
   });
 
-  const phoneContainers = document.querySelectorAll(`${form}`);
-  if (phoneContainers.length) {
-    phoneContainers.forEach((phoneContainer) => {
-      const inputs = phoneContainer.querySelectorAll(`${classPhone}`);
+  const inputs = document.querySelectorAll(`${formSelector} ${phoneClass}`);
+  inputs.forEach((phone) => phoneMask.mask(phone));
+};
 
-      inputs.forEach((phone) => {
-        phoneMask.mask(phone);
 
-        // phone.addEventListener('paste', (evt) => {
-        //   evt.preventDefault();
-        //   const initialValue = (evt.clipboardData || window.clipboardData).getData('text');
-        //   let serializedValue = initialValue.replace(/[^-0-9]/gim, '');
+const initPasswordEye = (formSelector) => {
+  document.querySelectorAll(formSelector).forEach((container) => {
+    container.querySelectorAll('.validator__eye').forEach((eye) => {
+      const input = eye.closest('label, .validator__password-wrapper')?.querySelector('input[type="password"]')
+        || eye.parentElement.querySelector('input[type="password"]');
+      if (!input) return;
 
-        //   if (Number(serializedValue.charAt(0)) === 7) {
-        //     serializedValue = serializedValue.slice(1);
-        //   } if (Number(serializedValue.charAt(0)) === 8) {
-        //     serializedValue = serializedValue.slice(1);
-        //   }
-        //   phone.value = Number(serializedValue);
-        // });
+      eye.addEventListener('click', () => {
+        eye.classList.toggle('validator__eye--open');
+        input.type = input.type === 'password' ? 'text' : 'password';
       });
     });
-  }
-};
-
-const maskInternationalPhone = (form) => {
-  const hashContainer = document.querySelector(`${form}`);
-  const countryPhone = hashContainer.querySelector('.validator__country-phone');
-  const firstPhoneMask = hashContainer.querySelector('.validator__country-mask').getAttribute('data-mask');
-
-  countryPhone.setAttribute('data-mask', firstPhoneMask.replace(/[^9]/g, ''));
-
-  let phoneMask = new Inputmask(firstPhoneMask, {
-    autoUnmask: true,
-  });
-
-  phoneMask.mask(countryPhone);
-
-  const options = [];
-
-  const optionsData = hashContainer.querySelectorAll('.validator__country-mask');
-
-  optionsData.forEach((option, index) => {
-    options.push({
-      value: option.getAttribute('data-value'),
-      label: option.getAttribute('data-country'),
-      id: index + 1,
-      customProperties: {
-        mask: option.getAttribute('data-mask'),
-        flag: option.getAttribute('data-flag'),
-      },
-    });
-  });
-
-  const choicesSelect = hashContainer.querySelector('.validator__country-select');
-
-  const choicesNolint = new Choices(choicesSelect, {
-    searchEnabled: false,
-    itemSelectText: '',
-    shouldSort: false,
-    choices: options,
-    // searchEnabled: true,
-    classNames: {
-      containerOuter: 'choices validator__countries',
-    },
-    callbackOnCreateTemplates(template) {
-      return {
-        item(classNames, data) {
-          return template(`
-            <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} 
-            ${data.placeholder ? classNames.placeholder : ''}" 
-            data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} 
-            ${data.disabled ? 'aria-disabled="true"' : ''}> 
-            <p class='choices__flag' style='background-image: url(${options[(data.choiceId - 1)].customProperties.flag})'></p>
-            ${data.label}
-            </div>
-          `);
-        },
-        choice(classNames, data) {
-          return template(`
-            <div class="${classNames.item} ${classNames.itemChoice} 
-            ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}"
-            data-select-text="${this.config.itemSelectText}" data-choice 
-            ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} 
-            data-id="${data.id}" data-value="${data.value}" 
-            ${data.groupId > 0 ? 'role="treeitem"' : 'role="option"'}>
-            <p class='choices__flag' style='background-image: url(${options[(data.id - 1)].customProperties.flag})'></p>
-            ${data.label}
-            </div>
-          `);
-        },
-      };
-    },
-  });
-
-  choicesSelect.addEventListener('choice', (evt) => {
-    countryPhone.setAttribute('data-mask', evt.detail.choice.customProperties.mask.replace(/[^9]/g, ''));
-    countryPhone.inputmask.remove();
-    countryPhone.value = '';
-    countryPhone.focus();
-    countryPhone.blur();
-    phoneMask = new Inputmask(evt.detail.choice.customProperties.mask, {
-      autoUnmask: true,
-    });
-    phoneMask.mask(countryPhone);
   });
 };
 
-const initPasswordEye = (form) => {
-  const eyeContainers = document.querySelectorAll(`${form}`);
-  eyeContainers.forEach((eyeContainer) => {
-    const eyeList = eyeContainer.querySelectorAll('.validator__eye');
-
-    eyeList.forEach((item) => {
-      const eye = item;
-      const input = eye.parentElement.querySelector('input[type="password"]');
-      if (input) {
-        eye.addEventListener('click', () => {
-          eye.classList.toggle('validator__eye--open');
-          if (input.type === 'password') {
-            input.type = 'text';
-          } else {
-            input.type = 'password';
-          }
-        });
-      }
-    });
-  });
-};
 
 const initFileLoadInput = (form, template) => {
   const FILE_TYPES = ['jpg', 'jpeg', 'gif', 'png'];
@@ -678,32 +389,37 @@ const initFileLoadInput = (form, template) => {
   });
 };
 
-const initSelectValidation = (form) => {
-  const formContainer = document.querySelector(`${form}`);
-  const nativeSelects = formContainer.querySelectorAll('.validator__select');
 
-  nativeSelects.forEach((select) => {
+const initSelectValidation = (formSelector) => {
+  const formContainer = document.querySelector(formSelector);
+  if (!formContainer) return;
+
+  formContainer.querySelectorAll('.validator__select').forEach((select) => {
+    const parent = select.parentElement;
+    if (!parent) return;
+
     select.addEventListener('change', () => {
-      if (select.parentElement.classList.contains('validator__input--error')) {
-        select.parentElement.classList.remove('validator__input--error');
-      }
+      parent.classList.remove('validator__input--error');
     });
   });
 };
 
-const initChoicesValidation = (form) => {
-  const formContainer = document.querySelector(`${form}`);
-  const nativeSelects = formContainer.querySelectorAll('.validator__choices');
 
-  nativeSelects.forEach((select) => {
-    const field = select.parentElement.parentElement.parentElement;
-    // const description = field.querySelector('.validator__description');
+const initChoicesValidation = (formSelector) => {
+  const formContainer = document.querySelector(formSelector);
+  if (!formContainer) return;
+
+  formContainer.querySelectorAll('.validator__choices').forEach((select) => {
+    const field = select.closest('.validator__field') || select.parentElement?.parentElement?.parentElement;
+    if (!field) return;
+
+    const description = field.querySelector('.validator__description');
     const customSelect = field.querySelector('.choices__inner');
+    if (!customSelect) return;
+
     select.addEventListener('change', () => {
-      if (customSelect.classList.contains('validator__input--error')) {
-        customSelect.classList.remove('validator__input--error');
-        // description.classList.remove('validator__description--error');
-      }
+      customSelect.classList.remove('validator__input--error');
+      description?.classList.remove('validator__description--error');
     });
   });
 };
@@ -745,7 +461,13 @@ const initAgreeCheckbox = (form) => {
 };
 
 export {
-  validateForm, maskNumber, maskSimplePhone, maskPhone, maskInternationalPhone,
-  initPasswordEye, initAgreeCheckbox, initFileLoadInput, focusFirstInput,
-  initSelectValidation, initChoicesValidation,
+  validateForm,
+  maskNumber,
+  maskPhone,
+  initPasswordEye,
+  initFileLoadInput,
+  initSelectValidation,
+  initChoicesValidation,
+  focusFirstInput,
+  initAgreeCheckbox,
 };

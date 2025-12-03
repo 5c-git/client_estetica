@@ -4,3 +4,9 @@ mixin alert(props)
       div.alert__container
       button(type="button" arial-label="Закрыть всплывающее окно").alert__close
         span
+
+  if props.error
+    section.alert.alert--error
+      div.alert__container #[b Ошибка!] #[br] Что-то пошло не так, повторите попытку позже.
+      button(type="button" arial-label="Закрыть всплывающее окно").alert__close
+        span

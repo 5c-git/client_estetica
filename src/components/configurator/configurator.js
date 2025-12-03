@@ -2,19 +2,31 @@ import './configurator.scss';
 
 const configurator = document.querySelector('.configurator');
 if (configurator) {
-  const form = document.querySelector('.configurator__form');
-  const images = document.querySelectorAll('.configurator__result img');
+  const form = configurator.querySelector('.configurator__form');
+  const images = configurator.querySelectorAll('.configurator__result img');
 
   const updateFurnitureImage = () => {
-    const interior = form.elements.interior.value;
-    const fabric = form.elements.fabric.value;
-    const color = form.elements.color.value;
+    // 1. Собираем выбранные значения фильтров
+    const selectedFilters = {};
+    const formData = new FormData(form);
 
+    formData.forEach((value, key) => {
+      selectedFilters[key] = value;
+    });
+
+    // 2. Перебираем картинки
     images.forEach(img => {
-      const match =
-        img.dataset.interior === interior &&
-        img.dataset.fabric === fabric &&
-        img.dataset.color === color;
+      let match = true;
+
+      // 3. Проверяем все data-* картинки
+      for (const [key, value] of Object.entries(selectedFilters)) {
+        const dataValue = img.dataset[key];
+
+        if (dataValue !== value) {
+          match = false;
+          break;
+        }
+      }
 
       img.classList.toggle('active', match);
     });

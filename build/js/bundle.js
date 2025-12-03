@@ -474,7 +474,14 @@ const initPromoGalleryAnimation = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _validator_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4489);
 
+
+const form = document.querySelector(".request-catalog__form");
+if (form) {
+  console.log(form);
+  (0,_validator_validator__WEBPACK_IMPORTED_MODULE_0__.validateForm)(".request-catalog__form");
+}
 
 
 /***/ }),
@@ -732,6 +739,10 @@ const initPromoAnimation = () => {
       const leftVideo = promo.querySelector(".promo__video--left");
       const rightVideo = promo.querySelector(".promo__video--right");
       const centerVideo = promo.querySelector(".promo__video--center");
+      const wrapper = promo.querySelector(".promo__wrapper");
+      const blackOverlay = document.createElement("div");
+      blackOverlay.className = "promo__black-overlay";
+      wrapper.appendChild(blackOverlay);
       gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
         scrollTrigger: {
           trigger: promo,
@@ -743,10 +754,19 @@ const initPromoAnimation = () => {
           pinSpacing: true
         }
       }).from(leftVideo, {
-        x: "-50vw"
-      }, 0).from(rightVideo, {
-        x: "50vw"
-      }, 0).to(centerVideo, {
+        x: "-50vw",
+        duration: 3
+      }).from(rightVideo, {
+        x: "50vw",
+        duration: 3
+      }, "<").to(leftVideo, {
+        duration: 1
+      }).to(rightVideo, {
+        duration: 1
+      }, "<").to(blackOverlay, {
+        opacity: 1,
+        duration: 2
+      }).to(centerVideo, {
         opacity: 1
       }).to(centerVideo, {
         duration: 1
@@ -1305,10 +1325,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   initFileLoadInput: () => (/* binding */ initFileLoadInput),
 /* harmony export */   initPasswordEye: () => (/* binding */ initPasswordEye),
 /* harmony export */   initSelectValidation: () => (/* binding */ initSelectValidation),
-/* harmony export */   maskInternationalPhone: () => (/* binding */ maskInternationalPhone),
 /* harmony export */   maskNumber: () => (/* binding */ maskNumber),
 /* harmony export */   maskPhone: () => (/* binding */ maskPhone),
-/* harmony export */   maskSimplePhone: () => (/* binding */ maskSimplePhone),
 /* harmony export */   validateForm: () => (/* binding */ validateForm)
 /* harmony export */ });
 /* harmony import */ var inputmask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1660);
@@ -1321,217 +1339,179 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const validateForm = (form) => {
-  const forma = document.querySelector(`${form}`);
-  let validator = new (formbouncerjs__WEBPACK_IMPORTED_MODULE_1___default())(form, {
+const getDescription = (field, deep = false) => {
+  var _a, _b, _c, _d;
+  if (deep) {
+    return ((_c = (_b = (_a = field.parentElement) == null ? void 0 : _a.parentElement) == null ? void 0 : _b.parentElement) == null ? void 0 : _c.querySelector(".validator__description")) || null;
+  }
+  return ((_d = field.parentElement) == null ? void 0 : _d.querySelector(".validator__description")) || null;
+};
+const setState = (field, isValid, description = null) => {
+  field.classList.toggle("validator__input--valid", isValid);
+  field.classList.toggle("validator__input--error", !isValid);
+  if (description) {
+    description.classList.toggle("validator__description--valid", isValid);
+    description.classList.toggle("validator__description--error", !isValid);
+  }
+  field.setAttribute("aria-invalid", String(!isValid));
+  return !isValid;
+};
+const patterns = {
+  text: /^([a-zA-ZА-Яа-яЁё.-]+\s?)*$/,
+  textarea: /^([\wА-Яа-яЁё\s-!$%^&*()_+|~=`{}\[\]:;<>?",.@#№'"«»\\/]+)*$/,
+  email: /^[a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я-]+\.[a-zA-ZА-Яа-я]{2,}$/,
+  password: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,64}$/
+};
+const validators = {
+  required(field) {
+    if (!field.classList.contains("validator__required"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    return setState(field, field.value.trim() !== "", description);
+  },
+  text(field) {
+    if (!field.classList.contains("validator__text"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    const isValid = patterns.text.test(field.value) && field.value.length >= 2 && field.value.length <= 225;
+    return setState(field, isValid, description);
+  },
+  textarea(field) {
+    if (!field.classList.contains("validator__textarea"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    const isValid = patterns.textarea.test(field.value) && field.value.length >= 4 && field.value.length <= 225;
+    return setState(field, isValid, description);
+  },
+  number(field) {
+    if (!field.classList.contains("validator__number"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    const isValid = field.value.length >= 1 && field.value.length <= 225;
+    return setState(field, isValid, description);
+  },
+  minmax(field) {
+    if (!field.classList.contains("validator__minmax"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    const min = parseInt(field.getAttribute("minlength"), 10) || 0;
+    const max = parseInt(field.getAttribute("maxlength"), 10) || Infinity;
+    const isValid = field.value.length >= min && field.value.length <= max;
+    return setState(field, isValid, description);
+  },
+  email(field) {
+    if (!field.classList.contains("validator__mail"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    return setState(field, patterns.email.test(field.value), description);
+  },
+  ruPhone(field) {
+    if (!field.classList.contains("validator__phone"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    console.log(field.value.length);
+    return setState(field, field.value.length === 11, description);
+  },
+  intPhone(field) {
+    var _a;
+    if (!field.classList.contains("validator__country-phone"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    const maskLength = ((_a = field.getAttribute("data-mask")) == null ? void 0 : _a.length) || 0;
+    return setState(field, field.value.length === maskLength, description);
+  },
+  password(field) {
+    if (!field.classList.contains("validator__password"))
+      return false;
+    if (field.disabled)
+      return false;
+    const description = getDescription(field);
+    return setState(field, patterns.password.test(field.value), description);
+  },
+  passwordMatch(field) {
+    const selector = field.getAttribute("data-bouncer-match");
+    if (!selector)
+      return false;
+    if (field.disabled)
+      return false;
+    const otherField = field.form.querySelector(selector);
+    if (!otherField)
+      return false;
+    return setState(field, otherField.value === field.value, getDescription(field));
+  },
+  select(field) {
+    var _a;
+    if (!field.classList.contains("validator__select"))
+      return false;
+    if (field.disabled)
+      return false;
+    const isValid = ((_a = field.options[field.selectedIndex]) == null ? void 0 : _a.value) !== "";
+    return setState(field.parentElement, isValid);
+  },
+  choices(field) {
+    if (!field.classList.contains("validator__choices"))
+      return false;
+    if (field.disabled)
+      return false;
+    const wrapper = field.parentElement;
+    const description = getDescription(field);
+    field.addEventListener("change", () => {
+      wrapper.classList.remove("validator__input--error");
+      if (description)
+        description.classList.remove("validator__description--error");
+    });
+    const isValid = field.hasAttribute("multiple") ? field.selectedIndex !== -1 : field.options[field.selectedIndex].value !== "";
+    wrapper.classList.toggle("validator__input--valid", isValid);
+    wrapper.classList.toggle("validator__input--error", !isValid);
+    if (description) {
+      description.classList.toggle("validator__description--valid", isValid);
+      description.classList.toggle("validator__description--error", !isValid);
+    }
+    return !isValid;
+  },
+  checkbox(field) {
+    if (!field.classList.contains("validator__checkbox"))
+      return false;
+    if (field.disabled)
+      return false;
+    const { name } = field.dataset;
+    const list = document.querySelectorAll(`.validator__checkbox[data-name="${name}"]`);
+    const isValid = Array.from(list).some((el) => el.checked);
+    list.forEach((el) => {
+      el.classList.toggle("validator__input--valid", isValid);
+      el.classList.toggle("validator__input--error", !isValid);
+    });
+    return !isValid;
+  }
+};
+const validateForm = (formSelector) => {
+  const formEl = document.querySelector(formSelector);
+  let validator = new (formbouncerjs__WEBPACK_IMPORTED_MODULE_1___default())(formSelector, {
     fieldClass: "validator__input--error",
     errorClass: "validator__error",
     disableSubmit: true,
     emitEvents: true,
-    // messageAfterField: false,
     patterns: {
-      email: /([a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я0-9._-]+\.([a-zA-ZА-Яа-я0-9])+)/
+      email: /^[a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я-]+\.[a-zA-ZА-Яа-я]{2,}$/
     },
-    customValidations: {
-      required(field) {
-        const selector = field.classList.contains("validator__required");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        if (field.value !== "") {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      text(field) {
-        const selector = field.classList.contains("validator__text");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        const textRegexp = new RegExp(/^([a-zA-ZА-Яа-яЁё.-]+\s?)*$/);
-        if (field.value.match(textRegexp) && field.value.length >= 2 && field.value.length <= 225) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      textarea(field) {
-        const selector = field.classList.contains("validator__textarea");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        const textRegexp = new RegExp(/^([a-zA-ZА-Яа-яЁё0-9-!$%^&amp;*()_+|~=`{}[\]:;;&lt;&gt;?",.@#№'&quot;„;“;“;”;‘;’;(?!…)«;»;/|/\\/]+\s?)*$/);
-        if (field.value.match(textRegexp) && field.value.length >= 4 && field.value.length <= 225) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      select(field) {
-        const selector = field.classList.contains("validator__select");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        if (field.options[field.selectedIndex].value !== "") {
-          field.parentElement.classList.remove("validator__input--error");
-          return false;
-        }
-        field.parentElement.classList.add("validator__input--error");
-        return true;
-      },
-      choices(field) {
-        const selector = field.classList.contains("validator__choices");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        const select = field.parentElement;
-        select.addEventListener("change", () => {
-          if (field.options[field.selectedIndex].value !== "") {
-            select.classList.remove("validator__input--error");
-            select.classList.add("validator__input--valid");
-          }
-        });
-        if (field.options[field.selectedIndex].value !== "") {
-          select.classList.remove("validator__input--error");
-          select.classList.add("validator__input--valid");
-          return false;
-        }
-        select.classList.add("validator__input--error");
-        select.classList.remove("validator__input--valid");
-        return true;
-      },
-      number(field) {
-        const selector = field.classList.contains("validator__number");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        if (field.value.length >= 1 && field.value.length <= 225) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      minmax(field) {
-        const selector = field.classList.contains("validator__minmax");
-        const min = field.getAttribute("minlength");
-        const max = field.getAttribute("maxlength");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        if (field.value.length >= min && field.value.length <= max) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      email(field) {
-        const selector = field.classList.contains("validator__mail");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        const checkPattern = (value) => {
-          const regexPattern = /([a-zA-ZА-Яа-я0-9._-]+@[a-zA-ZА-Яа-я0-9._-]+\.([a-zA-ZА-Яа-я0-9])+)/;
-          return regexPattern.test(value);
-        };
-        const isValid = checkPattern(field.value);
-        if (isValid) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      ruPhone(field) {
-        const selector = field.classList.contains("validator__phone");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        if (field.value.length === 10) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      intPhone(field) {
-        const selector = field.classList.contains("validator__country-phone");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        if (field.value.length === field.getAttribute("data-mask").length) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      password(field) {
-        const selector = field.classList.contains("validator__password");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        const checkPattern = (value) => {
-          const regexPattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,64}$/;
-          return regexPattern.test(value);
-        };
-        const isValid = checkPattern(field.value);
-        if (isValid) {
-          field.classList.add("validator__input--valid");
-          return false;
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      },
-      passwordMatch(field) {
-        const selector = field.getAttribute("data-bouncer-match");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        const otherField = field.form.querySelector(selector);
-        if (!otherField)
-          return false;
-        return otherField.value !== field.value;
-      },
-      checkbox(field) {
-        const selector = field.classList.contains("validator__checkbox");
-        if (!selector)
-          return false;
-        if (selector.disabled === true)
-          return false;
-        const { name } = field.dataset;
-        const list = document.querySelectorAll(`.validator__checkbox[data-name="${name}"]`);
-        for (let i = 0; i < list.length; i += 1) {
-          const item = list[i];
-          if (item.checked) {
-            field.classList.add("validator__input--valid");
-            list.forEach((e) => {
-              e.classList.remove("validator__input--error");
-            });
-            return false;
-          }
-        }
-        field.classList.remove("validator__input--valid");
-        return true;
-      }
-    },
+    customValidations: validators,
+    // подключаем объект кастомных валидаторов
     messages: {
       missingValue: {
         default: "\u041F\u043E\u043B\u0435 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E \u0434\u043B\u044F \u0437\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F!",
@@ -1553,166 +1533,65 @@ const validateForm = (form) => {
       textarea: "\u041D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E!",
       number: "\u0414\u043E\u043F\u0443\u0441\u043A\u0430\u044E\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0446\u0438\u0444\u0440\u044B!",
       ruPhone: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043B\u0435\u0444\u043E\u043D!",
-      intPhone: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0438 \u0432\u0432\u0435\u0434\u0438 \u043C\u0435\u0436\u0434\u043E\u043D\u0430\u0440\u043E\u0434\u043D\u044B\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D!",
-      password: '\u041F\u0430\u0440\u043E\u043B\u044C \u0434\u043E\u043B\u0436\u0435\u043D \u0431\u044B\u0442\u044C \u0434\u043B\u0438\u043D\u043E\u0439 \u043D\u0435 \u043C\u0435\u043D\u0435\u0435 8 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432, \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0445\u043E\u0442\u044F \u0431\u044B \u043E\u0434\u043D\u0443 \u0446\u0438\u0444\u0440\u0443, \u0441\u0442\u0440\u043E\u0447\u043D\u0443\u044E \u0438 \u0437\u0430\u0433\u043B\u0430\u0432\u043D\u0443\u044E \u043B\u0430\u0442\u0438\u043D\u0441\u043A\u0443\u044E \u0431\u0443\u043A\u0432\u0443, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0441\u043F\u0435\u0446\u0441\u0438\u043C\u0432\u043E\u043B ,.<>/?;:"[]{}|`~!@#$%^&*()_+=-.',
+      intPhone: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0438 \u0432\u0432\u0435\u0434\u0438 \u043C\u0435\u0436\u0434\u0443\u043D\u0430\u0440\u043E\u0434\u043D\u044B\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D!",
+      password: "\u041F\u0430\u0440\u043E\u043B\u044C \u0434\u043E\u043B\u0436\u0435\u043D \u0431\u044B\u0442\u044C \u0434\u043B\u0438\u043D\u043E\u0439 \u043D\u0435 \u043C\u0435\u043D\u0435\u0435 8 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432, \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0445\u043E\u0442\u044F \u0431\u044B \u043E\u0434\u043D\u0443 \u0446\u0438\u0444\u0440\u0443, \u0441\u0442\u0440\u043E\u0447\u043D\u0443\u044E \u0438 \u0437\u0430\u0433\u043B\u0430\u0432\u043D\u0443\u044E \u043B\u0430\u0442\u0438\u043D\u0441\u043A\u0443\u044E \u0431\u0443\u043A\u0432\u0443, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0441\u043F\u0435\u0446\u0441\u0438\u043C\u0432\u043E\u043B.",
       passwordMatch: "\u041F\u0430\u0440\u043E\u043B\u0438 \u043D\u0435 \u0441\u043E\u0432\u043F\u0430\u0434\u0430\u044E\u0442.",
       required: "\u041D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0437\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u043F\u043E\u043B\u0435!"
     }
   });
   const oldValidate = validator.validate;
   validator.validate = (field, options) => {
-    if (field.closest("fieldset") && field.closest("fieldset").disabled) {
+    var _a;
+    if ((_a = field.closest("fieldset")) == null ? void 0 : _a.disabled)
       return false;
-    }
     return oldValidate(field, options);
   };
-  forma.addEventListener("reset", () => {
+  formEl.addEventListener("reset", () => {
     validator.destroy();
-    validator = validateForm(form);
-    forma.querySelectorAll(".validator__input--valid").forEach((input) => {
-      input.classList.remove("validator__input--valid");
+    validator = validateForm(formSelector);
+    formEl.querySelectorAll(".validator__description").forEach((desc) => {
+      desc.classList.remove("validator__description--error", "validator__description--valid");
     });
-    forma.querySelectorAll(".validator__input--error").forEach((input) => {
-      input.classList.remove("validator__input--error");
+    formEl.querySelectorAll(".validator__input--valid, .validator__input--error").forEach((input) => {
+      input.classList.remove("validator__input--valid", "validator__input--error");
     });
-    forma.querySelectorAll("textarea").forEach((textarea) => {
-      textarea.setAttribute("style", "overflow-y: hidden;");
+    formEl.querySelectorAll("textarea").forEach((textarea) => {
+      textarea.style.overflowY = "hidden";
     });
   });
   return validator;
 };
-const maskNumber = (form, maxNumber) => {
+const maskNumber = (formSelector, maxNumber) => {
   const numberMask = new (inputmask__WEBPACK_IMPORTED_MODULE_0___default())(`9{0,${maxNumber}}`, {
     autoUnmask: true,
-    showMaskOnHover: false
+    showMaskOnHover: false,
+    showMaskOnFocus: false,
+    placeholder: ""
   });
-  const inputsContainer = document.querySelector(`${form}`);
-  const inputs = inputsContainer.querySelectorAll(".validator__number");
-  inputs.forEach((field) => {
-    numberMask.mask(field);
-  });
+  const inputs = document.querySelectorAll(`${formSelector} .validator__number`);
+  inputs.forEach((field) => numberMask.mask(field));
 };
-const maskSimplePhone = (form) => {
-  const mask = function() {
-    let matrix = "+7 (___) ___ ____", i = 0, def = matrix.replace(/\D/g, ""), val = this.value.replace(/\D/g, "");
-    if (def.length >= val.length)
-      val = def;
-    this.value = matrix.replace(/./g, function(a) {
-      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
-    });
-  };
-  const phonesContainer = document.querySelector(`${form}`);
-  const inputs = phonesContainer.querySelectorAll(".validator__simple-phone");
-  inputs.forEach((phone) => {
-    phone.addEventListener("input", mask);
-  });
-};
-const maskPhone = (form, classPhone) => {
-  const phoneMask = new (inputmask__WEBPACK_IMPORTED_MODULE_0___default())("+7 [(999) 999-99-99]", {
+const maskPhone = (formSelector, phoneClass) => {
+  const phoneMask = new (inputmask__WEBPACK_IMPORTED_MODULE_0___default())("+[9 (999) 999 99 99]", {
     autoUnmask: true,
     showMaskOnHover: false,
-    showMaskOnFocus: true
+    showMaskOnFocus: false,
+    placeholder: ""
   });
-  const phoneContainers = document.querySelectorAll(`${form}`);
-  if (phoneContainers.length) {
-    phoneContainers.forEach((phoneContainer) => {
-      const inputs = phoneContainer.querySelectorAll(`${classPhone}`);
-      inputs.forEach((phone) => {
-        phoneMask.mask(phone);
+  const inputs = document.querySelectorAll(`${formSelector} ${phoneClass}`);
+  inputs.forEach((phone) => phoneMask.mask(phone));
+};
+const initPasswordEye = (formSelector) => {
+  document.querySelectorAll(formSelector).forEach((container) => {
+    container.querySelectorAll(".validator__eye").forEach((eye) => {
+      var _a;
+      const input = ((_a = eye.closest("label, .validator__password-wrapper")) == null ? void 0 : _a.querySelector('input[type="password"]')) || eye.parentElement.querySelector('input[type="password"]');
+      if (!input)
+        return;
+      eye.addEventListener("click", () => {
+        eye.classList.toggle("validator__eye--open");
+        input.type = input.type === "password" ? "text" : "password";
       });
-    });
-  }
-};
-const maskInternationalPhone = (form) => {
-  const hashContainer = document.querySelector(`${form}`);
-  const countryPhone = hashContainer.querySelector(".validator__country-phone");
-  const firstPhoneMask = hashContainer.querySelector(".validator__country-mask").getAttribute("data-mask");
-  countryPhone.setAttribute("data-mask", firstPhoneMask.replace(/[^9]/g, ""));
-  let phoneMask = new (inputmask__WEBPACK_IMPORTED_MODULE_0___default())(firstPhoneMask, {
-    autoUnmask: true
-  });
-  phoneMask.mask(countryPhone);
-  const options = [];
-  const optionsData = hashContainer.querySelectorAll(".validator__country-mask");
-  optionsData.forEach((option, index) => {
-    options.push({
-      value: option.getAttribute("data-value"),
-      label: option.getAttribute("data-country"),
-      id: index + 1,
-      customProperties: {
-        mask: option.getAttribute("data-mask"),
-        flag: option.getAttribute("data-flag")
-      }
-    });
-  });
-  const choicesSelect = hashContainer.querySelector(".validator__country-select");
-  const choicesNolint = new (choices_js__WEBPACK_IMPORTED_MODULE_2___default())(choicesSelect, {
-    searchEnabled: false,
-    itemSelectText: "",
-    shouldSort: false,
-    choices: options,
-    // searchEnabled: true,
-    classNames: {
-      containerOuter: "choices validator__countries"
-    },
-    callbackOnCreateTemplates(template) {
-      return {
-        item(classNames, data) {
-          return template(`
-            <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} 
-            ${data.placeholder ? classNames.placeholder : ""}" 
-            data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ""} 
-            ${data.disabled ? 'aria-disabled="true"' : ""}> 
-            <p class='choices__flag' style='background-image: url(${options[data.choiceId - 1].customProperties.flag})'></p>
-            ${data.label}
-            </div>
-          `);
-        },
-        choice(classNames, data) {
-          return template(`
-            <div class="${classNames.item} ${classNames.itemChoice} 
-            ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}"
-            data-select-text="${this.config.itemSelectText}" data-choice 
-            ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : "data-choice-selectable"} 
-            data-id="${data.id}" data-value="${data.value}" 
-            ${data.groupId > 0 ? 'role="treeitem"' : 'role="option"'}>
-            <p class='choices__flag' style='background-image: url(${options[data.id - 1].customProperties.flag})'></p>
-            ${data.label}
-            </div>
-          `);
-        }
-      };
-    }
-  });
-  choicesSelect.addEventListener("choice", (evt) => {
-    countryPhone.setAttribute("data-mask", evt.detail.choice.customProperties.mask.replace(/[^9]/g, ""));
-    countryPhone.inputmask.remove();
-    countryPhone.value = "";
-    countryPhone.focus();
-    countryPhone.blur();
-    phoneMask = new (inputmask__WEBPACK_IMPORTED_MODULE_0___default())(evt.detail.choice.customProperties.mask, {
-      autoUnmask: true
-    });
-    phoneMask.mask(countryPhone);
-  });
-};
-const initPasswordEye = (form) => {
-  const eyeContainers = document.querySelectorAll(`${form}`);
-  eyeContainers.forEach((eyeContainer) => {
-    const eyeList = eyeContainer.querySelectorAll(".validator__eye");
-    eyeList.forEach((item) => {
-      const eye = item;
-      const input = eye.parentElement.querySelector('input[type="password"]');
-      if (input) {
-        eye.addEventListener("click", () => {
-          eye.classList.toggle("validator__eye--open");
-          if (input.type === "password") {
-            input.type = "text";
-          } else {
-            input.type = "password";
-          }
-        });
-      }
     });
   });
 };
@@ -1792,27 +1671,35 @@ const initFileLoadInput = (form, template) => {
     }
   });
 };
-const initSelectValidation = (form) => {
-  const formContainer = document.querySelector(`${form}`);
-  const nativeSelects = formContainer.querySelectorAll(".validator__select");
-  nativeSelects.forEach((select) => {
+const initSelectValidation = (formSelector) => {
+  const formContainer = document.querySelector(formSelector);
+  if (!formContainer)
+    return;
+  formContainer.querySelectorAll(".validator__select").forEach((select) => {
+    const parent = select.parentElement;
+    if (!parent)
+      return;
     select.addEventListener("change", () => {
-      if (select.parentElement.classList.contains("validator__input--error")) {
-        select.parentElement.classList.remove("validator__input--error");
-      }
+      parent.classList.remove("validator__input--error");
     });
   });
 };
-const initChoicesValidation = (form) => {
-  const formContainer = document.querySelector(`${form}`);
-  const nativeSelects = formContainer.querySelectorAll(".validator__choices");
-  nativeSelects.forEach((select) => {
-    const field = select.parentElement.parentElement.parentElement;
+const initChoicesValidation = (formSelector) => {
+  const formContainer = document.querySelector(formSelector);
+  if (!formContainer)
+    return;
+  formContainer.querySelectorAll(".validator__choices").forEach((select) => {
+    var _a, _b;
+    const field = select.closest(".validator__field") || ((_b = (_a = select.parentElement) == null ? void 0 : _a.parentElement) == null ? void 0 : _b.parentElement);
+    if (!field)
+      return;
+    const description = field.querySelector(".validator__description");
     const customSelect = field.querySelector(".choices__inner");
+    if (!customSelect)
+      return;
     select.addEventListener("change", () => {
-      if (customSelect.classList.contains("validator__input--error")) {
-        customSelect.classList.remove("validator__input--error");
-      }
+      customSelect.classList.remove("validator__input--error");
+      description == null ? void 0 : description.classList.remove("validator__description--error");
     });
   });
 };
@@ -1969,14 +1856,23 @@ __webpack_require__.r(__webpack_exports__);
 
 const configurator = document.querySelector(".configurator");
 if (configurator) {
-  const form = document.querySelector(".configurator__form");
-  const images = document.querySelectorAll(".configurator__result img");
+  const form = configurator.querySelector(".configurator__form");
+  const images = configurator.querySelectorAll(".configurator__result img");
   const updateFurnitureImage = () => {
-    const interior = form.elements.interior.value;
-    const fabric = form.elements.fabric.value;
-    const color = form.elements.color.value;
+    const selectedFilters = {};
+    const formData = new FormData(form);
+    formData.forEach((value, key) => {
+      selectedFilters[key] = value;
+    });
     images.forEach((img) => {
-      const match = img.dataset.interior === interior && img.dataset.fabric === fabric && img.dataset.color === color;
+      let match = true;
+      for (const [key, value] of Object.entries(selectedFilters)) {
+        const dataValue = img.dataset[key];
+        if (dataValue !== value) {
+          match = false;
+          break;
+        }
+      }
       img.classList.toggle("active", match);
     });
   };
@@ -2145,7 +2041,14 @@ var result = _node_modules_svg_sprite_loader_runtime_browser_sprite_build_js__WE
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _validator_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4489);
 
+
+const form = document.querySelector(".request__form");
+if (form) {
+  console.log(form);
+  (0,_validator_validator__WEBPACK_IMPORTED_MODULE_0__.validateForm)(".request__form");
+}
 
 
 /***/ }),
@@ -2349,14 +2252,10 @@ __webpack_require__.r(__webpack_exports__);
 window.Corners5ProjectLayout = {
   validation: {
     validateForm: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.validateForm,
-    maskSimplePhone: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.maskSimplePhone,
     maskNumber: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.maskNumber,
     maskPhone: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.maskPhone,
-    maskInternationalPhone: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.maskInternationalPhone,
     initPasswordEye: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.initPasswordEye,
-    initAgreeCheckbox: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.initAgreeCheckbox,
     initFileLoadInput: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.initFileLoadInput,
-    focusFirstInput: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.focusFirstInput,
     initSelectValidation: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.initSelectValidation,
     initChoicesValidation: _validator_validator__WEBPACK_IMPORTED_MODULE_0__.initChoicesValidation
   },

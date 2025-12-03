@@ -2,15 +2,6 @@ div.participants
   h2.participants__title.pro Что даёт дизайнеру участие<br> в ESTETICA
   div.participants__wrapper
     ul.participants__list
-      li.participants__item
-        include ../participant-card/participant-card
-      li.participants__item
-        include ../participant-card/participant-card
-      li.participants__item
-        include ../participant-card/participant-card
-      li.participants__item
-        include ../participant-card/participant-card
-      li.participants__item
-        include ../participant-card/participant-card
-      li.participants__item
-        include ../participant-card/participant-card
+      each i in [1,2,3,4,5,6]
+        li.participants__item
+          include ../participant-card/participant-card

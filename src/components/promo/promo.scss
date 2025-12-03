@@ -1,6 +1,7 @@
 .promo {
 
   &__wrapper {
+    position: relative;
     width: 100%;
     max-width: 1400px;
     display: grid;
@@ -51,6 +52,7 @@
     }
 
     &--center {
+      z-index: 1;
       grid-column: -1 / 1;
       opacity: 0;
 
@@ -58,5 +60,14 @@
         opacity: 1 !important;
       }
     }
+  }
+
+  &__black-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: $dark;
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0;
   }
 }

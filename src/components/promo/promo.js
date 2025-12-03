@@ -15,6 +15,12 @@ const initPromoAnimation = () => {
       const leftVideo = promo.querySelector('.promo__video--left');
       const rightVideo = promo.querySelector('.promo__video--right');
       const centerVideo = promo.querySelector('.promo__video--center');
+      const wrapper = promo.querySelector('.promo__wrapper')
+
+      // Создаём черный фон.
+      const blackOverlay = document.createElement('div');
+      blackOverlay.className = 'promo__black-overlay';
+      wrapper.appendChild(blackOverlay);
 
       gsap.timeline({
         scrollTrigger: {
@@ -29,10 +35,33 @@ const initPromoAnimation = () => {
         // Левое и правое видео выезжают к центру.
         .from(leftVideo, {
           x: '-50vw',
-        }, 0)
+          duration: 3,
+        })
         .from(rightVideo, {
           x: '50vw',
-        }, 0)
+          duration: 3,
+        }, '<')
+        .to(leftVideo, {
+          duration: 1,
+        })
+        .to(rightVideo, {
+          duration: 1,
+        }, '<')
+        // .to(wrapper, {
+        //   gap: 0,
+        // })
+        // Плавно появляется ЧЁРНАЯ область
+        .to(blackOverlay, {
+          opacity: 1,
+          duration: 2,
+        })
+        // // Левое и правое видео пропадают.
+        // .to(leftVideo, {
+        //   opacity: '0',
+        // })
+        // .to(rightVideo, {
+        //   opacity: '0',
+        // })
         // Центральное видео появляется через opacity.
         .to(centerVideo, {
           opacity: 1,
