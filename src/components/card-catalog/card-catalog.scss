@@ -1,0 +1,87 @@
+.card-catalog {
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+
+    @media(max-width: $tablet) {
+      gap: 24px;
+    }
+  }
+
+  &__title {
+    @include Title-62;
+    display: flex;
+    margin: 0;
+    gap: 15px;
+  }
+
+  &__amount {
+    color: $secondary;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  &__dropdown {
+    width: 250px;
+  }
+
+  &__tabs {
+
+    @media(max-width: $tablet) {
+      margin-right: -15px;
+      margin-left: -15px;
+      padding-right: 15px;
+      padding-left: 15px;
+      overflow-y: hidden;
+      overflow-x: auto;
+    }
+  }
+
+  &__tabs-list {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    @media(max-width: $tablet) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__tabs-item {
+    @include Body-20;
+    color: $secondary;
+    transition: color $transition-duration;
+    cursor: pointer;
+
+    &:hover {
+      @media(min-width: $desktop-only) {
+        color: $primary;
+      }
+    }
+
+    &:has(:checked) {
+      color: $primary;
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}

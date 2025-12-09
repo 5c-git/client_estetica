@@ -631,43 +631,83 @@
                   <div class="card-catalog__wrapper">
                     <h2 class="card-catalog__title">Вакансии<span class="card-catalog__amount">4</span></h2>
                     <div class="card-catalog__nav">
-                      <form action="#" method="post">
-                        <fieldset> 
-                          <label>
-                            <input type="radio" value="Все" name="filter" checked><span>Все</span>
-                          </label>
-                          <label>
-                            <input type="radio" value="Продажи" name="filter"><span>Продажи</span>
-                          </label>
-                          <label>
-                            <input type="radio" value="Дизайн" name="filter"><span>Дизайн</span>
-                          </label>
-                          <label>
-                            <input type="radio" value="Офис" name="filter"><span>Офис</span>
-                          </label>
-                          <label>
-                            <input type="radio" value="Производство" name="filter"><span>Производство</span>
-                          </label>
-                          <label>
-                            <input type="radio" value="Логистика" name="filter"><span>Логистика</span>
-                          </label>
-                          <label>
-                            <input type="radio" value="Склад" name="filter"><span>Склад</span>
-                          </label>
-                        </fieldset>
-                        <select name="sort">
-                          <option>Сначала новые</option>
-                          <option>Сначала старые</option>
-                          <option>Популярные</option>
-                          <option>С большой зарплатой</option>
-                          <option>Самые красивые</option>
-                        </select>
+                      <form class="card-catalog__form" action="#" method="post">
+                        <div class="card-catalog__tabs">
+                          <fieldset class="card-catalog__tabs-list">
+                            <label class="card-catalog__tabs-item">
+                              <input class="visually-hidden" type="radio" value="Все" name="filter" checked><span>Все</span>
+                            </label>
+                            <label class="card-catalog__tabs-item">
+                              <input class="visually-hidden" type="radio" value="Продажи" name="filter"><span>Продажи</span>
+                            </label>
+                            <label class="card-catalog__tabs-item">
+                              <input class="visually-hidden" type="radio" value="Дизайн" name="filter"><span>Дизайн</span>
+                            </label>
+                            <label class="card-catalog__tabs-item">
+                              <input class="visually-hidden" type="radio" value="Офис" name="filter"><span>Офис</span>
+                            </label>
+                            <label class="card-catalog__tabs-item">
+                              <input class="visually-hidden" type="radio" value="Производство" name="filter"><span>Производство</span>
+                            </label>
+                            <label class="card-catalog__tabs-item">
+                              <input class="visually-hidden" type="radio" value="Логистика" name="filter"><span>Логистика</span>
+                            </label>
+                            <label class="card-catalog__tabs-item">
+                              <input class="visually-hidden" type="radio" value="Склад" name="filter"><span>Склад</span>
+                            </label>
+                          </fieldset>
+                        </div>
+                        <div class="card-catalog__dropdown">
+                          <div class="field">
+                            <div class="field__inner">
+                              <select class="validator__choices field__input field__input--select" name="Category-1" id="Category-1">
+                                <option value>Причина обращения</option>
+                                <option value="1">1 взрослый</option>
+                                <option value="2">Подача документов на открытие счёте в реестре</option>
+                                <option value="3">3 взрослых</option>
+                                <option value="25">25 взрослых</option>
+                                <option value="В работе">В работе</option>
+                                <option value="Москва">Подача документов на изменение анкетных данных по лицевому счёту в реестре</option>
+                                <option value="Рязань">Возврат</option>
+                                <option value="Норильск">Возврат</option>
+                                <option value="Челябинск">Возврат</option>
+                                <option value="Возврат">Возврат</option>
+                                <option value="Выпущен">Выпущен</option>
+                                <option value="Исполнено">Исполнено</option>
+                                <option value="Отмена">Отмена</option>
+                                <option value="Черновик">Черновик</option>
+                              </select>
+                            </div>
+                            <div class="validator__error-container field__error"></div>
+                          </div>
+                        </div>
                       </form>
                     </div>
                     <div class="card-catalog__list">
-                      <div class="vacancy-card"></div>
-                      <div class="vacancy-card"></div>
-                      <div class="vacancy-card"></div>
+                      <div class="vacancy-card">
+                        <div class="vacancy-card__main">
+                          <div class="vacancy-card__top"><a class="vacancy-card__title" href="#">Менеджер по продажам</a>
+                            <div class="vacancy-card__place"><span>МО, Красногорск, ТЦ РИГАМОЛЛ</span><span class="vacancy-card__desc">Можно без опыта</span></div>
+                          </div><span class="vacancy-card__price">120 000 - 200 000 ₽ в месяц, до вычета налогов</span>
+                        </div>
+                        <div class="vacancy-card__footer"><a class="vacancy-card__action" href="#"><img src="./assets/images/hh-logo.png" alt=""><span>Подробнее </span></a><a class="vacancy-card__action" href="#"><img src="./assets/images/watsapp.png" alt=""><span>Связаться </span></a></div>
+                      </div>
+                      <div class="vacancy-card">
+                        <div class="vacancy-card__main">
+                          <div class="vacancy-card__top"><a class="vacancy-card__title" href="#">Менеджер по ремонту, оформитель стендов и площадок</a>
+                            <div class="vacancy-card__place"><span>Александровск-Сахалинский, Нахимовский проспект, 24/1</span><span class="vacancy-card__desc">Можно без опыта</span></div>
+                          </div><span class="vacancy-card__price">120 000 - 200 000 ₽ в месяц, до вычета налогов</span>
+                        </div>
+                        <div class="vacancy-card__footer"><a class="vacancy-card__action" href="#"><img src="./assets/images/hh-logo.png" alt=""><span>Подробнее </span></a><a class="vacancy-card__action" href="#"><img src="./assets/images/watsapp.png" alt=""><span>Связаться </span></a></div>
+                      </div>
+                      <div class="vacancy-card">
+                        <div class="vacancy-card__main">
+                          <div class="vacancy-card__top"><a class="vacancy-card__title" href="#">Руководитель учебного центра</a>
+                            <div class="vacancy-card__place"><span>Москва, МЦ ИМПЕРИЯ</span><span class="vacancy-card__desc">Можно без опыта</span></div>
+                          </div><span class="vacancy-card__price">от 200 000 ₽ в месяц, до вычета налогов</span>
+                        </div>
+                        <div class="vacancy-card__footer"><a class="vacancy-card__action" href="#"><img src="./assets/images/hh-logo.png" alt=""><span>Подробнее </span></a><a class="vacancy-card__action" href="#"><img src="./assets/images/watsapp.png" alt=""><span>Связаться </span></a></div>
+                      </div>
                     </div>
                   </div>
                 </div>

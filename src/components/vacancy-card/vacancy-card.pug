@@ -1,2 +1,19 @@
 mixin vacancy-card(props)
   div.vacancy-card
+    div.vacancy-card__main
+      div.vacancy-card__top
+        a(href="#").vacancy-card__title=props.title
+        div.vacancy-card__place
+          span=props.shop
+          span.vacancy-card__desc Можно без опыта
+
+
+      span.vacancy-card__price=props.price
+      
+    div.vacancy-card__footer
+      a(href="#").vacancy-card__action
+        img(src="./assets/images/hh-logo.png", alt="")
+        span Подробнее 
+      a(href="#").vacancy-card__action
+        img(src="./assets/images/watsapp.png", alt="")
+        span Связаться 

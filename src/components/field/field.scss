@@ -55,4 +55,193 @@
 
     &[readonly] {}
   }
+
+  &__choices {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    transition: color 0.3s;
+    flex-shrink: 0;
+    overflow: unset;
+
+    @media(max-width: $phone) {
+      width: 100%;
+    }
+
+    &:hover {
+      @media(min-width: $desktop-only) {
+        // color: $Alternative-2;
+      }
+    }
+
+    .choices__item {
+      // white-space: nowrap;
+      // text-overflow: ellipsis;
+      // overflow: hidden;
+    }
+
+    .choices__list--single {
+      @include Body-20;
+      min-width: 120px;
+      // min-height: 50px;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding-top: 0;
+      padding-right: 35px;
+      padding-bottom: 0;
+      padding-left: 0;
+      color: $primary;
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+      text-align: left;
+      color: currentcolor;
+
+      .choices__item--selectable {
+        @include Subtitle-20;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    .choices__list--dropdown {
+      @include Shadow-cards;
+      z-index: 15;
+      min-width: 100%;
+      margin: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border: 0;
+      border-radius: 10px;
+      background-color: $base;
+      word-break: initial;
+
+      .choices__list {
+        padding: 0;
+
+        &::-webkit-scrollbar {
+          width: 14px;
+        }
+
+        &::-webkit-scrollbar-track {
+          margin-top: 5px;
+          margin-bottom: 5px;
+          background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          height: 4px;
+          border: 4px solid #fbfbfb;
+          border-radius: 8px;
+          background-color: #b8b8b8;
+        }
+      }
+
+      .choices__input--cloned {
+        border: 0;
+        border-radius: 0
+      }
+
+      .choices__item {
+        @include Body-20;
+        margin: 0;
+        padding-top: 12px;
+        padding-right: 10px;
+        padding-bottom: 12px;
+        padding-left: 10px;
+        border-radius: 0;
+        text-align: left;
+        color: $dark;
+        transition:
+          color 0.3s,
+          background-color 0.3s;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        @media(max-width: $phone) {
+          line-height: 20px;
+        }
+
+        &:not(.is-selected):hover {
+          @media(min-width: $desktop-only) {
+            background-color: $elevated;
+          }
+        }
+      }
+
+      .choices__placeholder {
+        display: none;
+      }
+
+      .is-highlighted {
+        background-color: $base;
+      }
+
+      .is-selected {
+        // display: none;
+        color: $dark;
+        background-color: $elevated;
+      }
+    }
+
+    .choices__placeholder {
+      color: $secondary;
+      opacity: 1;
+    }
+
+    &[data-type*='select-one'] .choices__inner {
+      min-height: unset;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      background-color: transparent;
+    }
+
+    &[data-type*='select-one']:before {
+      position: absolute;
+      top: calc(50% - 2px);
+      right: 6px;
+      width: 10px;
+      height: 2px;
+      margin: 0;
+      border: 0;
+      background-color: currentcolor;
+      transition: transform 0.3s;
+      transform: rotate(45deg);
+      pointer-events: none;
+      content: '';
+    }
+
+    &[data-type*='select-one']:after {
+      position: absolute;
+      top: calc(50% - 2px);
+      right: 0;
+      width: 10px;
+      height: 2px;
+      margin: 0;
+      border: 0;
+      background-color: currentcolor;
+      transition: transform 0.3s;
+      transform: rotate(-45deg);
+      pointer-events: none;
+      content: '';
+    }
+
+    &[data-type*='select-one'].is-open:before {
+      margin: 0;
+      transform: rotate(-45deg);
+    }
+
+    &[data-type*='select-one'].is-open:after {
+      margin: 0;
+      transform: rotate(45deg);
+    }
+
+    &[data-type*='select-one'].is-open .choices__inner {
+      // border-radius: 8px 8px 0 0;
+    }
+  }
 }

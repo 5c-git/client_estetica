@@ -1,4 +1,5 @@
 include ../vacancy-card/vacancy-card
+include ../field/field
 
 div.card-catalog
   div.card-catalog__wrapper
@@ -6,35 +7,38 @@ div.card-catalog
       span.card-catalog__amount 4
 
     div.card-catalog__nav
-      form(action="#" method='post')
-        fieldset 
-          label
-            input(type='radio' value='Все' name='filter' checked) 
-            span Все
-          label
-            input(type='radio' value='Продажи' name='filter') 
-            span Продажи
-          label
-            input(type='radio' value='Дизайн' name='filter') 
-            span Дизайн
-          label
-            input(type='radio' value='Офис' name='filter') 
-            span Офис
-          label
-            input(type='radio' value='Производство' name='filter') 
-            span Производство
-          label
-            input(type='radio' value='Логистика' name='filter') 
-            span Логистика
-          label
-            input(type='radio' value='Склад' name='filter') 
-            span Склад
-        select(name="sort")
-          option Сначала новые
-          option Сначала старые
-          option Популярные
-          option С большой зарплатой
-          option Самые красивые
+      form(action="#" method='post').card-catalog__form
+        div.card-catalog__tabs
+          fieldset.card-catalog__tabs-list
+            label.card-catalog__tabs-item
+              input(type='radio' value='Все' name='filter' checked).visually-hidden
+              span Все
+            label.card-catalog__tabs-item
+              input(type='radio' value='Продажи' name='filter').visually-hidden
+              span Продажи
+            label.card-catalog__tabs-item
+              input(type='radio' value='Дизайн' name='filter').visually-hidden
+              span Дизайн
+            label.card-catalog__tabs-item
+              input(type='radio' value='Офис' name='filter').visually-hidden
+              span Офис
+            label.card-catalog__tabs-item
+              input(type='radio' value='Производство' name='filter').visually-hidden
+              span Производство
+            label.card-catalog__tabs-item
+              input(type='radio' value='Логистика' name='filter').visually-hidden
+              span Логистика
+            label.card-catalog__tabs-item
+              input(type='radio' value='Склад' name='filter').visually-hidden
+              span Склад
+        div.card-catalog__dropdown
+          +field({
+            select: true,
+            name: 'Category-1',
+            id: 'Category-1',
+            secondClass: 'validator__choices',
+            placeholder: 'Причина обращения',
+          })
 
     div.card-catalog__list
       +vacancy-card({
@@ -48,7 +52,7 @@ div.card-catalog
         shop: 'Александровск-Сахалинский, Нахимовский проспект, 24/1',
       })
       +vacancy-card({
-        title: '',
-        price: '',
-        shop: '',
+        title: 'Руководитель учебного центра',
+        price: 'от 200 000 ₽ в месяц, до вычета налогов',
+        shop: 'Москва, МЦ ИМПЕРИЯ',
       })

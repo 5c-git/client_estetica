@@ -66,3 +66,10 @@ requestForms.forEach((form) => {
   });
 });
 
+const cardCatalogForm = document.querySelector('.card-catalog__form');
+if (cardCatalogForm) {
+  const form = cardCatalogForm;
+  form.addEventListener('change', (evt) => {
+    console.log(evt.target.value);
+  });
+}

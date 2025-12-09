@@ -99,9 +99,19 @@ $transition-duration: 0.3s;
 
   @media(max-width: $phone) {
     font-size: 20px;
-    font-weight: 400;
-    font-style: normal;
     line-height: 28px;
+  }
+}
+
+@mixin Subtitle-20 {
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 28px;
+
+  @media(max-width: $phone) {
+    font-size: 16px;
+    line-height: 20px;
   }
 }
 
