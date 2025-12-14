@@ -28,6 +28,7 @@ html(lang="ru")
 
   body
     block mixins
+      include ../components/modal/modal
       include ../components/alert/alert
       include ../components/layout/layout
       include ../components/header/header
@@ -63,6 +64,18 @@ html(lang="ru")
         +alert({
           request: true,
         })
+
+    div
+      template#modal--more
+        +modal({
+          more: true,
+        })
+        
+      template#modal--access
+        +modal({
+          access: true,
+        })
+
 
     //- jQuery скрипты
     script(src='libsJQ/jquery.min.js')

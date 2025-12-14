@@ -15,7 +15,7 @@ const initPromoAnimation = () => {
       const leftVideo = promo.querySelector('.promo__video--left');
       const rightVideo = promo.querySelector('.promo__video--right');
       const centerVideo = promo.querySelector('.promo__video--center');
-      const wrapper = promo.querySelector('.promo__wrapper')
+      const wrapper = promo.querySelector('.promo__wrapper');
 
       // Создаём черный фон.
       const blackOverlay = document.createElement('div');
@@ -26,26 +26,27 @@ const initPromoAnimation = () => {
         scrollTrigger: {
           trigger: promo,
           start: 'center center',
-          end: '+=100%',
+          end: '+=200%',
           scrub: true,
           pin: true, // Фиксируем блок на экране пока идет анимация.
           pinSpacing: true,
+          markers: true,
         }
       })
         // Левое и правое видео выезжают к центру.
         .from(leftVideo, {
           x: '-50vw',
-          duration: 3,
+          duration: 2,
         })
         .from(rightVideo, {
           x: '50vw',
-          duration: 3,
+          duration: 2,
         }, '<')
         .to(leftVideo, {
-          duration: 1,
+          // duration: 1,
         })
         .to(rightVideo, {
-          duration: 1,
+          // duration: 1,
         }, '<')
         // .to(wrapper, {
         //   gap: 0,
@@ -53,7 +54,7 @@ const initPromoAnimation = () => {
         // Плавно появляется ЧЁРНАЯ область
         .to(blackOverlay, {
           opacity: 1,
-          duration: 2,
+          // duration: 2,
         })
         // // Левое и правое видео пропадают.
         // .to(leftVideo, {
@@ -67,7 +68,7 @@ const initPromoAnimation = () => {
           opacity: 1,
         })
         .to(centerVideo, {
-          duration: 1,
+          // duration: 1,
         })
     });
   };

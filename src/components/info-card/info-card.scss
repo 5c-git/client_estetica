@@ -45,10 +45,14 @@
       color: $secondary;
     }
 
-    ul:not([class]) {
+    ul:not([class]),
+    ol:not([class]) {
+      display: flex;
+      flex-direction: column;
       margin: 0;
       padding: 0;
       list-style: none;
+      gap: 10px;
 
       li:not([class]) {
         display: flex;

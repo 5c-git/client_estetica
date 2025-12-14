@@ -1,0 +1,23 @@
+include ../request/request
+
+mixin modal(props)
+  
+  if props.more
+    section.popUp.modal.modal--more
+      div.popUp__overlay.modal__overlay
+      section.popUp__container.modal__container
+        div.popUp__wrapper.modal__wrapper
+          button.popUp__close.modal__close
+            span
+
+  if props.access
+    section.popUp.modal.modal--access
+      div.popUp__overlay.modal__overlay
+      section.popUp__container.modal__container
+        div.popUp__wrapper.modal__wrapper
+          button.popUp__close.modal__close
+            span
+          h2.modal__title Получите подборку с ценами и вариантами исполнения
+          +request({
+            access: true,
+          })

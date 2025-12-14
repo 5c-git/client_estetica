@@ -88,6 +88,7 @@
     background: 0;
     outline: none;
     transition: transform $transition-duration;
+    will-change: transform;
     cursor: pointer;
 
     &:hover {

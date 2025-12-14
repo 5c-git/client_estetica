@@ -1,0 +1,135 @@
+.modal {
+
+  .request {
+
+    &__form {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .career-card {
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+    background: 0;
+
+    &__content {
+      display: unset;
+    }
+
+    &__more {
+      display: none;
+    }
+  }
+
+  &__container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    box-sizing: border-box;
+
+    @media(max-width: $phone) {
+      padding: 0;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 24px;
+    background-color: $base;
+    border-radius: 0;
+    gap: 36px;
+
+    @media(max-width: $phone) {
+      min-height: calc(var(--vh, 1vh) * 100);
+      padding: 16px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 5;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: $primary;
+    background-color: transparent;
+    transition: transform $transition-duration;
+    will-change: transform;
+    outline: none;
+    cursor: pointer;
+
+    @media(max-width: $phone) {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+    }
+
+    &:hover {
+      @media(min-width: $desktop-only) {
+        transform: rotate(90deg);
+      }
+    }
+
+    span {
+      position: relative;
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: transparent;
+      vertical-align: bottom;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: currentcolor;
+        content: '';
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: currentcolor;
+        content: '';
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &__title {
+    @include Subtitle-30;
+    margin: 0;
+  }
+
+  &--more {
+
+    .modal {
+
+      &__container {
+        padding: 0;
+      }
+    }
+  }
+}

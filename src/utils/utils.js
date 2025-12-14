@@ -215,7 +215,9 @@ const updateButtonState = (name) => {
 };
 
 // Функция чтобы навешивать вызов модального окна заявки по кнопке.
-const activateRequestButtons = (func) => {
+const activateRequestButtons = ({
+  submitForm,
+}) => {
   const buttons = document.querySelectorAll('.button-request:not(.button-request--js)');
 
   buttons.forEach((button) => {
@@ -223,7 +225,8 @@ const activateRequestButtons = (func) => {
 
     button.addEventListener('click', (evt) => {
       evt.preventDefault();
-      const { type, ...info } = button.dataset;
+      const { type } = button.dataset;
+      const info = button.dataset;
 
       if (!type) {
         console.warn('У кнопки не указан data-type, модалка не может быть вызвана');
@@ -233,7 +236,18 @@ const activateRequestButtons = (func) => {
       const modalSelector = `#modal--${type}`;
       const modalClass = `.modal--${type}`;
 
-      summonPopUp(modalSelector, true);
+      summonPopUp({
+        template: modalSelector,
+        blockScroll: true,
+        overlay: {
+          use: true,
+          closeOnClick: true,
+        },
+        esc: {
+          closeOnEsc: true,
+        },
+      });
+
       const modal = document.querySelector(modalClass);
 
       if (!modal) {
@@ -242,39 +256,30 @@ const activateRequestButtons = (func) => {
         return;
       }
 
-      setTextareaAutoHeight(`${modalClass} textarea`);
-
-      const buttonForCheckbox = modal.querySelector('button[data-checkbox-name]');
-      if (buttonForCheckbox) {
-        const name = buttonForCheckbox.dataset.checkboxName;
-        const checkbox = document.querySelector(`input[name="${name}"]`);
-
-        updateButtonState(name);
-        if (checkbox) {
-          checkbox.addEventListener('change', () => updateButtonState(name));
-        }
-      }
-
       const form = modal.querySelector('form');
+
       if (form) {
-        Object.entries(info).forEach(([key, value]) => {
-          form.insertAdjacentHTML('beforeend', `<input type="hidden" name="${key}" value="${value}">`);
-        });
+        for (const key in info) {
+          form.insertAdjacentHTML('beforeend', `<input type="hidden" name="${key}" value="${info[key]}">`);
+        }
 
         const validatedForm = validateForm(`${modalClass} form`);
-        maskPhone(modalClass, 'input[type="tel"]');
+        maskPhone(`${modalClass} form`);
+        setTextareaAutoHeight(`${modalClass} textarea`);
+
+        const fetch = async () => {
+          const answer = await submitForm(form);
+          if (answer) {
+            if (answer.status === 'success') {
+              validatedForm.destroy();
+              removePopUp(modalClass, true);
+            }
+          }
+        };
 
         form.addEventListener('bouncerFormValid', debounce(() => {
-          if (!func) return;
-          const answer = func(form);
-          if (answer && answer.responseJSON && answer.responseJSON.status === 'success') {
-            validatedForm.destroy();
-            removePopUp(modalClass, true);
-
-            summonAlert({
-              template: '#alert--blue',
-              text: answer.responseJSON.text,
-            });
+          if (submitForm) {
+            fetch();
           }
         }));
       }

@@ -1,5 +1,7 @@
 extends ../templates/default
 
+include ../components/request/request
+
 block header
   +header({
     mixin: 'header--black',
@@ -11,7 +13,7 @@ block main
   include ../components/intro-partner/intro-partner
 
   +layout({
-    title: 'Создавайте интерьеры<br> с мебелью которая вдохновляет',
+    title: 'Создавайте интерьеры<br> с мебелью, которая вдохновляет',
   })
     include ../components/gallery/gallery
 
@@ -19,7 +21,7 @@ block main
     include ../components/participants/participants
 
   +layout({})
-    include ../components/request/request
+    include ../components/request-wrapper/request-wrapper
 
   +layout({
     mixin: 'layout--column2',

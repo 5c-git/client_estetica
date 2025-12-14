@@ -14,5 +14,5 @@ mixin layout(props)
       if props.action
         div.layout__action
           img(src="./assets/images/icon-locked.svg" width='44' height='44' alt="")
-          button(type='button').button
+          button(type='button' data-type='access' data-id='012').button-request.button
             span.button__wrapper=props.action

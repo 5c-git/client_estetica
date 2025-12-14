@@ -73,3 +73,28 @@ if (cardCatalogForm) {
     console.log(evt.target.value);
   });
 }
+
+window.Corners5ProjectLayout.activateRequestButtons({
+  submitForm: (form) => {
+    const type = form.querySelector('input[name="type"]').value;
+    const fd = new FormData(form);
+
+    if (type === 'access') {
+      return $.ajax({
+        type: 'POST',
+        data: fd,
+        url: 'https://run.mocky.io/v3/ef8a4488-31a2-4d52-a983-a4ab6ad36107?mocky-delay=4000ms',
+        processData: false,
+        contentType: false,
+        success(data) {
+          window.Corners5ProjectLayout.summonAlert('#alert--request');
+        },
+        error() {
+          window.Corners5ProjectLayout.summonAlert('#alert--error');
+        },
+        complete(data) {
+        },
+      });
+    }
+  },
+});

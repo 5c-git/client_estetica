@@ -1,14 +1,8 @@
 include ../field/field
 
-div.request
-  div.request__wrapper
-    div.request__content
-      span.request__desc Регистрация
-
-      h2.request__title Условия работы с дизайнерами 
-
-      span Мы отправим вам после подтверждения регистрации в программе
-
+mixin request(props)
+  if props.partners
+    div.request
       form(action="#" method='post').request__form
         div.request__fields
           div.request__field
@@ -17,7 +11,7 @@ div.request
               name: 'Phone-number',
               id: 'Phone-number',
               placeholder: '+7 (999) 999-99-99',
-              secondClass: 'field__input--tel',
+              secondClass: 'validator__phone field__input--tel',
             })
         div.request__actions
           button(type='submit').button
@@ -25,6 +19,22 @@ div.request
 
         div.request__legal
           p Отправляя форму, вы даёте согласие на обработку персональных #[br] данных в соответствии с #[a(href='#' target='_blank') Политикой конфиденциальности ].
+          
+  if props.access
+    div.request
+      form(action="#" method='post').request__form
+        div.request__fields
+          div.request__field
+            +field({
+              type: 'tel',
+              name: 'Phone-number',
+              id: 'Phone-number',
+              placeholder: '+7 (999) 999-99-99',
+              secondClass: 'validator__phone field__input--tel',
+            })
+        div.request__actions
+          button(type='submit').button
+            span.button__wrapper Отправить
 
-    figure.request__banner
-      img(src="./assets/images/promo-gallery-1.png", alt="")
+        div.request__legal
+          p Отправляя форму, вы даёте согласие на обработку персональных #[br] данных в соответствии с #[a(href='#' target='_blank') Политикой конфиденциальности ].

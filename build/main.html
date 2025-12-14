@@ -560,6 +560,49 @@
             </section>
       </template>
     </div>
+    <div>
+      <template id="modal--more">
+            <section class="popUp modal modal--more">
+              <div class="popUp__overlay modal__overlay"></div>
+              <section class="popUp__container modal__container">
+                <div class="popUp__wrapper modal__wrapper">
+                  <button class="popUp__close modal__close"><span></span></button>
+                </div>
+              </section>
+            </section>
+      </template>
+      <template id="modal--access">
+            <section class="popUp modal modal--access">
+              <div class="popUp__overlay modal__overlay"></div>
+              <section class="popUp__container modal__container">
+                <div class="popUp__wrapper modal__wrapper">
+                  <button class="popUp__close modal__close"><span></span></button>
+                  <h2 class="modal__title">Получите подборку с ценами и вариантами исполнения</h2>
+                      <div class="request">
+                        <form class="request__form" action="#" method="post">
+                          <div class="request__fields">
+                            <div class="request__field">
+                              <div class="field">
+                                <div class="field__inner">
+                                  <input class="validator__phone field__input--tel field__input" type="tel" name="Phone-number" id="Phone-number" autocomplete="off" autocapitalize="off" placeholder="+7 (999) 999-99-99">
+                                </div>
+                                <div class="validator__error-container field__error"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="request__actions">
+                            <button class="button" type="submit"><span class="button__wrapper">Отправить</span></button>
+                          </div>
+                          <div class="request__legal">
+                            <p>Отправляя форму, вы даёте согласие на обработку персональных <br> данных в соответствии с <a href="#" target="_blank">Политикой конфиденциальности </a>.</p>
+                          </div>
+                        </form>
+                      </div>
+                </div>
+              </section>
+            </section>
+      </template>
+    </div>
     <script src="libsJQ/jquery.min.js"></script>
   <script defer src="js/urlapp.js"></script><script defer src="js/vendors.js"></script><script defer src="js/bundle.js"></script><script defer src="js/common.js"></script></body>
 </html>

@@ -101,7 +101,6 @@ const validators = {
     if (field.disabled) return false;
 
     const description = getDescription(field);
-    console.log(field.value.length);
     return setState(field, field.value.length === 11, description);
   },
 

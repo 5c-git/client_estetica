@@ -203,7 +203,7 @@
           <section class="layout">
             <div class="container"> 
               <div class="layout__header">
-                <h2 class="layout__title">Создавайте интерьеры<br> с мебелью которая вдохновляет</h2>
+                <h2 class="layout__title">Создавайте интерьеры<br> с мебелью, которая вдохновляет</h2>
               </div>
               <div class="layout__wrapper">
 <div class="gallery">
@@ -297,31 +297,33 @@
           <section class="layout">
             <div class="container"> 
               <div class="layout__wrapper">
-                <div class="request">
-                  <div class="request__wrapper">
-                    <div class="request__content"><span class="request__desc">Регистрация</span>
-                      <h2 class="request__title">Условия работы с дизайнерами </h2><span>Мы отправим вам после подтверждения регистрации в программе</span>
-                      <form class="request__form" action="#" method="post">
-                        <div class="request__fields">
-                          <div class="request__field">
-                            <div class="field">
-                              <div class="field__inner">
-                                <input class="field__input--tel field__input" type="tel" name="Phone-number" id="Phone-number" autocomplete="off" autocapitalize="off" placeholder="+7 (999) 999-99-99">
+                <div class="request-wrapper">
+                  <div class="request-wrapper__wrapper"><span class="request-wrapper__desc">Регистрация</span>
+                    <h2 class="request-wrapper__title">Условия работы с дизайнерами </h2><span>Мы отправим вам после подтверждения регистрации в программе</span>
+                    <div class="request-wrapper__content">
+                          <div class="request">
+                            <form class="request__form" action="#" method="post">
+                              <div class="request__fields">
+                                <div class="request__field">
+                                      <div class="field">
+                                        <div class="field__inner">
+                                          <input class="validator__phone field__input--tel field__input" type="tel" name="Phone-number" id="Phone-number" autocomplete="off" autocapitalize="off" placeholder="+7 (999) 999-99-99">
+                                        </div>
+                                        <div class="validator__error-container field__error"></div>
+                                      </div>
+                                </div>
                               </div>
-                              <div class="validator__error-container field__error"></div>
-                            </div>
+                              <div class="request__actions">
+                                <button class="button" type="submit"><span class="button__wrapper">Получить условия</span></button>
+                              </div>
+                              <div class="request__legal">
+                                <p>Отправляя форму, вы даёте согласие на обработку персональных <br> данных в соответствии с <a href="#" target="_blank">Политикой конфиденциальности </a>.</p>
+                              </div>
+                            </form>
                           </div>
-                        </div>
-                        <div class="request__actions">
-                          <button class="button" type="submit"><span class="button__wrapper">Получить условия</span></button>
-                        </div>
-                        <div class="request__legal">
-                          <p>Отправляя форму, вы даёте согласие на обработку персональных <br> данных в соответствии с <a href="#" target="_blank">Политикой конфиденциальности </a>.</p>
-                        </div>
-                      </form>
                     </div>
-                    <figure class="request__banner"><img src="./assets/images/promo-gallery-1.png" alt=""></figure>
                   </div>
+                  <figure class="request-wrapper__banner"><img src="./assets/images/our-mission-2.png" alt=""></figure>
                 </div>
               </div>
             </div>
@@ -347,7 +349,7 @@
     <div class="bumf-card__content"><span class="bumf-card__title">Каталоги</span><span class="bumf-card__desc">Актуальные каталоги продукции Estetica Vision</span></div></a></div>
               </div>
               <div class="layout__action"><img src="./assets/images/icon-locked.svg" width="44" height="44" alt="">
-                <button class="button" type="button"><span class="button__wrapper">Запросить доступ</span></button>
+                <button class="button-request button" type="button" data-type="access" data-id="012"><span class="button__wrapper">Запросить доступ</span></button>
               </div>
             </div>
           </section>
@@ -450,6 +452,49 @@
             <section class="alert alert--request">
               <div class="alert__container"></div>
               <button class="alert__close" type="button" arial-label="Закрыть всплывающее окно"><span></span></button>
+            </section>
+      </template>
+    </div>
+    <div>
+      <template id="modal--more">
+            <section class="popUp modal modal--more">
+              <div class="popUp__overlay modal__overlay"></div>
+              <section class="popUp__container modal__container">
+                <div class="popUp__wrapper modal__wrapper">
+                  <button class="popUp__close modal__close"><span></span></button>
+                </div>
+              </section>
+            </section>
+      </template>
+      <template id="modal--access">
+            <section class="popUp modal modal--access">
+              <div class="popUp__overlay modal__overlay"></div>
+              <section class="popUp__container modal__container">
+                <div class="popUp__wrapper modal__wrapper">
+                  <button class="popUp__close modal__close"><span></span></button>
+                  <h2 class="modal__title">Получите подборку с ценами и вариантами исполнения</h2>
+                      <div class="request">
+                        <form class="request__form" action="#" method="post">
+                          <div class="request__fields">
+                            <div class="request__field">
+                                  <div class="field">
+                                    <div class="field__inner">
+                                      <input class="validator__phone field__input--tel field__input" type="tel" name="Phone-number" id="Phone-number" autocomplete="off" autocapitalize="off" placeholder="+7 (999) 999-99-99">
+                                    </div>
+                                    <div class="validator__error-container field__error"></div>
+                                  </div>
+                            </div>
+                          </div>
+                          <div class="request__actions">
+                            <button class="button" type="submit"><span class="button__wrapper">Отправить</span></button>
+                          </div>
+                          <div class="request__legal">
+                            <p>Отправляя форму, вы даёте согласие на обработку персональных <br> данных в соответствии с <a href="#" target="_blank">Политикой конфиденциальности </a>.</p>
+                          </div>
+                        </form>
+                      </div>
+                </div>
+              </section>
             </section>
       </template>
     </div>
