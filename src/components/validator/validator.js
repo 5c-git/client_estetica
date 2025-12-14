@@ -274,7 +274,7 @@ const maskPhone = (formSelector, phoneClass) => {
     placeholder: '',
   });
 
-  const inputs = document.querySelectorAll(`${formSelector} ${phoneClass}`);
+  const inputs = document.querySelectorAll(`${formSelector} .validator__phone`);
   inputs.forEach((phone) => phoneMask.mask(phone));
 };
 

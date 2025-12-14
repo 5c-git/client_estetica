@@ -1652,7 +1652,7 @@ const maskPhone = (formSelector, phoneClass) => {
     showMaskOnFocus: false,
     placeholder: ""
   });
-  const inputs = document.querySelectorAll(`${formSelector} ${phoneClass}`);
+  const inputs = document.querySelectorAll(`${formSelector} .validator__phone`);
   inputs.forEach((phone) => phoneMask.mask(phone));
 };
 const initPasswordEye = (formSelector) => {
