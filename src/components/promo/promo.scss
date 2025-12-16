@@ -7,13 +7,17 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-right: auto;
+    margin-bottom: calc(-785px / 2);
     margin-left: auto;
+    transform: translateY(-50%);
     gap: 24px;
 
     @media(max-width: $tablet) {
       height: auto;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       grid-row: unset;
+      margin-bottom: unset;
+      transform: unset;
     }
   }
 

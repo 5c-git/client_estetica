@@ -6,6 +6,9 @@ import {
 } from '../../utils/utils';
 /* eslint-enable */
 
+// Классы попапов, которые не должны влиять на разблокировку скролла.
+const POPUP_IGNORE_CLASSES = ['cookie', 'modal-zone-info'];
+
 const body = document.querySelector('body');
 
 // Общая функция открытия модалки
@@ -23,7 +26,7 @@ const openPopup = (options) => {
     },
   } = options;
 
-  const popUpName = template.replace(/^#/, '');
+  const popUpName = template.replace(/^[#.]/, ''); // убираем # или .
   const templateElement = document.querySelector(`#${popUpName}`);
 
   if (!templateElement) {
@@ -49,20 +52,17 @@ const openPopup = (options) => {
   const overlayEl = popup.querySelector('.popUp__overlay');
   const closes = popup.querySelectorAll('.popUp__close');
 
-  function removePopup() {
-    // // Закрытие с анимацией
-    // popup.classList.add('popUp--closing');
-    // popup.addEventListener('animationend', () => {
-    //   popup.remove();
-    //   // Разблокируем скролл только если больше нет открытых попапов
-    //   if (blockScroll && !document.querySelector('.popUp')) {
-    //     getPaddingFromBody();
-    //   }
-    // }, { once: true });
+  // Создаём строку вида ":not(.cookie):not(.modal-zone-info)".
+  function buildPopupSelector() {
+    const exclude = POPUP_IGNORE_CLASSES.map(cls => `:not(.${cls})`).join('');
+    return `.popUp${exclude}`;
+  }
 
+  function closePopup() {
     popup.remove();
-    // Разблокируем скролл только если больше нет открытых попапов
-    if (blockScroll && !document.querySelector('.popUp')) {
+
+    // Разблокируем скролл только если больше нет открытых попапов (кроме исключений)
+    if (blockScroll && !document.querySelector(buildPopupSelector())) {
       getPaddingFromBody();
     }
 
@@ -81,20 +81,20 @@ const openPopup = (options) => {
 
     evt.preventDefault();
     // Закрываем только текущую модалку
-    removePopup();
+    closePopup();
   }
 
   if (blockScroll) getPaddingOnBody();
 
   if (overlayEl) {
     if (overlay.use && overlay.closeOnClick) {
-      overlayEl.addEventListener('click', removePopup);
+      overlayEl.addEventListener('click', closePopup);
     } else if (!overlay.use) {
       overlayEl.remove();
     }
   }
 
-  closes.forEach((close) => close.addEventListener('click', removePopup));
+  closes.forEach((close) => close.addEventListener('click', closePopup));
 
   // ESC только если включено в опциях
   if (esc.closeOnEsc) {
@@ -155,36 +155,48 @@ const summonPopUp = (arg1, arg2, arg3) => {
 };
 
 // Функция removePopUp с безопасной анимацией и поддержкой нескольких попапов
-const removePopUp = (arg) => {
-  const findPopup = (name) => {
-    if (name.startsWith('#')) return document.querySelector(`.${name.slice(1)}`);
-
-    const cls = name.startsWith('.') ? name : `.${name}`;
-    return document.querySelector(cls);
-  };
+const removePopUp = (arg, forceBlockScroll = true) => {
+  if (!arg) return;
 
   let popup = null;
+  let blockScroll = forceBlockScroll; // по умолчанию true
+  let redirect;
+
+  // Если строка.
   if (typeof arg === 'string') {
-    popup = findPopup(arg);
-  } else if (typeof arg === 'object' && arg !== null) {
-    popup = findPopup(arg.template);
+    const popUpName = arg.replace(/^[#.]/, ''); // убираем # или .
+    popup = document.querySelector(`.${popUpName}`);
+  }
+
+  // Если объект.
+  else if (typeof arg === 'object' && arg !== null) {
+    if (arg.template) {
+      const popUpName = arg.template.replace(/^[#.]/, '');
+      popup = document.querySelector(`.${popUpName}`);
+    }
+    if (arg.blockScroll !== undefined) blockScroll = arg.blockScroll;
+    if (arg.redirect) redirect = arg.redirect;
   }
 
   if (!popup) return;
 
-  // // Закрытие с анимацией
-  // popup.classList.add('popUp--closing');
-  // popup.addEventListener('animationend', () => {
-  //   popup.remove();
-
-  //   // Проверяем оставшиеся модалки с overlay
-  //   if (!document.querySelector('.popUp__overlay')) getPaddingFromBody();
-  // }, { once: true });
-
+  // Удаляем попап.
   popup.remove();
 
-  // Проверяем оставшиеся модалки с overlay
-  if (!document.querySelector('.popUp__overlay')) getPaddingFromBody();
+  // Разблокируем скролл.
+  if (blockScroll) {
+    getPaddingFromBody();
+  }
+
+  // Редирект
+  if (redirect) {
+    setTimeout(() => {
+      window.location.href = redirect;
+    }, 300);
+  }
 };
 
-export { summonPopUp, removePopUp };
+export {
+  summonPopUp,
+  removePopUp,
+};

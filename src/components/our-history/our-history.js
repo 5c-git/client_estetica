@@ -15,7 +15,6 @@ if (clubCardsNew) {
 
 
   const swiperNavInit = () => {
-    console.log('swiperNavInit');
     swiperNav = new Swiper(nav, {
       modules: [FreeMode],
       spaceBetween: 0,
@@ -31,7 +30,6 @@ if (clubCardsNew) {
   };
 
   const swiperMainDesktopInit = () => {
-    console.log('swiperMainDesktopInit');
     swiperMainDesktop = new Swiper(main, {
       modules: [Thumbs, EffectFade],
       allowTouchMove: true,

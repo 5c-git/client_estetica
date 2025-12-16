@@ -62,6 +62,7 @@
     @include Body-20;
     color: $secondary;
     transition: color $transition-duration;
+    white-space: nowrap;
     cursor: pointer;
 
     &:hover {

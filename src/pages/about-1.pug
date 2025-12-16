@@ -1,1 +1,35 @@
 extends ../templates/default
+
+include ../components/participants/participants
+
+block header
+  +header({
+    mixin: 'header--liquid',
+  })
+
+block main
+  include ../components/breadcrumbs/breadcrumbs
+
+  +layout({})
+    +participants({
+      items: [1,2,3,4],
+    })
+
+  +layout({
+    title: 'Группа компаний ESTETICA - лидер по<br> производству мебели премиум класса в России',
+  })
+    include ../components/statistics/statistics
+
+  +layout({
+    mixin: 'layout--grey',
+  })
+    include ../components/our-history/our-history
+
+  +layout({
+    title: 'Фирменная сеть салонов в городах России',
+  })
+    +article({
+      storeMap: true,
+    })
+
+  include ../components/store-map/store-map

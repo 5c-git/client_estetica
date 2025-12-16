@@ -93,6 +93,9 @@
     }
 
     a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
       color: $secondary;
       text-decoration: underline;
       transition: text-decoration-color $transition-duration;
@@ -104,10 +107,15 @@
           text-decoration-color: currentcolor;
         }
       }
+
+      svg {
+        fill: currentcolor;
+      }
     }
   }
 
   &__copyright {
+    margin-bottom: auto;
     color: $secondary;
 
     @media(max-width: $tablet) {
@@ -125,6 +133,26 @@
       align-items: center;
       text-align: center;
       gap: 44px;
+    }
+  }
+
+  &__5corners {
+    order: 1;
+
+    @media(max-width: $tablet) {
+      display: flex;
+      justify-content: center;
+    }
+
+    a {
+      transition: color $transition-duration;
+      text-decoration: none;
+
+      &:hover {
+        @media(min-width: $desktop-only) {
+          color: $hover;
+        }
+      }
     }
   }
 

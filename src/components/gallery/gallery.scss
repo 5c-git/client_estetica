@@ -2,7 +2,7 @@
   position: relative;
 
   &__swiper {
-    overflow: unset;
+    // overflow: unset;
   }
 
   &__list {
@@ -14,9 +14,13 @@
   }
 
   &__item {
-    width: unset;
+    width: 405px;
     height: unset;
     margin-right: 24px;
+
+    @media(max-width: $tablet) {
+      width: 203px;
+    }
 
     @media(max-width: $phone) {
       margin-right: 24px;
@@ -26,19 +30,11 @@
       margin-right: 0;
     }
 
-    &:nth-child(even) {
+    &--small {
       width: 280px;
 
       @media(max-width: $tablet) {
         width: 140px;
-      }
-    }
-
-    &:nth-child(odd) {
-      width: 405px;
-
-      @media(max-width: $tablet) {
-        width: 203px;
       }
     }
   }

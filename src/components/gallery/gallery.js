@@ -16,7 +16,7 @@ const galleryInit = (container) => {
     // Optional parameters
     slidesPerView: 'auto',
     spaceBetween: 0,
-    loop: false,
+    loop: true,
     // Responsive breakpoints
     breakpoints: {},
   });

@@ -483,7 +483,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const form = document.querySelector(".request-catalog__form");
 if (form) {
-  console.log(form);
   (0,_validator_validator__WEBPACK_IMPORTED_MODULE_0__.validateForm)(".request-catalog__form");
 }
 
@@ -773,48 +772,48 @@ gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.registerPlugin(gsap_ScrollTrigg
 const initPromoAnimation = () => {
   const mm = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.matchMedia();
   const deskstopAnimation = () => {
-    const promos = document.querySelectorAll(".promo");
-    promos.forEach((promo) => {
-      const leftVideo = promo.querySelector(".promo__video--left");
-      const rightVideo = promo.querySelector(".promo__video--right");
-      const centerVideo = promo.querySelector(".promo__video--center");
-      const wrapper = promo.querySelector(".promo__wrapper");
-      const blackOverlay = document.createElement("div");
-      blackOverlay.className = "promo__black-overlay";
-      wrapper.appendChild(blackOverlay);
-      gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
-        scrollTrigger: {
-          trigger: promo,
-          start: "center center",
-          end: "+=200%",
-          scrub: true,
-          pin: true,
-          // Фиксируем блок на экране пока идет анимация.
-          pinSpacing: true,
-          markers: true
-        }
-      }).from(leftVideo, {
-        x: "-50vw",
-        duration: 2
-      }).from(rightVideo, {
-        x: "50vw",
-        duration: 2
-      }, "<").to(leftVideo, {
-        // duration: 1,
-      }).to(rightVideo, {
-        // duration: 1,
-      }, "<").to(blackOverlay, {
-        opacity: 1
-        // duration: 2,
-      }).to(centerVideo, {
-        opacity: 1
-      }).to(centerVideo, {
-        // duration: 1,
+    const ctx = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.context(() => {
+      const promos = document.querySelectorAll(".promo");
+      promos.forEach((promo) => {
+        const leftVideo = promo.querySelector(".promo__video--left");
+        const rightVideo = promo.querySelector(".promo__video--right");
+        const centerVideo = promo.querySelector(".promo__video--center");
+        const blackOverlay = promo.querySelector(".promo__black-overlay");
+        gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
+          scrollTrigger: {
+            trigger: promo,
+            start: "top center",
+            end: "+=200%",
+            scrub: true,
+            pin: true,
+            // Фиксируем блок на экране пока идет анимация.
+            pinSpacing: true,
+            // markers: true,
+            invalidateOnRefresh: true
+          }
+        }).from(leftVideo, {
+          x: "-50vw",
+          duration: 2
+        }).from(rightVideo, {
+          x: "50vw",
+          duration: 2
+        }, "<").to(leftVideo, {
+          duration: 1
+        }).to(rightVideo, {
+          duration: 1
+        }, "<").to(blackOverlay, {
+          opacity: 1
+        }).to(centerVideo, {
+          opacity: 1
+        }).to(centerVideo, {
+          duration: 1
+        });
       });
     });
+    return () => ctx.revert();
   };
   mm.add("(min-width: 992px)", () => {
-    deskstopAnimation();
+    return deskstopAnimation();
   });
   mm.add("(max-width: 991px)", () => {
   });
@@ -1838,84 +1837,81 @@ __webpack_require__.r(__webpack_exports__);
 
 gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u);
 const initParticipantsAnimation = () => {
-  const section = document.querySelector(".participants");
-  if (!section)
-    return;
-  const items = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.utils.toArray(".participants__item");
-  if (items.length < 2)
-    return;
-  const first = items[0];
-  const rest = items.slice(1);
-  const createTimeline = () => {
-    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.getAll().forEach((st) => {
-      if (st.trigger === section || st.animation && st.animation._targets && st.animation._targets.length && st.animation._targets.some((t) => section.contains(t))) {
-        st.kill();
+  const mm = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.matchMedia();
+  const deskstopAnimation = () => {
+    const ctx = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.context(() => {
+      const participants = document.querySelector(".participants");
+      if (!participants)
+        return;
+      const title = participants.querySelector(".participants__title");
+      const cardsWrappers = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.utils.toArray(".participants__item");
+      const cards = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.utils.toArray(".participants__item-pin");
+      const firstItem = participants.querySelector(".participants__item");
+      if (!firstItem)
+        return;
+      const titleHeight = title ? title.offsetHeight : 0;
+      const cardHeight = firstItem.offsetHeight / 2;
+      const gap = 50;
+      console.log(titleHeight);
+      if (title) {
+        gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.create({
+          trigger: cardsWrappers[0],
+          start: () => `top center-=${titleHeight + cardHeight}`,
+          end: () => `bottom center+=${cardHeight}`,
+          endTrigger: participants,
+          pin: title,
+          pinSpacing: false,
+          scrub: true,
+          // markers: {
+          //   fontSize: "20px"
+          // },
+          invalidateOnRefresh: true
+        });
       }
+      const total = cards.length;
+      const maxScale = 1;
+      const step = 0.025;
+      const scales = Array.from({ length: total }, (_, i) => {
+        const s = maxScale - step * i;
+        return s > 0 ? s : 0;
+      });
+      scales.reverse();
+      cardsWrappers.forEach((wrapper, i) => {
+        const card = cards[i];
+        const scale = scales[i];
+        const rotation = i !== total - 1 ? -10 : 0;
+        gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.to(card, {
+          scale,
+          rotationX: rotation,
+          transformOrigin: "center center",
+          ease: "none",
+          invalidateOnRefresh: true,
+          scrollTrigger: {
+            trigger: wrapper,
+            start: () => `top center-=${titleHeight + cardHeight - gap * i}`,
+            end: () => `bottom center+=${gap * (total - 1)}`,
+            endTrigger: participants,
+            scrub: true,
+            pin: wrapper,
+            pinSpacing: false,
+            // markers: {
+            //   indent: 100 * i,
+            //   startColor: "#0ae448",
+            //   endColor: "#fec5fb",
+            //   fontSize: "14px"
+            // },
+            id: i + 1
+          }
+        });
+      });
     });
-    const firstRect = first.getBoundingClientRect();
-    const offsets = items.map((item) => {
-      const r = item.getBoundingClientRect();
-      const yMove = firstRect.top - r.top;
-      return yMove;
-    });
-    const totalSteps = rest.length;
-    const stepHeight = 220;
-    const totalScroll = totalSteps * stepHeight;
-    const tl = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "center center",
-        end: "+=" + totalScroll,
-        scrub: true,
-        pin: true,
-        pinSpacing: true
-        //markers: true,
-      }
-    });
-    rest.forEach((card, i) => {
-      const stepLabel = `step${i}`;
-      tl.addLabel(stepLabel);
-      const targetY = (i + 1) * -95;
-      console.log(targetY);
-      tl.to(card, {
-        yPercent: targetY,
-        duration: 1,
-        ease: "none"
-      }, stepLabel);
-      for (let j = 0; j <= i; j++) {
-        const prev = items[j];
-        const stepScale = 0.04;
-        const scaleTarget = Math.max(0.7, 1 - stepScale * (i - j + 1));
-        tl.to(prev, {
-          scale: scaleTarget,
-          transformOrigin: "top center",
-          duration: 1,
-          ease: "none"
-        }, stepLabel);
-      }
-    });
-    return tl;
+    return () => ctx.revert();
   };
-  let tlInstance = createTimeline();
-  let resizeTimer;
-  const onResize = () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.refresh(true);
-      tlInstance = createTimeline();
-    }, 150);
-  };
-  window.addEventListener("resize", onResize);
-  return () => {
-    window.removeEventListener("resize", onResize);
-    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.getAll().forEach((st) => {
-      if (st.trigger === section || st.animation && st.animation._targets && st.animation._targets.length && st.animation._targets.some((t) => section.contains(t))) {
-        st.kill();
-      }
-    });
-    if (tlInstance)
-      tlInstance.kill();
-  };
+  mm.add("(min-width: 992px)", () => {
+    return deskstopAnimation();
+  });
+  mm.add("(max-width: 991px)", () => {
+  });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initParticipantsAnimation);
 
@@ -2062,7 +2058,7 @@ const galleryInit = (container) => {
     // Optional parameters
     slidesPerView: "auto",
     spaceBetween: 0,
-    loop: false,
+    loop: true,
     // Responsive breakpoints
     breakpoints: {}
   });
@@ -2194,7 +2190,6 @@ if (clubCardsNew) {
   let swiperMainDesktop;
   let swiperNav;
   const swiperNavInit = () => {
-    console.log("swiperNavInit");
     swiperNav = new swiper__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A(nav, {
       modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__/* .FreeMode */ .U1],
       spaceBetween: 0,
@@ -2209,7 +2204,6 @@ if (clubCardsNew) {
     });
   };
   const swiperMainDesktopInit = () => {
-    console.log("swiperMainDesktopInit");
     swiperMainDesktop = new swiper__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A(main, {
       modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__/* .Thumbs */ .WO, swiper_modules__WEBPACK_IMPORTED_MODULE_1__/* .EffectFade */ ._R],
       allowTouchMove: true,
@@ -2506,6 +2500,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3670);
 
 
+const POPUP_IGNORE_CLASSES = ["cookie", "modal-zone-info"];
 const body = document.querySelector("body");
 const openPopup = (options) => {
   const {
@@ -2520,7 +2515,7 @@ const openPopup = (options) => {
       closeOnEsc: true
     }
   } = options;
-  const popUpName = template.replace(/^#/, "");
+  const popUpName = template.replace(/^[#.]/, "");
   const templateElement = document.querySelector(`#${popUpName}`);
   if (!templateElement) {
     console.warn(`#${popUpName} \u043C\u043E\u0434\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u043A\u043D\u0430 \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442.`);
@@ -2539,9 +2534,13 @@ const openPopup = (options) => {
   body.append(popup);
   const overlayEl = popup.querySelector(".popUp__overlay");
   const closes = popup.querySelectorAll(".popUp__close");
-  function removePopup() {
+  function buildPopupSelector() {
+    const exclude = POPUP_IGNORE_CLASSES.map((cls) => `:not(.${cls})`).join("");
+    return `.popUp${exclude}`;
+  }
+  function closePopup() {
     popup.remove();
-    if (blockScroll && !document.querySelector(".popUp")) {
+    if (blockScroll && !document.querySelector(buildPopupSelector())) {
       (0,_utils_utils__WEBPACK_IMPORTED_MODULE_0__/* .getPaddingFromBody */ .iW)();
     }
     document.removeEventListener("keydown", onPopupEscPress);
@@ -2557,18 +2556,18 @@ const openPopup = (options) => {
     if (evt.code !== "Escape")
       return;
     evt.preventDefault();
-    removePopup();
+    closePopup();
   }
   if (blockScroll)
     (0,_utils_utils__WEBPACK_IMPORTED_MODULE_0__/* .getPaddingOnBody */ .rP)();
   if (overlayEl) {
     if (overlay.use && overlay.closeOnClick) {
-      overlayEl.addEventListener("click", removePopup);
+      overlayEl.addEventListener("click", closePopup);
     } else if (!overlay.use) {
       overlayEl.remove();
     }
   }
-  closes.forEach((close) => close.addEventListener("click", removePopup));
+  closes.forEach((close) => close.addEventListener("click", closePopup));
   if (esc.closeOnEsc) {
     document.addEventListener("keydown", onPopupEscPress);
   }
@@ -2618,24 +2617,36 @@ const summonPopUp = (arg1, arg2, arg3) => {
     console.warn("\u041D\u0435\u0432\u0435\u0440\u043D\u044B\u0435 \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442\u044B \u0434\u043B\u044F summonPopUp");
   }
 };
-const removePopUp = (arg) => {
-  const findPopup = (name) => {
-    if (name.startsWith("#"))
-      return document.querySelector(`.${name.slice(1)}`);
-    const cls = name.startsWith(".") ? name : `.${name}`;
-    return document.querySelector(cls);
-  };
+const removePopUp = (arg, forceBlockScroll = true) => {
+  if (!arg)
+    return;
   let popup = null;
+  let blockScroll = forceBlockScroll;
+  let redirect;
   if (typeof arg === "string") {
-    popup = findPopup(arg);
+    const popUpName = arg.replace(/^[#.]/, "");
+    popup = document.querySelector(`.${popUpName}`);
   } else if (typeof arg === "object" && arg !== null) {
-    popup = findPopup(arg.template);
+    if (arg.template) {
+      const popUpName = arg.template.replace(/^[#.]/, "");
+      popup = document.querySelector(`.${popUpName}`);
+    }
+    if (arg.blockScroll !== void 0)
+      blockScroll = arg.blockScroll;
+    if (arg.redirect)
+      redirect = arg.redirect;
   }
   if (!popup)
     return;
   popup.remove();
-  if (!document.querySelector(".popUp__overlay"))
+  if (blockScroll) {
     (0,_utils_utils__WEBPACK_IMPORTED_MODULE_0__/* .getPaddingFromBody */ .iW)();
+  }
+  if (redirect) {
+    setTimeout(() => {
+      window.location.href = redirect;
+    }, 300);
+  }
 };
 
 
