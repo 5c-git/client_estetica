@@ -810,6 +810,9 @@ summary::-webkit-details-marker {
   text-align: left;
   flex-grow: 1;
 }
+.card-catalog {
+  scroll-margin-top: 200px;
+}
 .card-catalog__wrapper {
   display: flex;
   flex-direction: column;
@@ -3067,6 +3070,7 @@ summary::-webkit-details-marker {
   position: relative;
   margin-top: 160px;
   margin-bottom: 160px;
+  scroll-margin-top: 200px;
 }
 @media (max-width: 767px) {
   .layout {
