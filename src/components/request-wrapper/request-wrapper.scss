@@ -37,6 +37,13 @@
     margin: 0;
   }
 
+  &__content {
+
+    @media(max-width: $tablet) {
+      order: 1;
+    }
+  }
+
   &__banner {
     margin: 0;
     border-radius: 16px;

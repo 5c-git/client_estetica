@@ -67,6 +67,7 @@ $transition-duration: 0.3s;
 
 @mixin liquid-glass {
   backdrop-filter: blur(8px) saturate(1.2);
+  outline: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 @mixin Shadow-L {
