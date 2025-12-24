@@ -22,6 +22,10 @@
     color: $secondary;
     grid-column: -1 / 1;
 
+    @media(max-width: $phone) {
+      @include Caption-14;
+    }
+
     p {
       margin: 0;
     }

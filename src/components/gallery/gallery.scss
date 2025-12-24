@@ -26,24 +26,6 @@
     margin: 0;
   }
 
-  &__swiper {
-    // overflow: unset;
-
-    @media(max-width: $desktop) {
-      margin-right: -30px;
-      margin-left: -30px;
-      padding-right: 30px;
-      padding-left: 30px;
-    }
-
-    @media(max-width: $tablet) {
-      margin-right: -15px;
-      margin-left: -15px;
-      padding-right: 15px;
-      padding-left: 15px;
-    }
-  }
-
   &__list {
     align-items: center;
     margin: 0;

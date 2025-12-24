@@ -28,7 +28,7 @@ const initPromoAnimation = () => {
             scrub: true,
             pin: true, // Фиксируем блок на экране пока идет анимация.
             pinSpacing: true,
-            markers: true,
+            // markers: true,
             invalidateOnRefresh: true,
           }
         })
@@ -134,9 +134,9 @@ const initPromoAnimation = () => {
     return deskstopAnimation();
   });
 
-  mm.add("(max-width: 801px)", () => {
+  mm.add("(max-width: 991px)", () => {
     // Ничего не делаем — при ресайзе gsap сам уберёт все связанные ScrollTrigger'ы
-    return mobileAnimation();
+    // return mobileAnimation();
   });
 };
 

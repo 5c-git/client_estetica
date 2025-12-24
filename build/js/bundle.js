@@ -816,7 +816,7 @@ const initPromoAnimation = () => {
             pin: true,
             // Фиксируем блок на экране пока идет анимация.
             pinSpacing: true,
-            markers: true,
+            // markers: true,
             invalidateOnRefresh: true
           }
         }).from(leftVideo, {
@@ -893,8 +893,7 @@ const initPromoAnimation = () => {
   mm.add("(min-width: 992px)", () => {
     return deskstopAnimation();
   });
-  mm.add("(max-width: 801px)", () => {
-    return mobileAnimation();
+  mm.add("(max-width: 991px)", () => {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initPromoAnimation);
@@ -1983,9 +1982,9 @@ const initParticipantsAnimation = () => {
           pin: title,
           pinSpacing: false,
           scrub: true,
-          markers: {
-            fontSize: "24px"
-          },
+          // markers: {
+          //   fontSize: "24px"
+          // },
           invalidateOnRefresh: true
         });
       }
@@ -2008,12 +2007,12 @@ const initParticipantsAnimation = () => {
             scrub: true,
             pin: wrapper,
             pinSpacing: false,
-            markers: {
-              indent: 100 * i,
-              startColor: "#0ae448",
-              endColor: "#fec5fb",
-              fontSize: "14px"
-            },
+            // markers: {
+            //   indent: 100 * i,
+            //   startColor: "#0ae448",
+            //   endColor: "#fec5fb",
+            //   fontSize: "14px"
+            // },
             id: i + 1
           }
         });
