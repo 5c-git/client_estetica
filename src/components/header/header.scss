@@ -100,6 +100,7 @@
   }
 
   &__wrapper {
+    min-height: 66px;
     display: flex;
     justify-content: space-between;
     padding-top: 15px;
@@ -152,6 +153,9 @@
 
   &__logo {
     width: 226px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: inherit;
     flex-shrink: 0;
 
@@ -395,6 +399,7 @@
         &__fixed {
           background-color: var(--bg-color);
           outline-color: transparent;
+          border-color: transparent;
         }
 
         &__mobile-nav {

@@ -2,7 +2,7 @@ import './gallery.scss';
 
 import Swiper from 'swiper';
 import {
-  Navigation, Pagination,
+  Navigation, Pagination, Autoplay,
 } from 'swiper/modules';
 
 const galleryInit = (container) => {
@@ -12,11 +12,17 @@ const galleryInit = (container) => {
   const swiper = gallery.querySelector('.swiper');
 
   new Swiper(swiper, {
-    modules: [Navigation, Pagination],
+    modules: [Navigation, Pagination, Autoplay],
     // Optional parameters
     slidesPerView: 'auto',
     spaceBetween: 0,
     loop: true,
+    speed: 3000,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
     // Responsive breakpoints
     breakpoints: {},
   });

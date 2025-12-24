@@ -8,6 +8,18 @@ const initIntroAnimation = () => {
 
   const loader = intro.querySelector('.intro__loading');
   const video = intro.querySelector('.intro__media video');
+
+  if (!video) {
+    // loader.remove();
+    loader.classList.add('intro__loading--hidden');
+
+    loader.addEventListener('transitionend', () => {
+      intro.classList.add('intro--show');
+    });
+
+    return;
+  }
+
   const reelsItems = reels.querySelectorAll('.reels__item');
   const reelsNumbers = reels.querySelectorAll('.reels__numbers');
   const reelsProgress = reels.querySelector('.reels__progress-value');
@@ -17,7 +29,7 @@ const initIntroAnimation = () => {
   const observer = new IntersectionObserver((entries) => {
     const entry = entries[0];
 
-    // Запуск анимации только один раз, когда блок действительно виден.
+    // Запуск анимации только один раз, когда блок виден.
     if (entry.isIntersecting && !animationStarted) {
       animationStarted = true;
 

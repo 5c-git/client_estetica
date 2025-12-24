@@ -101,7 +101,7 @@ const validators = {
     if (field.disabled) return false;
 
     const description = getDescription(field);
-    return setState(field, field.value.length === 11, description);
+    return setState(field, field.value.length === 10, description);
   },
 
   intPhone(field) {
@@ -267,7 +267,7 @@ const maskNumber = (formSelector, maxNumber) => {
 };
 
 const maskPhone = (formSelector, phoneClass) => {
-  const phoneMask = new Inputmask('+[9 (999) 999 99 99]', {
+  const phoneMask = new Inputmask('+7[(999) 999 99 99]', {
     autoUnmask: true,
     showMaskOnHover: false,
     showMaskOnFocus: false,

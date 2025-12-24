@@ -6,12 +6,11 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="theme-color" content="#231f20"><link rel="preload" href="./assets/fonts/SuisseIntl/SuisseIntl-Regular.woff2" as="font" crossorigin="anonymous">
 <link rel="preload" href="./assets/fonts/SuisseIntl/SuisseIntl-Bold.woff2" as="font" crossorigin="anonymous">
-<link rel="apple-touch-icon" sizes="76x76" href="./assets/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicons/favicon-16x16.png">
-<link rel="manifest" href="./assets/favicons/site.webmanifest">
-<link rel="mask-icon" href="./assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="./assets/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="./assets/favicons/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="./assets/favicons/favicon.svg" />
+<link rel="shortcut icon" href="./assets/favicons/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicons/apple-touch-icon.png" />
+<link rel="manifest" href="./assets/favicons/site.webmanifest" />
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="msapplication-config" content="./assets/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
@@ -171,14 +170,17 @@
         </header>
     <main>
 <section class="intro">
-  <div class="intro__media">
-    <video src="./assets/documents/intro-1.mp4" autoplay muted loop poster="./assets/images/banners/banner-10.jpg"></video>
-  </div>
+  <div class="intro__media"><img src="./assets/images/banners/banner-10.jpg" alt=""></div>
   <div class="intro__wrapper">
     <div class="container">
       <div class="intro__content">
         <h1 class="intro__title"> <span>Обеденная</span><span>группа</span><span>Morgan</span></h1>
-        <p>Выразительный дизайн и неповторимый комфорт</p>
+        <ul> 
+          <li> <a href="#">Какая-то ссылка</a></li>
+          <li> 
+            <p>Выразительный дизайн и неповторимый комфорт</p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -208,7 +210,7 @@
 </section>
           <section class="layout layout--header-center">
             <div class="container"> 
-              <div class="layout__header">
+              <div class="scroll-reveal layout__header">
                 <h2 class="layout__title">ESTETICA  — мебель,<br> которая говорит за вас</h2>
                 <p class="layout__post-title">Для нас мебель — это не просто предмет интерьера, а язык, на котором вы выражаете характер, вкус и индивидуальность. Каждая коллекция ESTETICA создана, чтобы соединять искусство и жизнь, превращая дом в отражение вашей личности.</p>
               </div>
@@ -217,15 +219,15 @@
   <div class="promo__wrapper">
     <video class="promo__video promo__video--left" autoplay loop playsinline muted>
       <source media="(min-width: 991px)" src="./assets/documents/promo-1-desktop@1x.webm">
-      <source src="./assets/documents/promo-1-mobile@1x.webm">
+      <source src="./assets/documents/promo-1-mobile@1x.mp4">
     </video>
     <video class="promo__video promo__video--right" autoplay loop playsinline muted>
       <source media="(min-width: 991px)" src="./assets/documents/promo-2-desktop@1x.webm">
-      <source src="./assets/documents/promo-2-mobile@1x.webm">
+      <source src="./assets/documents/promo-2-mobile@1x.mp4">
     </video>
     <video class="promo__video promo__video--center" autoplay loop playsinline muted>
       <source media="(min-width: 991px)" src="./assets/documents/promo-3-desktop@1x.webm">
-      <source src="./assets/documents/promo-3-mobile@1x.webm">
+      <source src="./assets/documents/promo-3-mobile@1x.mp4">
     </video>
     <div class="promo__black-overlay"></div>
   </div>
@@ -240,7 +242,7 @@
                   <div class="request-catalog__wrapper">
                     <figure class="request-catalog__banner"><img src="./assets/images/request-catalog-1.png" alt=""></figure>
                     <div class="request-catalog__main">
-                      <h2 class="request-catalog__title">Посмотрите как мебель ESTETICA оживает <br> в проектах дизайнеров</h2>
+                      <h2 class="scroll-reveal request-catalog__title">Посмотрите как мебель ESTETICA оживает <br> в проектах дизайнеров</h2>
                       <form class="request-catalog__form" action="#" method="post">
                         <div class="request-catalog__fields">
                           <div class="request-catalog__field">
@@ -271,7 +273,7 @@
 <div class="configurator">
   <div class="configurator__wrapper">
     <div class="configurator__main">
-      <div class="configurator__header">
+      <div class="scroll-reveal configurator__header">
         <h2 class="configurator__title">Ваш интерьер. Наше мастерство.</h2>
         <p class="configurator__post-title">Каждое изделие создаётся с учётом ваших идей: от выбора ткани и отделки до индивидуальных размеров и уникальных декоративных элементов.</p>
       </div>
@@ -348,7 +350,7 @@
               <div class="layout__wrapper">
 <div class="promo-gallery">
   <div class="promo-gallery__wrapper">
-    <div class="promo-gallery__header">
+    <div class="scroll-reveal promo-gallery__header">
       <h2 class="promo-gallery__title">Точно. Стильно. <br> Индивидуально.</h2>
       <div class="promo-gallery__post-title">
         <p>Каждое изделие изготавливается индивидуально, с учётом ваших пожеланий. </p>
@@ -374,7 +376,7 @@
                   <div class="request-catalog__wrapper">
                     <figure class="request-catalog__banner"><img src="./assets/images/request-catalog-1.png" alt=""></figure>
                     <div class="request-catalog__main">
-                      <h2 class="request-catalog__title">Посмотрите как мебель ESTETICA оживает <br> в проектах дизайнеров</h2>
+                      <h2 class="scroll-reveal request-catalog__title">Посмотрите как мебель ESTETICA оживает <br> в проектах дизайнеров</h2>
                       <form class="request-catalog__form" action="#" method="post">
                         <div class="request-catalog__fields">
                           <div class="request-catalog__field">
@@ -404,7 +406,7 @@
               <div class="layout__wrapper">
 <div class="promo-partner">
   <div class="promo-partner__wrapper">
-    <div class="promo-partner__header"><span class="promo-partner__desc">Дизайнерам</span>
+    <div class="scroll-reveal promo-partner__header"><span class="promo-partner__desc">Дизайнерам</span>
       <h2 class="promo-partner__title">Партнёрская программа </h2>
     </div>
     <div class="promo-partner__media">
@@ -423,7 +425,7 @@
               <div class="layout__wrapper">
                 <div class="promo-news">
                   <div class="promo-news__wrapper">
-                    <div class="promo-news__header"><span class="promo-news__desc">Что нового?</span>
+                    <div class="scroll-reveal promo-news__header"><span class="promo-news__desc">Что нового?</span>
                       <h2 class="promo-news__title">Новости & события</h2>
                       <div class="promo-news__more"><a class="button" href="#"><span class="button__wrapper">Все новости</span></a></div>
                     </div>
@@ -534,6 +536,7 @@
         <li><a href="./about-1.html" tabindex="-1">О компании</a></li>
         <li><a href="./news-1.html" tabindex="-1">Новости (разводящая)</a></li>
         <li><a href="./news-2.html" tabindex="-1">Новости (детальная)</a></li>
+        <li><a href="./test.html" tabindex="-1">Тесты</a></li>
       </ul>
     </div>
   </div>

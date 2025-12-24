@@ -1,7 +1,7 @@
 import './field.scss';
 import Choices from 'choices.js';
 
-const phoneMask = new Inputmask('+[9 (999) 999 99 99]', {
+const phoneMask = new Inputmask('+7[(999) 999 99 99]', {
   autoUnmask: true,
   showMaskOnHover: false,
   showMaskOnFocus: false,

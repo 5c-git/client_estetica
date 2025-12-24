@@ -1,0 +1,18 @@
+extends ../templates/default
+
+block header
+
+block main
+
+  section(style='height: 100vh')
+
+  +layout({
+    mixin: 'layout--header-center',
+    title: 'ESTETICA  — мебель,<br> которая говорит за вас',
+    postTitle: 'Для нас мебель — это не просто предмет интерьера, а язык, на котором вы выражаете характер, вкус и индивидуальность. Каждая коллекция ESTETICA создана, чтобы соединять искусство и жизнь, превращая дом в отражение вашей личности.',
+  })
+    include ../components/promo/promo
+
+  section(style='height: 100vh')
+
+block footer

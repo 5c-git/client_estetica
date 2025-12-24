@@ -129,6 +129,7 @@
   &__title {
     @include Subtitle-30;
     margin: 0;
+    padding-right: 30px;
   }
 
   &--more {

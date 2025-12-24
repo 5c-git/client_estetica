@@ -13,9 +13,8 @@
     gap: 24px;
 
     @media(max-width: $tablet) {
-      height: auto;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      grid-row: unset;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: repeat(2, 480px);
       margin-bottom: unset;
       transform: unset;
     }
@@ -33,7 +32,7 @@
     overflow: hidden;
 
     @media(max-width: $tablet) {
-      height: auto;
+      height: 480px;
       grid-row: unset;
     }
 
@@ -42,7 +41,8 @@
       grid-column-start: 1;
 
       @media(max-width: $tablet) {
-        grid-column-start: unset;
+        grid-column-start: 1;
+        grid-row-start: 1;
       }
     }
 
@@ -51,7 +51,8 @@
       grid-column-start: 2;
 
       @media(max-width: $tablet) {
-        grid-column-start: unset;
+        grid-column-start: 1;
+        grid-row-start: 2;
       }
     }
 
@@ -61,7 +62,9 @@
       opacity: 0;
 
       @media(max-width: $tablet) {
-        opacity: 1 !important;
+        height: 100%;
+        grid-column-start: 1;
+        grid-row: 1 / 3;
       }
     }
   }

@@ -24,25 +24,6 @@ const initParticipantsAnimation = () => {
       const cardHeight = firstItem.offsetHeight / 2;
       const gap = 50;
 
-      console.log(titleHeight);
-
-      // 1. Pin заголовка.
-      if (title) {
-        ScrollTrigger.create({
-          trigger: cardsWrappers[0],
-          start: () => `top center-=${titleHeight + cardHeight}`,
-          end: () => `bottom center+=${cardHeight}`,
-          endTrigger: participants,
-          pin: title,
-          pinSpacing: false,
-          scrub: true,
-          // markers: {
-          //   fontSize: "20px"
-          // },
-          invalidateOnRefresh: true,
-        });
-      }
-
       const total = cards.length;
       const maxScale = 1;
       const step = 0.025;
@@ -54,6 +35,25 @@ const initParticipantsAnimation = () => {
       });
 
       scales.reverse();
+
+      console.log(titleHeight);
+
+      // 1. Pin заголовка.
+      if (title) {
+        ScrollTrigger.create({
+          trigger: cardsWrappers[0],
+          start: () => `top center-=${titleHeight}`,
+            end: () => `bottom center+=${titleHeight + gap * (total)}`,
+          endTrigger: participants,
+          pin: title,
+          pinSpacing: false,
+          scrub: true,
+          markers: {
+            fontSize: "24px"
+          },
+          invalidateOnRefresh: true,
+        });
+      }
 
       // 2. Pin и анимация карточек.
       cardsWrappers.forEach((wrapper, i) => {
@@ -69,18 +69,19 @@ const initParticipantsAnimation = () => {
           invalidateOnRefresh: true,
           scrollTrigger: {
             trigger: wrapper,
-            start: () => `top center-=${titleHeight + cardHeight - gap * i}`,
-            end: () => `bottom center+=${gap * (total - 1)}`,
+            start: () => `top center-=${titleHeight - gap * i}`,
+            end: () => `bottom center+=${titleHeight + gap * (total)}`,
+            // end: () => `bottom center+=${gap * (total - 1)}`,
             endTrigger: participants,
             scrub: true,
             pin: wrapper,
             pinSpacing: false,
-            // markers: {
-            //   indent: 100 * i,
-            //   startColor: "#0ae448",
-            //   endColor: "#fec5fb",
-            //   fontSize: "14px"
-            // },
+            markers: {
+              indent: 100 * i,
+              startColor: "#0ae448",
+              endColor: "#fec5fb",
+              fontSize: "14px"
+            },
             id: i + 1,
           }
         });

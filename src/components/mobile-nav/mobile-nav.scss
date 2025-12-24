@@ -92,11 +92,15 @@
     flex-grow: 1;
 
     &:after {
-      width: 10px;
-      height: 10px;
-      border-top: 2px solid currentColor;
-      border-right: 2px solid currentColor;
-      transform: rotate(45deg);
+      width: 24px;
+      height: 24px;
+      color: inherit;
+      background-color: currentColor;
+      mask-size: contain;
+      mask-position: center left;
+      mask-repeat: no-repeat;
+      mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjE3IDExTDEyLjU5IDcuNDFMMTQgNkwyMCAxMkwxNCAxOEwxMi41OSAxNi41OUwxNi4xNyAxM0w0IDEzTDQgMTFMMTYuMTcgMTFaIiBmaWxsPSIjMUMxQzFDIi8+Cjwvc3ZnPgo=");
+      flex-shrink: 0;
       content: '';
     }
   }

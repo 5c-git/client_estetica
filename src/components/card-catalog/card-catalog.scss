@@ -79,6 +79,10 @@
     input {
       display: none;
     }
+
+    &--active {
+      color: $primary;
+    }
   }
 
   &__list {

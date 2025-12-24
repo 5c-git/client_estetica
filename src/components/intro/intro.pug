@@ -1,6 +1,7 @@
 section.intro
   div.intro__media
-    video(src="./assets/documents/intro-1.mp4" autoplay muted loop poster='./assets/images/banners/banner-10.jpg')
+    //- video(src="./assets/documents/intro-1.mp4" autoplay muted loop poster='./assets/images/banners/banner-10.jpg')
+    img(src="./assets/images/banners/banner-10.jpg", alt="")
   div.intro__wrapper
     div.container
       div.intro__content
@@ -8,7 +9,11 @@ section.intro
           span Обеденная
           span группа
           span Morgan
-        p Выразительный дизайн и неповторимый комфорт
+        ul 
+          li 
+            a(href="#") Какая-то ссылка
+          li  
+            p Выразительный дизайн и неповторимый комфорт
         
   div.intro__loading
     div.intro__loading-wrapper
