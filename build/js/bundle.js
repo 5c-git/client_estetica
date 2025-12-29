@@ -795,6 +795,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u);
+const startAllVideoInOneTime = () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = Array.from(document.querySelectorAll(".promo__video"));
+    if (!videos.length)
+      return;
+    Promise.all(
+      videos.map(
+        (video) => video.readyState >= 3 ? Promise.resolve() : new Promise(
+          (resolve) => video.addEventListener("canplay", resolve, { once: true })
+        )
+      )
+    ).then(() => {
+      videos.forEach((video) => {
+        video.pause();
+        video.currentTime = 0;
+      });
+      videos.forEach((video) => video.play());
+    });
+  });
+};
+startAllVideoInOneTime();
 const initPromoAnimation = () => {
   const mm = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.matchMedia();
   const deskstopAnimation = () => {

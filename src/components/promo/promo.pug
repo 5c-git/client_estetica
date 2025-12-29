@@ -1,15 +1,15 @@
 section.promo
   div.promo__wrapper
-    video(autoplay loop playsinline muted).promo__video.promo__video--left
-      source(media='(min-width: 767px)' src='./assets/documents/promo-1-desktop@1x.webm')
-      source(src='./assets/documents/promo-1-mobile@1x.mp4')
+    video(preload="auto" loop playsinline muted data-sync).promo__video.promo__video--left
+      source(media='(min-width: 767px)' src='./assets/documents/promo-1-desktop@1x.mp4')
+      source(src='./assets/documents/promo-1-desktop@1x.mp4')
 
-    video(autoplay loop playsinline muted).promo__video.promo__video--right
-      source(media='(min-width: 767px)' src='./assets/documents/promo-2-desktop@1x.webm')
-      source(src='./assets/documents/promo-2-mobile@1x.mp4')
+    video(preload="auto" loop playsinline muted data-sync).promo__video.promo__video--right
+      source(media='(min-width: 767px)' src='./assets/documents/promo-2-desktop@1x.mp4')
+      source(src='./assets/documents/promo-2-desktop@1x.mp4')
 
-    video(autoplay loop playsinline muted).promo__video.promo__video--center
-      source(media='(min-width: 767px)' src='./assets/documents/promo-3-desktop@1x.webm')
-      source(src='./assets/documents/promo-3-mobile@1x.mp4')
+    video(preload="auto" loop playsinline muted data-sync).promo__video.promo__video--center
+      source(media='(min-width: 767px)' src='./assets/documents/promo-3-desktop@1x.mp4')
+      source(src='./assets/documents/promo-3-mobile@1x--2.mp4')
 
     div.promo__black-overlay
