@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
     window.Corners5ProjectLayout.initPromoAnimation();
     window.Corners5ProjectLayout.initPromoGalleryAnimation();
     window.Corners5ProjectLayout.initParticipantsAnimation();
+    window.Corners5ProjectLayout.initTestPromoAnimation();
   }, 500);
 });
 

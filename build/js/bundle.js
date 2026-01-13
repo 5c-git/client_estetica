@@ -100,6 +100,7 @@ var map = {
 	"./statistics/statistics.js": 1733,
 	"./store-map/store-map.js": 7681,
 	"./subscribe-tg/subscribe-tg.js": 6671,
+	"./test-promo/test-promo.js": 5227,
 	"./tooltip/tooltip.js": 281,
 	"./top-bar/top-bar.js": 5945,
 	"./training-card/training-card.js": 1921,
@@ -160,6 +161,7 @@ var map = {
 	"components/statistics/statistics.js": 1733,
 	"components/store-map/store-map.js": 7681,
 	"components/subscribe-tg/subscribe-tg.js": 6671,
+	"components/test-promo/test-promo.js": 5227,
 	"components/tooltip/tooltip.js": 281,
 	"components/top-bar/top-bar.js": 5945,
 	"components/training-card/training-card.js": 1921,
@@ -467,7 +469,6 @@ const initPromoGalleryAnimation = () => {
     if (banners) {
       banners.style.transform = "";
     }
-    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.getAll().forEach((st) => st.kill());
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initPromoGalleryAnimation);
@@ -824,9 +825,9 @@ const initPromoAnimation = () => {
       const promos = document.querySelectorAll(".promo");
       promos.forEach((promo) => {
         const wrapper = promo.querySelector(".promo__wrapper");
-        const leftVideo = promo.querySelector(".promo__video--left");
-        const rightVideo = promo.querySelector(".promo__video--right");
-        const centerVideo = promo.querySelector(".promo__video--center");
+        const leftVideo = promo.querySelector(".promo__banner--left");
+        const rightVideo = promo.querySelector(".promo__banner--right");
+        const centerVideo = promo.querySelector(".promo__banner--center");
         const blackOverlay = promo.querySelector(".promo__black-overlay");
         gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
           scrollTrigger: {
@@ -837,7 +838,6 @@ const initPromoAnimation = () => {
             pin: true,
             // Фиксируем блок на экране пока идет анимация.
             pinSpacing: true,
-            // markers: true,
             invalidateOnRefresh: true
           }
         }).from(leftVideo, {
@@ -874,32 +874,40 @@ const initPromoAnimation = () => {
       console.log("mobileAnimation init");
       const promos = document.querySelectorAll(".promo");
       promos.forEach((promo) => {
-        const leftVideo = promo.querySelector(".promo__video--left");
-        const rightVideo = promo.querySelector(".promo__video--right");
-        const centerVideo = promo.querySelector(".promo__video--center");
+        const wrapper = promo.querySelector(".promo__wrapper");
+        const leftVideo = promo.querySelector(".promo__banner--left");
+        const rightVideo = promo.querySelector(".promo__banner--right");
+        const centerVideo = promo.querySelector(".promo__banner--center");
         const blackOverlay = promo.querySelector(".promo__black-overlay");
         gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
           scrollTrigger: {
             trigger: promo,
-            start: "center center",
+            start: "top center",
             end: "+=200%",
             scrub: true,
             pin: true,
             // Фиксируем блок на экране пока идет анимация.
             pinSpacing: true,
-            markers: true,
             invalidateOnRefresh: true
           }
         }).from(leftVideo, {
-          xPercent: -100,
+          xPercent: -150,
           duration: 2
         }).from(rightVideo, {
-          xPercent: 100,
+          xPercent: 150,
           duration: 2
         }, "<").to(leftVideo, {
           duration: 1
         }).to(rightVideo, {
           duration: 1
+        }, "<").to(wrapper, {
+          gap: 0
+        }).to(leftVideo, {
+          borderBottomRightRadius: 0,
+          borderBottomLeftRadius: 0
+        }, "<").to(rightVideo, {
+          borderTopRightRadius: 0,
+          borderTopLeftRadius: 0
         }, "<").to(blackOverlay, {
           opacity: 1
         }).to(centerVideo, {
@@ -915,6 +923,7 @@ const initPromoAnimation = () => {
     return deskstopAnimation();
   });
   mm.add("(max-width: 991px)", () => {
+    return mobileAnimation();
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initPromoAnimation);
@@ -1993,12 +2002,11 @@ const initParticipantsAnimation = () => {
         return s > 0 ? s : 0;
       });
       scales.reverse();
-      console.log(titleHeight);
       if (title) {
         gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u.create({
           trigger: cardsWrappers[0],
-          start: () => `top center-=${titleHeight}`,
-          end: () => `bottom center+=${titleHeight + gap * total}`,
+          start: () => `top center-=${-(titleHeight / 2) + cardHeight}`,
+          end: () => `bottom center+=${titleHeight / 2 + cardHeight + gap * (total - 1)}`,
           endTrigger: participants,
           pin: title,
           pinSpacing: false,
@@ -2018,11 +2026,10 @@ const initParticipantsAnimation = () => {
           rotationX: rotation,
           transformOrigin: "center center",
           ease: "none",
-          invalidateOnRefresh: true,
           scrollTrigger: {
             trigger: wrapper,
-            start: () => `top center-=${titleHeight - gap * i}`,
-            end: () => `bottom center+=${titleHeight + gap * total}`,
+            start: () => `top center-=${-(titleHeight / 2) + cardHeight - gap * i}`,
+            end: () => `bottom center+=${titleHeight / 2 + cardHeight + gap * (total - 1)}`,
             // end: () => `bottom center+=${gap * (total - 1)}`,
             endTrigger: participants,
             scrub: true,
@@ -2034,7 +2041,8 @@ const initParticipantsAnimation = () => {
             //   endColor: "#fec5fb",
             //   fontSize: "14px"
             // },
-            id: i + 1
+            id: i + 1,
+            invalidateOnRefresh: true
           }
         });
       });
@@ -2168,6 +2176,134 @@ const sliders = document.querySelectorAll(".slider");
 sliders.forEach((el) => {
   sliderInit(el);
 });
+
+
+/***/ }),
+
+/***/ 5227:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5880);
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6575);
+
+
+
+gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u);
+const initTestPromoAnimation = () => {
+  const mm = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.matchMedia();
+  const testDeskstopAnimation = () => {
+    const ctx = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.context(() => {
+      console.log("deskstopAnimation init");
+      const promos = document.querySelectorAll(".test-promo");
+      promos.forEach((promo) => {
+        const wrapper = promo.querySelector(".test-promo__wrapper");
+        const leftVideo = promo.querySelector(".test-promo__banner--left");
+        const rightVideo = promo.querySelector(".test-promo__banner--right");
+        const centerVideo = promo.querySelector(".test-promo__banner--center");
+        const blackOverlay = promo.querySelector(".test-promo__black-overlay");
+        gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
+          scrollTrigger: {
+            trigger: promo,
+            start: "top center",
+            end: "+=200%",
+            scrub: true,
+            pin: true,
+            // Фиксируем блок на экране пока идет анимация.
+            pinSpacing: true,
+            invalidateOnRefresh: true
+          }
+        }).from(leftVideo, {
+          x: "-50vw",
+          duration: 2
+        }).from(rightVideo, {
+          x: "50vw",
+          duration: 2
+        }, "<").to(leftVideo, {
+          duration: 1
+        }).to(rightVideo, {
+          duration: 1
+        }, "<").to(wrapper, {
+          gap: 0
+        }).to(leftVideo, {
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0
+        }, "<").to(rightVideo, {
+          borderTopLeftRadius: 0,
+          borderBottomLeftRadius: 0
+        }, "<").to(blackOverlay, {
+          opacity: 1
+        }, "<").to(centerVideo, {
+          opacity: 1
+        }).to(centerVideo, {
+          duration: 1
+        });
+      });
+    });
+    return () => ctx.revert();
+  };
+  const testMobileAnimation = () => {
+    const ctx = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.context(() => {
+      console.log("mobileAnimation init");
+      const promos = document.querySelectorAll(".test-promo");
+      promos.forEach((promo) => {
+        const wrapper = promo.querySelector(".test-promo__wrapper");
+        const leftVideo = promo.querySelector(".test-promo__banner--left");
+        const rightVideo = promo.querySelector(".test-promo__banner--right");
+        const centerVideo = promo.querySelector(".test-promo__banner--center");
+        const blackOverlay = promo.querySelector(".test-promo__black-overlay");
+        gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
+          scrollTrigger: {
+            trigger: promo,
+            start: "top center",
+            end: "+=100%",
+            scrub: true,
+            pin: true,
+            // Фиксируем блок на экране пока идет анимация.
+            pinSpacing: true,
+            invalidateOnRefresh: true
+          }
+        }).from(leftVideo, {
+          xPercent: -150,
+          duration: 2
+        }).from(rightVideo, {
+          xPercent: 150,
+          duration: 2
+        }, "<").to(leftVideo, {
+          duration: 1
+        }).to(rightVideo, {
+          duration: 1
+        }, "<").to(wrapper, {
+          gap: 0
+        }).to(leftVideo, {
+          borderBottomRightRadius: 0,
+          borderBottomLeftRadius: 0
+        }, "<").to(rightVideo, {
+          borderTopRightRadius: 0,
+          borderTopLeftRadius: 0
+        }, "<").to(blackOverlay, {
+          opacity: 1
+        }).to(centerVideo, {
+          opacity: 1
+        }).to(centerVideo, {
+          duration: 1
+        });
+      });
+    });
+    return () => ctx.revert();
+  };
+  mm.add("(min-width: 992px)", () => {
+    return testDeskstopAnimation();
+  });
+  mm.add("(max-width: 991px)", () => {
+    return testMobileAnimation();
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initTestPromoAnimation);
 
 
 /***/ }),
@@ -2448,6 +2584,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _promo_gallery_promo_gallery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(445);
 /* harmony import */ var _promo_promo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2945);
 /* harmony import */ var _participants_participants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4855);
+/* harmony import */ var _test_promo_test_promo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5227);
+
 
 
 
@@ -2483,7 +2621,8 @@ window.Corners5ProjectLayout = {
   updateButtonState: _utils_utils__WEBPACK_IMPORTED_MODULE_4__/* .updateButtonState */ .Dl,
   initPromoGalleryAnimation: _promo_gallery_promo_gallery__WEBPACK_IMPORTED_MODULE_5__["default"],
   initPromoAnimation: _promo_promo__WEBPACK_IMPORTED_MODULE_6__["default"],
-  initParticipantsAnimation: _participants_participants__WEBPACK_IMPORTED_MODULE_7__["default"]
+  initParticipantsAnimation: _participants_participants__WEBPACK_IMPORTED_MODULE_7__["default"],
+  initTestPromoAnimation: _test_promo_test_promo__WEBPACK_IMPORTED_MODULE_8__["default"]
 };
 
 

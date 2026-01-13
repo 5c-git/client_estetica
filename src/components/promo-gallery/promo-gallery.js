@@ -78,7 +78,7 @@ const initPromoGalleryAnimation = () => {
     }
 
     // Полная очистка всех ScrollTriggers по этому breakpoint
-    ScrollTrigger.getAll().forEach(st => st.kill());
+    // ScrollTrigger.getAll().forEach(st => st.kill());
   });
 };
 

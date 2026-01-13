@@ -13,11 +13,27 @@
     padding-top: 67px;
   }
 
+  &:has(.intro__loading) {
+    .intro {
+      &__media {
+        transform: scale(0.7);
+      }
+
+      &__title,
+      h1 {
+
+        span {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+      }
+    }
+  }
+
   &__media {
     position: absolute;
     inset: 0;
     height: 100%;
-    transform: scale(0.7);
     transition: transform 0.5s;
 
     video,
@@ -110,8 +126,6 @@
       transition:
         opacity 0.5s ease 0s,
         transform 0.5s ease 0s;
-      opacity: 0;
-      transform: translateY(40px);
     }
   }
 
@@ -160,24 +174,27 @@
   }
 
   &--show {
-    .intro {
-      &__media {
-        transform: scale(1);
-      }
 
-      &__title {
-        span {
-          opacity: 1;
-          transform: translateY(0);
+    &:has(.intro__loading) {
+      .intro {
+        &__media {
+          transform: scale(1);
+        }
 
-          $num: 1;
+        &__title {
+          span {
+            opacity: 1;
+            transform: translateY(0);
 
-          @while $num < 20 {
-            &:nth-of-type(#{$num}) {
-              transition-delay: calc(0.1s + 0.1s * $num);
+            $num: 1;
+
+            @while $num < 20 {
+              &:nth-of-type(#{$num}) {
+                transition-delay: calc(0.1s + 0.1s * $num);
+              }
+
+              $num: $num + 1;
             }
-
-            $num: $num + 1;
           }
         }
       }

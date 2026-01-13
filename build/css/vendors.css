@@ -1,3 +1,17 @@
+:root {
+  --container-padding: 50px;
+}
+
+@media (max-width: 1300px) {
+  :root {
+    --container-padding: 30px;
+  }
+}
+@media (max-width: 991px) {
+  :root {
+    --container-padding: 15px;
+  }
+}
 body[data-aos-duration="50"] [data-aos], [data-aos][data-aos][data-aos-duration="50"] {
   transition-duration: 50ms;
 }
@@ -1499,6 +1513,20 @@ button.swiper-pagination-bullet {
   overflow: hidden;
 }
 
+:root {
+  --container-padding: 50px;
+}
+
+@media (max-width: 1300px) {
+  :root {
+    --container-padding: 30px;
+  }
+}
+@media (max-width: 991px) {
+  :root {
+    --container-padding: 15px;
+  }
+}
 /* ===============================
 =            Choices            =
 =============================== */

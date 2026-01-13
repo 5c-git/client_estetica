@@ -1,4 +1,4 @@
-.promo {
+.test-promo {
 
   &__wrapper {
     position: relative;
@@ -13,13 +13,11 @@
     gap: 24px;
 
     @media(max-width: $tablet) {
-      height: 554px;
+      height: 744px;
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: repeat(2, 1fr);
-      margin-bottom: calc(-554px / 2);
-      // margin-bottom: unset;
-      transform: translateY(calc(-554px / 2));
-      // transform: unset;
+      margin-bottom: calc(100% / 2);
+      transform: translateY(-50%);
     }
   }
 
@@ -37,6 +35,13 @@
     @media(max-width: $tablet) {
       height: 100%;
       grid-row: unset;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     &--left {

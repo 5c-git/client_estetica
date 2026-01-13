@@ -22,6 +22,22 @@ $phone: 767px;
 $article-width: 800px;
 $transition-duration: 0.3s;
 
+:root {
+  --container-padding: 50px;
+}
+
+@media (max-width: $desktop) {
+  :root {
+    --container-padding: 30px;
+  }
+}
+
+@media (max-width: $tablet) {
+  :root {
+    --container-padding: 15px;
+  }
+}
+
 @mixin scroll {
   overflow: auto;
   overflow-x: hidden;
@@ -51,18 +67,7 @@ $transition-duration: 0.3s;
   width: 100%;
   max-width: 1780px;
   margin: 0 auto;
-  padding-right: 50px;
-  padding-left: 50px;
-
-  @media(max-width: $desktop) {
-    padding-right: 30px;
-    padding-left: 30px;
-  }
-
-  @media(max-width: $tablet) {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
+  padding-inline: var(--container-padding);
 }
 
 @mixin liquid-glass {

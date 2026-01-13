@@ -22,6 +22,7 @@ import {
 import initPromoGalleryAnimation from '../promo-gallery/promo-gallery';
 import initPromoAnimation from '../promo/promo';
 import initParticipantsAnimation from '../participants/participants';
+import initTestPromoAnimation from '../test-promo/test-promo';
 
 window.Corners5ProjectLayout = {
   validation: {
@@ -51,4 +52,5 @@ window.Corners5ProjectLayout = {
   initPromoGalleryAnimation,
   initPromoAnimation,
   initParticipantsAnimation,
+  initTestPromoAnimation,
 };

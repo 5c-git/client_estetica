@@ -1,5 +1,6 @@
 extends ../templates/default
 
+include ../components/layout-heder/layout-heder
 include ../components/wrapper-card/wrapper-card
 include ../components/slider/slider
 
@@ -11,7 +12,9 @@ block header
 block main
   include ../components/breadcrumbs/breadcrumbs
 
-  include ../components/layout-heder/layout-heder
+  +layout-heder({
+    career: true,
+  })
 
   +layout({
     title: 'Группа компаний ESTETICA - лидер по<br> производству мебели премиум класса в России',

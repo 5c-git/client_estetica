@@ -1,15 +1,35 @@
-section.layout-heder
-  div.container
-    div.layout-heder__wrapper
-      div.layout-heder__body
-        div.layout-heder__header
-          h1.layout-heder__title Карьера в компании ESTETICA
+mixin layout-heder(props)
+  if props.career
+    section.layout-heder
+      div.container
+        div.layout-heder__wrapper
+          div.layout-heder__body
+            div.layout-heder__header
+              h1.layout-heder__title Карьера в компании ESTETICA
 
-        div.layout-heder__main
-          p(style='color: #8F8F8F;') Ваша карьера начинается здесь! Присоединяйтесь к команде ESTETICA.
-          a(href="#TEST-1").button 
-            span.button__wrapper Выбрать вакансию
+            div.layout-heder__main
+              p(style='color: #8F8F8F;') Ваша карьера начинается здесь! Присоединяйтесь к команде ESTETICA.
+              a(href="#TEST-1").button 
+                span.button__wrapper Выбрать вакансию
 
-      div.layout-heder__media
-        figure
-          img(src="./assets/images/banners/banner-9.jpg", alt="")
+          div.layout-heder__media
+            figure
+              img(src="./assets/images/banners/banner-9.jpg", alt="")
+
+              
+  if props.about
+    section.layout-heder
+      div.container
+        div.layout-heder__wrapper
+          div.layout-heder__body
+            div.layout-heder__header
+              h1.layout-heder__title Карьера в компании ESTETICA
+
+            div.layout-heder__main
+              p(style='color: #8F8F8F;') Ваша карьера начинается здесь! Присоединяйтесь к команде ESTETICA.
+              a(href="#TEST-1").button 
+                span.button__wrapper Выбрать вакансию
+
+          div.layout-heder__media
+            figure
+              img(src="./assets/images/banners/banner-9.jpg", alt="")

@@ -1,51 +1,24 @@
-import './promo.scss';
+import './test-promo.scss';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const startAllVideoInOneTime = () => {
-  document.addEventListener('DOMContentLoaded', () => {
-    const videos = Array.from(document.querySelectorAll('.promo__video'));
-    if (!videos.length) return;
-
-    Promise.all(
-      videos.map(video =>
-        video.readyState >= 3
-          ? Promise.resolve()
-          : new Promise(resolve =>
-            video.addEventListener('canplay', resolve, { once: true })
-          )
-      )
-    ).then(() => {
-      videos.forEach(video => {
-        video.pause();
-        video.currentTime = 0;
-      });
-
-      videos.forEach(video => video.play());
-    });
-  });
-};
-
-startAllVideoInOneTime();
-
-
-const initPromoAnimation = () => {
+const initTestPromoAnimation = () => {
   // ScrollTrigger.matchMedia() официально устарел начиная с GSAP 3.11.0.
   // Теперь вместо него нужно использовать gsap.matchMedia(), который работает идентично, но поддерживает современный API и синхронизацию с GSAP Context (для корректной очистки анимаций при смене breakpoints).
   const mm = gsap.matchMedia();
 
-  const deskstopAnimation = () => {
+  const testDeskstopAnimation = () => {
     const ctx = gsap.context(() => {
       console.log('deskstopAnimation init');
-      const promos = document.querySelectorAll('.promo');
+      const promos = document.querySelectorAll('.test-promo');
       promos.forEach((promo) => {
-        const wrapper = promo.querySelector('.promo__wrapper');
-        const leftVideo = promo.querySelector('.promo__banner--left');
-        const rightVideo = promo.querySelector('.promo__banner--right');
-        const centerVideo = promo.querySelector('.promo__banner--center');
-        const blackOverlay = promo.querySelector('.promo__black-overlay');
+        const wrapper = promo.querySelector('.test-promo__wrapper');
+        const leftVideo = promo.querySelector('.test-promo__banner--left');
+        const rightVideo = promo.querySelector('.test-promo__banner--right');
+        const centerVideo = promo.querySelector('.test-promo__banner--center');
+        const blackOverlay = promo.querySelector('.test-promo__black-overlay');
 
         gsap.timeline({
           scrollTrigger: {
@@ -102,22 +75,22 @@ const initPromoAnimation = () => {
     return () => ctx.revert();
   };
 
-  const mobileAnimation = () => {
+  const testMobileAnimation = () => {
     const ctx = gsap.context(() => {
       console.log('mobileAnimation init');
-      const promos = document.querySelectorAll('.promo');
+      const promos = document.querySelectorAll('.test-promo');
       promos.forEach((promo) => {
-        const wrapper = promo.querySelector('.promo__wrapper');
-        const leftVideo = promo.querySelector('.promo__banner--left');
-        const rightVideo = promo.querySelector('.promo__banner--right');
-        const centerVideo = promo.querySelector('.promo__banner--center');
-        const blackOverlay = promo.querySelector('.promo__black-overlay');
+        const wrapper = promo.querySelector('.test-promo__wrapper');
+        const leftVideo = promo.querySelector('.test-promo__banner--left');
+        const rightVideo = promo.querySelector('.test-promo__banner--right');
+        const centerVideo = promo.querySelector('.test-promo__banner--center');
+        const blackOverlay = promo.querySelector('.test-promo__black-overlay');
 
         gsap.timeline({
           scrollTrigger: {
             trigger: promo,
             start: 'top center',
-            end: '+=200%',
+            end: '+=100%',
             scrub: true,
             pin: true, // Фиксируем блок на экране пока идет анимация.
             pinSpacing: true,
@@ -169,13 +142,13 @@ const initPromoAnimation = () => {
   };
 
   mm.add("(min-width: 992px)", () => {
-    return deskstopAnimation();
+    return testDeskstopAnimation();
   });
 
   mm.add("(max-width: 991px)", () => {
     // Ничего не делаем — при ресайзе gsap сам уберёт все связанные ScrollTrigger'ы
-    return mobileAnimation();
+    return testMobileAnimation();
   });
 };
 
-export default initPromoAnimation;
+export default initTestPromoAnimation;

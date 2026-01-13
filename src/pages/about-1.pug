@@ -1,35 +1,40 @@
-extends ../templates/default
+//- extends ../templates/default
 
-include ../components/participants/participants
+//- include ../components/layout-heder/layout-heder
+//- include ../components/participants/participants
 
-block header
-  +header({
-    mixin: 'header--liquid',
-  })
+//- block header
+//-   +header({
+//-     mixin: 'header--liquid',
+//-   })
 
-block main
-  include ../components/breadcrumbs/breadcrumbs
+//- block main
+//-   include ../components/breadcrumbs/breadcrumbs
 
-  +layout({})
-    +participants({
-      items: [1,2,3,4],
-    })
+//-   +layout-heder({
+//-     about: true,
+//-   })
 
-  +layout({
-    title: 'Группа компаний ESTETICA - лидер по<br> производству мебели премиум класса в России',
-  })
-    include ../components/statistics/statistics
+//-   +layout({})
+//-     +participants({
+//-       items: [1,2,3,4],
+//-     })
 
-  +layout({
-    mixin: 'layout--grey',
-  })
-    include ../components/our-history/our-history
+//-   +layout({
+//-     title: 'Группа компаний ESTETICA - лидер по<br> производству мебели премиум класса в России',
+//-   })
+//-     include ../components/statistics/statistics
 
-  +layout({
-    title: 'Фирменная сеть салонов в городах России',
-  })
-    +article({
-      storeMap: true,
-    })
+//-   +layout({
+//-     mixin: 'layout--grey',
+//-   })
+//-     include ../components/our-history/our-history
 
-  include ../components/store-map/store-map
+//-   +layout({
+//-     title: 'Фирменная сеть<br> салонов<br> в городах России',
+//-   })
+//-     +article({
+//-       storeMap: true,
+//-     })
+
+//-   include ../components/store-map/store-map

@@ -103,8 +103,8 @@
     min-height: 66px;
     display: flex;
     justify-content: space-between;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     // flex-wrap: wrap;
     gap: 30px;
 
@@ -113,6 +113,7 @@
     }
 
     @media(max-width: $tablet) {
+      min-height: 50px;
       position: relative;
       z-index: 5;
     }

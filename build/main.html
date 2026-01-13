@@ -17,16 +17,6 @@
     <title>estetica.ru</title>
   <link href="css/vendors.css" rel="stylesheet"><link href="css/bundle.css" rel="stylesheet"></head>
   <body>
-<div class="top-bar">
-  <div class="container">
-    <div class="top-bar__padding">
-      <div class="top-bar__wrapper"><span>Скидка 30%. Только до 23 ноября.</span></div>
-    </div>
-    <div class="top-bar__fixed">
-      <div class="top-bar__wrapper"><span>Скидка 30%. Только до 23 ноября.</span></div>
-    </div>
-  </div>
-</div>
         <header class="header header--black header--liquid">
           <div class="header__padding"></div>
           <div class="header__fixed">
@@ -170,7 +160,9 @@
         </header>
     <main>
 <section class="intro">
-  <div class="intro__media"><img src="./assets/images/banners/banner-10.jpg" alt=""></div>
+  <div class="intro__media">
+    <video src="./assets/documents/intro-1.mp4" autoplay muted loop poster="./assets/images/banners/banner-10.jpg"></video>
+  </div>
   <div class="intro__wrapper">
     <div class="container">
       <div class="intro__content">
@@ -217,18 +209,24 @@
               <div class="layout__wrapper">
 <section class="promo">
   <div class="promo__wrapper">
-    <video class="promo__video promo__video--left" preload="auto" loop playsinline muted data-sync>
-      <source media="(min-width: 767px)" src="./assets/documents/promo-1-desktop@1x.mp4">
-      <source src="./assets/documents/promo-1-desktop@1x.mp4">
-    </video>
-    <video class="promo__video promo__video--right" preload="auto" loop playsinline muted data-sync>
-      <source media="(min-width: 767px)" src="./assets/documents/promo-2-desktop@1x.mp4">
-      <source src="./assets/documents/promo-2-desktop@1x.mp4">
-    </video>
-    <video class="promo__video promo__video--center" preload="auto" loop playsinline muted data-sync>
-      <source media="(min-width: 767px)" src="./assets/documents/promo-3-desktop@1x.mp4">
-      <source src="./assets/documents/promo-3-mobile@1x--2.mp4">
-    </video>
+    <div class="promo__banner promo__banner--left">
+      <video class="promo__video" preload="auto" loop playsinline muted autoplay>
+        <source media="(min-width: 767px)" src="./assets/documents/promo-1-desktop@1x.mp4">
+        <source src="./assets/documents/promo-1-desktop@1x.mp4">
+      </video>
+    </div>
+    <div class="promo__banner promo__banner--right">
+      <video class="promo__video" preload="auto" loop playsinline muted autoplay>
+        <source media="(min-width: 767px)" src="./assets/documents/promo-2-desktop@1x.mp4">
+        <source src="./assets/documents/promo-2-desktop@1x.mp4">
+      </video>
+    </div>
+    <div class="promo__banner promo__banner--center">
+      <video class="promo__video" preload="auto" loop playsinline muted autoplay>
+        <source media="(min-width: 767px)" src="./assets/documents/promo-3-desktop@1x.mp4">
+        <source src="./assets/documents/promo-3-mobile@1x--2.mp4">
+      </video>
+    </div>
     <div class="promo__black-overlay"></div>
   </div>
 </section>

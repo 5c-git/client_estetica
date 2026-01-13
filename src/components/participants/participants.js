@@ -15,7 +15,7 @@ const initParticipantsAnimation = () => {
       if (!participants) return;
 
       const title = participants.querySelector('.participants__title');
-      const cardsWrappers = gsap.utils.toArray(".participants__item");
+      const cardsWrappers = gsap.utils.toArray('.participants__item');
       const cards = gsap.utils.toArray(".participants__item-pin");
       const firstItem = participants.querySelector('.participants__item');
       if (!firstItem) return; // Без карточек нет смысла пинить.
@@ -36,14 +36,16 @@ const initParticipantsAnimation = () => {
 
       scales.reverse();
 
-      console.log(titleHeight);
+      // console.log(`titleHeight - ${titleHeight}`);
+      // console.log(`cardHeight - ${cardHeight}`);
+      // console.log(`end - ${titleHeight + gap * (total)}`);
 
       // 1. Pin заголовка.
       if (title) {
         ScrollTrigger.create({
           trigger: cardsWrappers[0],
-          start: () => `top center-=${titleHeight}`,
-            end: () => `bottom center+=${titleHeight + gap * (total)}`,
+          start: () => `top center-=${-(titleHeight / 2) + cardHeight}`,
+          end: () => `bottom center+=${(titleHeight / 2) + cardHeight + gap * (total - 1)}`,
           endTrigger: participants,
           pin: title,
           pinSpacing: false,
@@ -66,11 +68,10 @@ const initParticipantsAnimation = () => {
           rotationX: rotation,
           transformOrigin: "center center",
           ease: "none",
-          invalidateOnRefresh: true,
           scrollTrigger: {
             trigger: wrapper,
-            start: () => `top center-=${titleHeight - gap * i}`,
-            end: () => `bottom center+=${titleHeight + gap * (total)}`,
+            start: () => `top center-=${-(titleHeight / 2) + cardHeight - gap * i}`,
+            end: () => `bottom center+=${(titleHeight / 2) + cardHeight + gap * (total - 1)}`,
             // end: () => `bottom center+=${gap * (total - 1)}`,
             endTrigger: participants,
             scrub: true,
@@ -83,6 +84,7 @@ const initParticipantsAnimation = () => {
             //   fontSize: "14px"
             // },
             id: i + 1,
+            invalidateOnRefresh: true,
           }
         });
       });
