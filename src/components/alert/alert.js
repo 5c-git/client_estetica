@@ -49,7 +49,8 @@ const summonAlert = (input) => {
 
   const oldAlert = document.querySelector(`.${alertName}`);
   if (oldAlert) {
-    oldAlert.remove();
+    // Удаляем предыдущее сообщение того же типа. 
+    // oldAlert.remove(); 
   }
 
   const templateContent = alertTemplate.content.cloneNode(true);

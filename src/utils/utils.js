@@ -1,10 +1,6 @@
 import "./main.scss";
 import "./fonts.scss";
 import {
-  summonAlert,
-  removeAlert,
-} from '../components/alert/alert';
-import {
   summonPopUp,
   removePopUp,
 } from '../components/popUp/popUp';

@@ -792,6 +792,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5880);
 /* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6575);
+/* harmony import */ var _alert_alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4009);
+
 
 
 
@@ -802,17 +804,40 @@ const startAllVideoInOneTime = () => {
     if (!videos.length)
       return;
     Promise.all(
-      videos.map(
-        (video) => video.readyState >= 3 ? Promise.resolve() : new Promise(
-          (resolve) => video.addEventListener("canplay", resolve, { once: true })
-        )
-      )
+      videos.map((video, index) => {
+        const videoNumber = index + 1;
+        if (video.readyState >= 3) {
+          (0,_alert_alert__WEBPACK_IMPORTED_MODULE_2__.summonAlert)({
+            template: "#alert--request",
+            text: `\u0412\u0438\u0434\u0435\u043E ${videoNumber} \u0443\u0436\u0435 \u0431\u044B\u043B\u043E \u0433\u043E\u0442\u043E\u0432\u043E`
+          });
+          return Promise.resolve();
+        }
+        return new Promise((resolve) => {
+          video.addEventListener(
+            "canplay",
+            () => {
+              (0,_alert_alert__WEBPACK_IMPORTED_MODULE_2__.summonAlert)({
+                template: "#alert--request",
+                text: `\u0412\u0438\u0434\u0435\u043E ${videoNumber} \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u043E\u0441\u044C \u0438 \u0433\u043E\u0442\u043E\u0432\u043E`
+              });
+              resolve();
+            },
+            { once: true }
+          );
+        });
+      })
     ).then(() => {
       videos.forEach((video) => {
         video.pause();
         video.currentTime = 0;
       });
       videos.forEach((video) => video.play());
+      (0,_alert_alert__WEBPACK_IMPORTED_MODULE_2__.summonAlert)({
+        template: "#alert--request",
+        text: "\u0412\u0441\u0435 \u0432\u0438\u0434\u0435\u043E \u0438\u0437 \u0431\u043B\u043E\u043A\u0430 .promo \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0438\u0441\u044C \u0438 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u043B\u0438\u0441\u044C \u0441 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043A\u0430\u0434\u0440\u0430!"
+      });
+      console.log("\u0412\u0441\u0435 \u0432\u0438\u0434\u0435\u043E \u0438\u0437 \u0431\u043B\u043E\u043A\u0430 .promo \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0438\u0441\u044C \u0438 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u043B\u0438\u0441\u044C \u0441 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043A\u0430\u0434\u0440\u0430!");
     });
   });
 };
@@ -996,10 +1021,8 @@ initScrollRevealRandomWords(".wave-text");
 /* harmony export */   sg: () => (/* binding */ debounce)
 /* harmony export */ });
 /* unused harmony exports shuffle, numberSplitter, PHONE_REG_EXP, INN_REG_EXP, BIRTHDAY_REG_EXP, TOKEN, scrollToErrorField */
-/* harmony import */ var _components_alert_alert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4009);
-/* harmony import */ var _components_popUp_popUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9417);
-/* harmony import */ var _components_validator_validator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4489);
-
+/* harmony import */ var _components_popUp_popUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9417);
+/* harmony import */ var _components_validator_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4489);
 
 
 
@@ -1175,7 +1198,7 @@ const activateRequestButtons = ({
       }
       const modalSelector = `#modal--${type}`;
       const modalClass = `.modal--${type}`;
-      (0,_components_popUp_popUp__WEBPACK_IMPORTED_MODULE_1__.summonPopUp)({
+      (0,_components_popUp_popUp__WEBPACK_IMPORTED_MODULE_0__.summonPopUp)({
         template: modalSelector,
         blockScroll: true,
         overlay: {
@@ -1196,15 +1219,15 @@ const activateRequestButtons = ({
         for (const key in info) {
           form.insertAdjacentHTML("beforeend", `<input type="hidden" name="${key}" value="${info[key]}">`);
         }
-        const validatedForm = (0,_components_validator_validator__WEBPACK_IMPORTED_MODULE_2__.validateForm)(`${modalClass} form`);
-        (0,_components_validator_validator__WEBPACK_IMPORTED_MODULE_2__.maskPhone)(`${modalClass} form`);
+        const validatedForm = (0,_components_validator_validator__WEBPACK_IMPORTED_MODULE_1__.validateForm)(`${modalClass} form`);
+        (0,_components_validator_validator__WEBPACK_IMPORTED_MODULE_1__.maskPhone)(`${modalClass} form`);
         setTextareaAutoHeight(`${modalClass} textarea`);
         const fetch = async () => {
           const answer = await submitForm(form);
           if (answer) {
             if (answer.status === "success") {
               validatedForm.destroy();
-              (0,_components_popUp_popUp__WEBPACK_IMPORTED_MODULE_1__.removePopUp)(modalClass, true);
+              (0,_components_popUp_popUp__WEBPACK_IMPORTED_MODULE_0__.removePopUp)(modalClass, true);
             }
           }
         };
@@ -1292,7 +1315,6 @@ const summonAlert = (input) => {
   }
   const oldAlert = document.querySelector(`.${alertName}`);
   if (oldAlert) {
-    oldAlert.remove();
   }
   const templateContent = alertTemplate.content.cloneNode(true);
   const alert = templateContent.querySelector(`.${alertName}`);

@@ -1,6 +1,10 @@
 import './promo.scss';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  summonAlert,
+  removeAlert,
+} from '../alert/alert';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,13 +14,34 @@ const startAllVideoInOneTime = () => {
     if (!videos.length) return;
 
     Promise.all(
-      videos.map(video =>
-        video.readyState >= 3
-          ? Promise.resolve()
-          : new Promise(resolve =>
-            video.addEventListener('canplay', resolve, { once: true })
-          )
-      )
+      videos.map((video, index) => {
+        const videoNumber = index + 1;
+
+        // Уже готово
+        if (video.readyState >= 3) {
+          summonAlert({
+            template: '#alert--request',
+            text: `Видео ${videoNumber} уже было готово`,
+          });
+
+          return Promise.resolve();
+        }
+
+        // Ждём canplay
+        return new Promise(resolve => {
+          video.addEventListener(
+            'canplay',
+            () => {
+              summonAlert({
+                template: '#alert--request',
+                text: `Видео ${videoNumber} загрузилось и готово`,
+              });
+              resolve();
+            },
+            { once: true }
+          );
+        });
+      })
     ).then(() => {
       videos.forEach(video => {
         video.pause();
@@ -24,6 +49,12 @@ const startAllVideoInOneTime = () => {
       });
 
       videos.forEach(video => video.play());
+
+      summonAlert({
+        template: '#alert--request',
+        text: 'Все видео из блока .promo загрузились и запустились с первого кадра!',
+      });
+      console.log('Все видео из блока .promo загрузились и запустились с первого кадра!');
     });
   });
 };
