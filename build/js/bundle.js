@@ -48,6 +48,198 @@ cookie();
 
 /***/ }),
 
+/***/ 124:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ promo)
+});
+
+// EXTERNAL MODULE: ./node_modules/gsap/index.js + 2 modules
+var gsap = __webpack_require__(5880);
+// EXTERNAL MODULE: ./node_modules/gsap/ScrollTrigger.js + 1 modules
+var ScrollTrigger = __webpack_require__(6575);
+// EXTERNAL MODULE: ./src/components/alert/alert.js
+var alert_alert = __webpack_require__(4009);
+;// ./src/env.js
+const ENV = window.location.origin.includes("192.168") || window.location.origin.includes("localhost") || window.location.origin.includes("html.5corners") ? "Local" : "Remote";
+
+;// ./src/components/promo/promo.js
+
+
+
+
+
+gsap/* gsap */.os.registerPlugin(ScrollTrigger/* ScrollTrigger */.u);
+const startAllVideoInOneTime = () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = Array.from(document.querySelectorAll(".promo__video"));
+    if (!videos.length)
+      return;
+    Promise.all(
+      videos.map((video, index) => {
+        const videoNumber = index + 1;
+        if (video.readyState >= 3) {
+          if (ENV === "Local") {
+            (0,alert_alert.summonAlert)({
+              template: "#alert--request",
+              text: `\u0412\u0438\u0434\u0435\u043E ${videoNumber} \u0443\u0436\u0435 \u0431\u044B\u043B\u043E \u0433\u043E\u0442\u043E\u0432\u043E`
+            });
+          }
+          return Promise.resolve();
+        }
+        return new Promise((resolve) => {
+          video.addEventListener(
+            "canplay",
+            () => {
+              if (ENV === "Local") {
+                (0,alert_alert.summonAlert)({
+                  template: "#alert--request",
+                  text: `\u0412\u0438\u0434\u0435\u043E ${videoNumber} \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u043E\u0441\u044C \u0438 \u0433\u043E\u0442\u043E\u0432\u043E`
+                });
+              }
+              resolve();
+            },
+            { once: true }
+          );
+        });
+      })
+    ).then(() => {
+      videos.forEach((video) => {
+        video.pause();
+        video.currentTime = 0;
+      });
+      videos.forEach((video) => video.play());
+      if (ENV === "Local") {
+        (0,alert_alert.summonAlert)({
+          template: "#alert--request",
+          text: "\u0412\u0441\u0435 \u0432\u0438\u0434\u0435\u043E \u0438\u0437 \u0431\u043B\u043E\u043A\u0430 .promo \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0438\u0441\u044C \u0438 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u043B\u0438\u0441\u044C \u0441 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043A\u0430\u0434\u0440\u0430!"
+        });
+        console.log("\u0412\u0441\u0435 \u0432\u0438\u0434\u0435\u043E \u0438\u0437 \u0431\u043B\u043E\u043A\u0430 .promo \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0438\u0441\u044C \u0438 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u043B\u0438\u0441\u044C \u0441 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043A\u0430\u0434\u0440\u0430!");
+      }
+    });
+  });
+};
+startAllVideoInOneTime();
+const initPromoAnimation = () => {
+  const mm = gsap/* gsap */.os.matchMedia();
+  const deskstopAnimation = () => {
+    const ctx = gsap/* gsap */.os.context(() => {
+      console.log("deskstopAnimation init");
+      const promos = document.querySelectorAll(".promo");
+      promos.forEach((promo) => {
+        const wrapper = promo.querySelector(".promo__wrapper");
+        const leftVideo = promo.querySelector(".promo__banner--left");
+        const rightVideo = promo.querySelector(".promo__banner--right");
+        const centerVideo = promo.querySelector(".promo__banner--center");
+        const blackOverlay = promo.querySelector(".promo__black-overlay");
+        gsap/* gsap */.os.timeline({
+          scrollTrigger: {
+            trigger: promo,
+            start: "top center",
+            end: "+=200%",
+            scrub: true,
+            pin: true,
+            // Фиксируем блок на экране пока идет анимация.
+            pinSpacing: true,
+            invalidateOnRefresh: true
+          }
+        }).from(leftVideo, {
+          x: "-50vw",
+          duration: 2
+        }).from(rightVideo, {
+          x: "50vw",
+          duration: 2
+        }, "<").to(leftVideo, {
+          duration: 1
+        }).to(rightVideo, {
+          duration: 1
+        }, "<").to(wrapper, {
+          gap: 0
+        }).to(leftVideo, {
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0
+        }, "<").to(rightVideo, {
+          borderTopLeftRadius: 0,
+          borderBottomLeftRadius: 0
+        }, "<").to(blackOverlay, {
+          opacity: 1
+        }, "<").to(centerVideo, {
+          opacity: 1
+        }).to(centerVideo, {
+          duration: 1
+        });
+      });
+    });
+    return () => ctx.revert();
+  };
+  const mobileAnimation = () => {
+    const ctx = gsap/* gsap */.os.context(() => {
+      console.log("mobileAnimation init");
+      const promos = document.querySelectorAll(".promo");
+      promos.forEach((promo) => {
+        const wrapper = promo.querySelector(".promo__wrapper");
+        const leftVideo = promo.querySelector(".promo__banner--left");
+        const rightVideo = promo.querySelector(".promo__banner--right");
+        const centerVideo = promo.querySelector(".promo__banner--center");
+        const blackOverlay = promo.querySelector(".promo__black-overlay");
+        gsap/* gsap */.os.timeline({
+          scrollTrigger: {
+            trigger: promo,
+            start: "top center",
+            end: "+=200%",
+            scrub: true,
+            pin: true,
+            // Фиксируем блок на экране пока идет анимация.
+            pinSpacing: true,
+            invalidateOnRefresh: true
+          }
+        }).from(leftVideo, {
+          xPercent: -150,
+          duration: 2
+        }).from(rightVideo, {
+          xPercent: 150,
+          duration: 2
+        }, "<").to(leftVideo, {
+          duration: 1
+        }).to(rightVideo, {
+          duration: 1
+        }, "<").to(wrapper, {
+          gap: 0
+        }).to(leftVideo, {
+          borderBottomRightRadius: 0,
+          borderBottomLeftRadius: 0
+        }, "<").to(rightVideo, {
+          borderTopRightRadius: 0,
+          borderTopLeftRadius: 0
+        }, "<").to(blackOverlay, {
+          opacity: 1
+        }).to(centerVideo, {
+          opacity: 1
+        }).to(centerVideo, {
+          duration: 1
+        });
+      });
+    });
+    return () => ctx.revert();
+  };
+  mm.add("(min-width: 992px)", () => {
+    return deskstopAnimation();
+  });
+  mm.add("(max-width: 991px)", () => {
+    return mobileAnimation();
+  });
+};
+/* harmony default export */ const promo = (initPromoAnimation);
+
+
+/***/ }),
+
 /***/ 147:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -88,7 +280,7 @@ var map = {
 	"./promo-gallery/promo-gallery.js": 445,
 	"./promo-news/promo-news.js": 257,
 	"./promo-partner/promo-partner.js": 1061,
-	"./promo/promo.js": 2945,
+	"./promo/promo.js": 124,
 	"./reels/reels.js": 8417,
 	"./request-catalog/request-catalog.js": 993,
 	"./request-wrapper/request-wrapper.js": 4473,
@@ -149,7 +341,7 @@ var map = {
 	"components/promo-gallery/promo-gallery.js": 445,
 	"components/promo-news/promo-news.js": 257,
 	"components/promo-partner/promo-partner.js": 1061,
-	"components/promo/promo.js": 2945,
+	"components/promo/promo.js": 124,
 	"components/reels/reels.js": 8417,
 	"components/request-catalog/request-catalog.js": 993,
 	"components/request-wrapper/request-wrapper.js": 4473,
@@ -778,180 +970,6 @@ function importAll(r) {
   filteredKeys.forEach(r);
 }
 importAll(__webpack_require__(147));
-
-
-/***/ }),
-
-/***/ 2945:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5880);
-/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6575);
-/* harmony import */ var _alert_alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4009);
-
-
-
-
-gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__/* .ScrollTrigger */ .u);
-const startAllVideoInOneTime = () => {
-  document.addEventListener("DOMContentLoaded", () => {
-    const videos = Array.from(document.querySelectorAll(".promo__video"));
-    if (!videos.length)
-      return;
-    Promise.all(
-      videos.map((video, index) => {
-        const videoNumber = index + 1;
-        if (video.readyState >= 3) {
-          (0,_alert_alert__WEBPACK_IMPORTED_MODULE_2__.summonAlert)({
-            template: "#alert--request",
-            text: `\u0412\u0438\u0434\u0435\u043E ${videoNumber} \u0443\u0436\u0435 \u0431\u044B\u043B\u043E \u0433\u043E\u0442\u043E\u0432\u043E`
-          });
-          return Promise.resolve();
-        }
-        return new Promise((resolve) => {
-          video.addEventListener(
-            "canplay",
-            () => {
-              (0,_alert_alert__WEBPACK_IMPORTED_MODULE_2__.summonAlert)({
-                template: "#alert--request",
-                text: `\u0412\u0438\u0434\u0435\u043E ${videoNumber} \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u043E\u0441\u044C \u0438 \u0433\u043E\u0442\u043E\u0432\u043E`
-              });
-              resolve();
-            },
-            { once: true }
-          );
-        });
-      })
-    ).then(() => {
-      videos.forEach((video) => {
-        video.pause();
-        video.currentTime = 0;
-      });
-      videos.forEach((video) => video.play());
-      (0,_alert_alert__WEBPACK_IMPORTED_MODULE_2__.summonAlert)({
-        template: "#alert--request",
-        text: "\u0412\u0441\u0435 \u0432\u0438\u0434\u0435\u043E \u0438\u0437 \u0431\u043B\u043E\u043A\u0430 .promo \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0438\u0441\u044C \u0438 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u043B\u0438\u0441\u044C \u0441 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043A\u0430\u0434\u0440\u0430!"
-      });
-      console.log("\u0412\u0441\u0435 \u0432\u0438\u0434\u0435\u043E \u0438\u0437 \u0431\u043B\u043E\u043A\u0430 .promo \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0438\u0441\u044C \u0438 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u043B\u0438\u0441\u044C \u0441 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043A\u0430\u0434\u0440\u0430!");
-    });
-  });
-};
-startAllVideoInOneTime();
-const initPromoAnimation = () => {
-  const mm = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.matchMedia();
-  const deskstopAnimation = () => {
-    const ctx = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.context(() => {
-      console.log("deskstopAnimation init");
-      const promos = document.querySelectorAll(".promo");
-      promos.forEach((promo) => {
-        const wrapper = promo.querySelector(".promo__wrapper");
-        const leftVideo = promo.querySelector(".promo__banner--left");
-        const rightVideo = promo.querySelector(".promo__banner--right");
-        const centerVideo = promo.querySelector(".promo__banner--center");
-        const blackOverlay = promo.querySelector(".promo__black-overlay");
-        gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
-          scrollTrigger: {
-            trigger: promo,
-            start: "top center",
-            end: "+=200%",
-            scrub: true,
-            pin: true,
-            // Фиксируем блок на экране пока идет анимация.
-            pinSpacing: true,
-            invalidateOnRefresh: true
-          }
-        }).from(leftVideo, {
-          x: "-50vw",
-          duration: 2
-        }).from(rightVideo, {
-          x: "50vw",
-          duration: 2
-        }, "<").to(leftVideo, {
-          duration: 1
-        }).to(rightVideo, {
-          duration: 1
-        }, "<").to(wrapper, {
-          gap: 0
-        }).to(leftVideo, {
-          borderTopRightRadius: 0,
-          borderBottomRightRadius: 0
-        }, "<").to(rightVideo, {
-          borderTopLeftRadius: 0,
-          borderBottomLeftRadius: 0
-        }, "<").to(blackOverlay, {
-          opacity: 1
-        }, "<").to(centerVideo, {
-          opacity: 1
-        }).to(centerVideo, {
-          duration: 1
-        });
-      });
-    });
-    return () => ctx.revert();
-  };
-  const mobileAnimation = () => {
-    const ctx = gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.context(() => {
-      console.log("mobileAnimation init");
-      const promos = document.querySelectorAll(".promo");
-      promos.forEach((promo) => {
-        const wrapper = promo.querySelector(".promo__wrapper");
-        const leftVideo = promo.querySelector(".promo__banner--left");
-        const rightVideo = promo.querySelector(".promo__banner--right");
-        const centerVideo = promo.querySelector(".promo__banner--center");
-        const blackOverlay = promo.querySelector(".promo__black-overlay");
-        gsap__WEBPACK_IMPORTED_MODULE_0__/* .gsap */ .os.timeline({
-          scrollTrigger: {
-            trigger: promo,
-            start: "top center",
-            end: "+=200%",
-            scrub: true,
-            pin: true,
-            // Фиксируем блок на экране пока идет анимация.
-            pinSpacing: true,
-            invalidateOnRefresh: true
-          }
-        }).from(leftVideo, {
-          xPercent: -150,
-          duration: 2
-        }).from(rightVideo, {
-          xPercent: 150,
-          duration: 2
-        }, "<").to(leftVideo, {
-          duration: 1
-        }).to(rightVideo, {
-          duration: 1
-        }, "<").to(wrapper, {
-          gap: 0
-        }).to(leftVideo, {
-          borderBottomRightRadius: 0,
-          borderBottomLeftRadius: 0
-        }, "<").to(rightVideo, {
-          borderTopRightRadius: 0,
-          borderTopLeftRadius: 0
-        }, "<").to(blackOverlay, {
-          opacity: 1
-        }).to(centerVideo, {
-          opacity: 1
-        }).to(centerVideo, {
-          duration: 1
-        });
-      });
-    });
-    return () => ctx.revert();
-  };
-  mm.add("(min-width: 992px)", () => {
-    return deskstopAnimation();
-  });
-  mm.add("(max-width: 991px)", () => {
-    return mobileAnimation();
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initPromoAnimation);
 
 
 /***/ }),
@@ -2604,7 +2622,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _alert_alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4009);
 /* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3670);
 /* harmony import */ var _promo_gallery_promo_gallery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(445);
-/* harmony import */ var _promo_promo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2945);
+/* harmony import */ var _promo_promo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(124);
 /* harmony import */ var _participants_participants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4855);
 /* harmony import */ var _test_promo_test_promo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5227);
 

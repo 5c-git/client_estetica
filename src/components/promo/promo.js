@@ -5,6 +5,7 @@ import {
   summonAlert,
   removeAlert,
 } from '../alert/alert';
+import { ENV } from '../../env';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,10 +20,13 @@ const startAllVideoInOneTime = () => {
 
         // Уже готово
         if (video.readyState >= 3) {
-          summonAlert({
-            template: '#alert--request',
-            text: `Видео ${videoNumber} уже было готово`,
-          });
+          // Вывести сообщения о видео только для разработки. 
+          if (ENV === 'Local') {
+            summonAlert({
+              template: '#alert--request',
+              text: `Видео ${videoNumber} уже было готово`,
+            });
+          }
 
           return Promise.resolve();
         }
@@ -32,10 +36,14 @@ const startAllVideoInOneTime = () => {
           video.addEventListener(
             'canplay',
             () => {
-              summonAlert({
-                template: '#alert--request',
-                text: `Видео ${videoNumber} загрузилось и готово`,
-              });
+              // Вывести сообщения о видео только для разработки. 
+              if (ENV === 'Local') {
+                summonAlert({
+                  template: '#alert--request',
+                  text: `Видео ${videoNumber} загрузилось и готово`,
+                });
+              }
+
               resolve();
             },
             { once: true }
@@ -50,11 +58,14 @@ const startAllVideoInOneTime = () => {
 
       videos.forEach(video => video.play());
 
-      summonAlert({
-        template: '#alert--request',
-        text: 'Все видео из блока .promo загрузились и запустились с первого кадра!',
-      });
-      console.log('Все видео из блока .promo загрузились и запустились с первого кадра!');
+      // Вывести сообщения о видео только для разработки. 
+      if (ENV === 'Local') {
+        summonAlert({
+          template: '#alert--request',
+          text: 'Все видео из блока .promo загрузились и запустились с первого кадра!',
+        });
+        console.log('Все видео из блока .promo загрузились и запустились с первого кадра!');
+      }
     });
   });
 };
