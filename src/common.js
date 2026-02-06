@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     window.Corners5ProjectLayout.initPromoAnimation();
     window.Corners5ProjectLayout.initPromoGalleryAnimation();

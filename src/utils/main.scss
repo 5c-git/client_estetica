@@ -51,11 +51,17 @@ body {
     //   top: 52px;
     // }
 
-    .header__fixed {
-      top: 52px;
-
-      @media(max-width: $tablet) {
+    .header {
+      &__fixed {
         top: 52px;
+
+        @media(max-width: $tablet) {
+          top: 52px;
+        }
+      }
+
+      &__mobile-nav {
+        padding-top: 119px;
       }
     }
 
